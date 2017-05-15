@@ -22,7 +22,7 @@ import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
-        SpellingFragment.OnFragmentInteractionListener {
+        SectionFragment.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,10 +101,10 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         switch (item.getItemId()) {
             case R.id.nav_search:   break;
-            case R.id.nav_sets:     setTitle(R.string.nav_sets);     break;
-            case R.id.nav_spelling: setTitle(R.string.nav_spelling); fragment = new SpellingFragment(); break;
-            case R.id.nav_practice: setTitle(R.string.nav_practice); break;
-            case R.id.nav_about:    setTitle(R.string.nav_about);    break;
+            case R.id.nav_sets:     break;
+            case R.id.nav_spelling: fragment = new SpellingFragment(); break;
+            case R.id.nav_practice: break;
+            case R.id.nav_about:    break;
         }
 
         // Insert the fragment by replacing any existing fragment
@@ -120,5 +120,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onFragmentInteraction(Uri uri) {}
+    public void onSetTitle(String title) {
+        setTitle(title);
+    }
 }
