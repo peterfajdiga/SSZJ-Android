@@ -3,14 +3,10 @@ package peterfajdiga.sszj;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.SearchView;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -41,15 +37,17 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 
-
+        // do search
         // Get the intent, verify the action and get the query
         Intent intent = getIntent();
-        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+        if (intent.getAction().equals(Intent.ACTION_SEARCH)) {
             String query = intent.getStringExtra(SearchManager.QUERY);
-            System.err.println(query);
-            // TODO: search
+            Fragment fragment = new WordFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString(WordFragment.BUNDLE_KEY_WORD, query);
+            fragment.setArguments(bundle);
+            loadSectionFragment(fragment);
         }
-
     }
 
     @Override
@@ -95,28 +93,27 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
 
-        // Create a new fragment
-        Fragment fragment = null;
-
         // Handle navigation view item clicks here.
         switch (item.getItemId()) {
             case R.id.nav_search:   break;
             case R.id.nav_sets:     break;
-            case R.id.nav_spelling: fragment = new SpellingFragment(); break;
+            case R.id.nav_spelling: loadSectionFragment(new SpellingFragment()); break;
             case R.id.nav_practice: break;
             case R.id.nav_about:    break;
         }
-
-        // Insert the fragment by replacing any existing fragment
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.content_frame, fragment)
-                .commit();
 
         // Close the drawer
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void loadSectionFragment(Fragment fragment) {
+        // Insert the fragment by replacing any existing fragment
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.content_frame, fragment)
+                .commit();
     }
 
     @Override
