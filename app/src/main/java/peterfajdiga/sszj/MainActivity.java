@@ -73,25 +73,16 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
 
-        // Create a new fragment and specify the planet to show based on position
+        // Create a new fragment
         Fragment fragment = null;
-        /*Bundle args = new Bundle();
-        args.putInt(PlanetFragment.ARG_PLANET_NUMBER, position);
-        fragment.setArguments(args);*/
 
         // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_search) {
-            // Handle the camera action
-        } else if (id == R.id.nav_sets) {
-
-        } else if (id == R.id.nav_spelling) {
-            fragment = new SpellingFragment();
-        } else if (id == R.id.nav_practice) {
-
-        } else if (id == R.id.nav_about) {
-
+        switch (item.getItemId()) {
+            case R.id.nav_search: break;
+            case R.id.nav_sets: break;
+            case R.id.nav_spelling: fragment = new SpellingFragment(); break;
+            case R.id.nav_practice: break;
+            case R.id.nav_about: break;
         }
 
         // Insert the fragment by replacing any existing fragment
@@ -100,7 +91,7 @@ public class MainActivity extends AppCompatActivity
                 .replace(R.id.content_frame, fragment)
                 .commit();
 
-
+        // Close the drawer
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
