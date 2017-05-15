@@ -11,4 +11,7 @@
     <string name="nav_spelling">Črkovanje</string>
     <string name="nav_practice">Vaje</string>
     <string name="nav_about">O slovarju</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
