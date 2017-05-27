@@ -1,0 +1,28 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="peterfajdiga.sszj.SpellingFragment" >
+
+    <android.support.v7.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+        <TextView
+            android:text="@string/about0"
+            style="@style/ContentText.Normal" />
+        <TextView
+            android:text="@string/about1_heading"
+            style="@style/ContentText.Heading" />
+        <TextView
+            android:text="@string/about1"
+            style="@style/ContentText.Normal" />
+        <TextView
+            android:text="@string/about2_heading"
+            style="@style/ContentText.Heading" />
+        <TextView
+            android:text="@string/about2"
+            style="@style/ContentText.Normal" />
+    </android.support.v7.widget.LinearLayoutCompat>
+
+</ScrollView>

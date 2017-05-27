@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_sets:     break;
             case R.id.nav_spelling: loadSectionFragment(new SpellingFragment()); break;
             case R.id.nav_practice: break;
-            case R.id.nav_about:    break;
+            case R.id.nav_about:    loadSectionFragment(new AboutFragment()); break;
         }
 
         // Close the drawer
