@@ -4,6 +4,7 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.SearchRecentSuggestions;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.SearchView;
@@ -41,12 +42,16 @@ public class MainActivity extends AppCompatActivity
         // Get the intent, verify the action and get the query
         Intent intent = getIntent();
         if (intent.getAction().equals(Intent.ACTION_SEARCH)) {
-            String query = intent.getStringExtra(SearchManager.QUERY);
-            Fragment fragment = new WordFragment();
+            final String query = intent.getStringExtra(SearchManager.QUERY);
+            // TODO: check if valid word
+            final Fragment fragment = new WordFragment();
             Bundle bundle = new Bundle();
             bundle.putString(WordFragment.BUNDLE_KEY_WORD, query);
             fragment.setArguments(bundle);
             loadSectionFragment(fragment);
+
+            // save search
+            new SearchRecentSuggestions(this, SearchRecentProvider.AUTHORITY, SearchRecentProvider.MODE).saveRecentQuery(query, null);
         }
     }
 
