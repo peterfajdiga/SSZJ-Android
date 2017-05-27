@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
 
@@ -58,5 +59,8 @@ public class WordFragment extends SectionFragment implements WordRequest.Owner {
         final ImageView animationView = (ImageView)self.findViewById(R.id.animation_view);
         animationView.setImageDrawable(word.animation);
         word.animation.start();
+
+        final TextView definitionView = (TextView)self.findViewById(R.id.definition_view);
+        definitionView.setText(word.definition);
     }
 }

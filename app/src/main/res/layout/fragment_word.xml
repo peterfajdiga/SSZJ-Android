@@ -1,7 +1,8 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="peterfajdiga.sszj.WordFragment">
 
     <ImageView
@@ -13,4 +14,8 @@
         android:background="@color/colorAccent"/>
     <!--TODO: Remove background-->
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/definition_view"
+        style="@style/ContentText.Normal" />
+
+</android.support.v7.widget.LinearLayoutCompat>
