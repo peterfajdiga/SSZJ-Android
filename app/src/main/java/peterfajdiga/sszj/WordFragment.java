@@ -1,6 +1,7 @@
 package peterfajdiga.sszj;
 
 
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,11 +57,14 @@ public class WordFragment extends SectionFragment implements WordRequest.Owner {
 
     @Override
     public void onWordLoaded(Word word) {
-        final ImageView animationView = (ImageView)self.findViewById(R.id.animation_view);
-        animationView.setImageDrawable(word.animation);
-        word.animation.start();
-
         final TextView definitionView = (TextView)self.findViewById(R.id.definition_view);
         definitionView.setText(word.definition);
+    }
+
+    @Override
+    public void onWordAnimationLoaded(AnimationDrawable animation) {
+        final ImageView animationView = (ImageView)self.findViewById(R.id.animation_view);
+        animationView.setImageDrawable(animation);
+        animation.start();
     }
 }
