@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
@@ -62,9 +63,28 @@ public class WordFragment extends SectionFragment implements WordRequest.Owner {
     }
 
     @Override
+    public void onWordFailed() {
+        removeLoadingSpinner();
+    }
+
+    @Override
     public void onWordAnimationLoaded(AnimationDrawable animation) {
+        removeLoadingSpinner();
+
         final ImageView animationView = (ImageView)self.findViewById(R.id.animation_view);
         animationView.setImageDrawable(animation);
         animation.start();
+    }
+
+    @Override
+    public void onWordAnimationFailed() {
+        removeLoadingSpinner();
+        final ImageView loadingFailedIcon = (ImageView)self.findViewById(R.id.loading_failed_icon);
+        loadingFailedIcon.setVisibility(View.VISIBLE);
+    }
+
+    private void removeLoadingSpinner() {
+        final ProgressBar spinner = (ProgressBar)self.findViewById(R.id.loading_spinner);
+        spinner.setVisibility(View.GONE);
     }
 }

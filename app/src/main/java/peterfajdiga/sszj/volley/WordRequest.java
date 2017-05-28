@@ -17,17 +17,14 @@ import peterfajdiga.sszj.pojo.Word;
 public class WordRequest extends JsonObjectRequest {
 
     private static final String feature = "slovar";
-    private Owner owner = null;
 
     public WordRequest(final Owner owner, final String word) {
-        super(Request.Method.GET, Constants.buildUrl(feature, word), null, new Listener(owner), new ErrorListener());
-        this.owner = owner;
+        super(Request.Method.GET, Constants.buildUrl(feature, word), null, new Listener(owner), new ErrorListener(owner));
     }
 
 
     private static class Listener implements Response.Listener<JSONObject>, BitmapRequest.Owner {
         private Owner requestOwner;
-        private Word word;
         private Bitmap[] bitmaps;
 
         Listener(final Owner requestOwner) {
@@ -56,10 +53,11 @@ public class WordRequest extends JsonObjectRequest {
                 queue.add(request);
 
                 // load word
-                word = new Word(response.getString("beseda"), "Ni še definicij.");
+                final Word word = new Word(response.getString("beseda"), "Ni še definicij.");
                 requestOwner.onWordLoaded(word);
             } catch (Exception e) {
                 e.printStackTrace();
+                requestOwner.onWordFailed();
             }
         }
 
@@ -77,19 +75,34 @@ public class WordRequest extends JsonObjectRequest {
                 requestOwner.onWordAnimationLoaded(AnimationBuilder.build(bitmaps));
             }
         }
+
+        @Override
+        public void onBitmapFailed() {
+            requestOwner.onWordAnimationFailed();
+        }
     }
 
+
     private static class ErrorListener implements Response.ErrorListener {
+        private Owner requestOwner;
+
+        ErrorListener(final Owner requestOwner) {
+            this.requestOwner = requestOwner;
+        }
+
         @Override
         public void onErrorResponse(VolleyError error) {
             // TODO: Handle non-existent word
             System.err.println(error.getMessage());
+            requestOwner.onWordFailed();
         }
     }
 
 
     public interface Owner {
         void onWordLoaded(Word word);
+        void onWordFailed();
         void onWordAnimationLoaded(AnimationDrawable animation);
+        void onWordAnimationFailed();
     }
 }

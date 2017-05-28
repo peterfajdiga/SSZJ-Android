@@ -5,13 +5,28 @@
     android:orientation="vertical"
     tools:context="peterfajdiga.sszj.WordFragment">
 
+    <ProgressBar
+        android:id="@+id/loading_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <ImageView
+        android:id="@+id/loading_failed_icon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:visibility="gone"
+        android:src="@drawable/ic_broken_image"
+        android:contentDescription="@string/error_animation" />
+
     <ImageView
         android:id="@+id/animation_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scaleType="fitCenter"
         android:adjustViewBounds="true"
-        android:background="@color/colorAccent"/>
+        android:background="@color/colorAccent" />
     <!--TODO: Remove background-->
 
     <TextView
