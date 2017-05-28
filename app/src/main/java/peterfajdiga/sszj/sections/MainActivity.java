@@ -19,6 +19,7 @@ import android.view.MenuItem;
 
 import peterfajdiga.sszj.R;
 import peterfajdiga.sszj.SearchRecentProvider;
+import peterfajdiga.sszj.logic.Words;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
@@ -46,15 +47,17 @@ public class MainActivity extends AppCompatActivity
         Intent intent = getIntent();
         if (intent.getAction().equals(Intent.ACTION_SEARCH)) {
             final String query = intent.getStringExtra(SearchManager.QUERY);
-            // TODO: check if valid word
-            final Fragment fragment = new WordFragment();
-            Bundle bundle = new Bundle();
-            bundle.putString(WordFragment.BUNDLE_KEY_WORD, query);
-            fragment.setArguments(bundle);
-            loadSectionFragment(fragment);
 
-            // save search
-            new SearchRecentSuggestions(this, SearchRecentProvider.AUTHORITY, SearchRecentProvider.MODE).saveRecentQuery(query, null);
+            if (Words.isValidWord(query)) {
+                final Fragment fragment = new WordFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString(WordFragment.BUNDLE_KEY_WORD, query);
+                fragment.setArguments(bundle);
+                loadSectionFragment(fragment);
+
+                // save search
+                new SearchRecentSuggestions(this, SearchRecentProvider.AUTHORITY, SearchRecentProvider.MODE).saveRecentQuery(query, null);
+            }
         }
     }
 
