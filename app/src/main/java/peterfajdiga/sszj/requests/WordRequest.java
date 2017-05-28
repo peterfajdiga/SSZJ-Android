@@ -1,4 +1,4 @@
-package peterfajdiga.sszj.volley;
+package peterfajdiga.sszj.requests;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.AnimationDrawable;
@@ -11,7 +11,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONObject;
 
-import peterfajdiga.sszj.AnimationBuilder;
+import peterfajdiga.sszj.logic.AnimationBuilder;
 import peterfajdiga.sszj.pojo.Word;
 
 public class WordRequest extends JsonObjectRequest {

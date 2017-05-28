@@ -1,4 +1,4 @@
-package peterfajdiga.sszj;
+package peterfajdiga.sszj.sections;
 
 import android.app.SearchManager;
 import android.content.Context;
@@ -16,6 +16,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import peterfajdiga.sszj.R;
+import peterfajdiga.sszj.SearchRecentProvider;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,

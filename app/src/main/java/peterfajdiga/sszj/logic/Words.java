@@ -1,4 +1,4 @@
-package peterfajdiga.sszj;
+package peterfajdiga.sszj.logic;
 
 public interface Words {
     String[] getWordsStartingWith(String prefix);  // ignores case

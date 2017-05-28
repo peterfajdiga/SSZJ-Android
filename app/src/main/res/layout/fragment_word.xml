@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="peterfajdiga.sszj.WordFragment">
+    tools:context="peterfajdiga.sszj.sections.WordFragment">
 
     <ProgressBar
         android:id="@+id/loading_spinner"

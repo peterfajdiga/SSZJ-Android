@@ -1,4 +1,4 @@
-package peterfajdiga.sszj;
+package peterfajdiga.sszj.logic;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.AnimationDrawable;

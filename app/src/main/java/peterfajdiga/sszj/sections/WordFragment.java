@@ -1,4 +1,4 @@
-package peterfajdiga.sszj;
+package peterfajdiga.sszj.sections;
 
 
 import android.graphics.drawable.AnimationDrawable;
@@ -12,9 +12,10 @@ import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
 
+import peterfajdiga.sszj.R;
 import peterfajdiga.sszj.pojo.Word;
-import peterfajdiga.sszj.volley.Constants;
-import peterfajdiga.sszj.volley.WordRequest;
+import peterfajdiga.sszj.requests.Constants;
+import peterfajdiga.sszj.requests.WordRequest;
 
 
 public class WordFragment extends SectionFragment implements WordRequest.Owner {

@@ -1,4 +1,4 @@
-package peterfajdiga.sszj;
+package peterfajdiga.sszj.logic;
 
 import java.text.Collator;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package peterfajdiga.sszj.volley;
+package peterfajdiga.sszj.requests;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
