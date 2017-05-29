@@ -28,9 +28,15 @@ public class WordFragment extends SectionFragment implements WordRequest.Owner {
     private View self;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        self = inflater.inflate(R.layout.fragment_word, container, false);
+        return self;
+    }
 
+    @Override
+    protected void init() {
         final Bundle args = this.getArguments();
         if (args != null) {
             word = args.getString(BUNDLE_KEY_WORD);
@@ -43,19 +49,7 @@ public class WordFragment extends SectionFragment implements WordRequest.Owner {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        self = inflater.inflate(R.layout.fragment_word, container, false);
-        return self;
-    }
-
-    @Override
     protected String getTitle() {
-        final Bundle args = this.getArguments();
-        if (args != null) {
-            word = args.getString(BUNDLE_KEY_WORD);
-        }
         return word;
     }
 

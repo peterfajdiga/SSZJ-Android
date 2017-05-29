@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.provider.SearchRecentSuggestions;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.SearchView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -50,7 +51,7 @@ public class MainActivity extends AppCompatActivity
         if (intent.getAction().equals(Intent.ACTION_SEARCH)) {
             final String query = intent.getStringExtra(SearchManager.QUERY);
             if (Words.isValidWord(query)) {
-                loadWord(query);
+                loadWord(query, false);
                 new SearchRecentSuggestions(this, SearchRecentProvider.AUTHORITY, SearchRecentProvider.MODE).saveRecentQuery(query, null);  // save search
             }
         }
@@ -115,21 +116,25 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    private void loadSectionFragment(Fragment fragment) {
+    private void loadSectionFragment(final Fragment fragment, final boolean saveStack) {
         // Insert the fragment by replacing any existing fragment
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.content_frame, fragment)
-                .addToBackStack(null)
-                .commit();
+        final FragmentTransaction transaction = fragmentManager.beginTransaction().replace(R.id.content_frame, fragment);
+        if (saveStack) {
+            transaction.addToBackStack(null);
+        }
+        transaction.commit();
+    }
+    private void loadSectionFragment(final Fragment fragment) {
+        loadSectionFragment(fragment, true);
     }
 
-    private void loadWord(String word) {
+    private void loadWord(String word, boolean saveStack) {
         final Fragment fragment = new WordFragment();
         Bundle bundle = new Bundle();
         bundle.putString(WordFragment.BUNDLE_KEY_WORD, word);
         fragment.setArguments(bundle);
-        loadSectionFragment(fragment);
+        loadSectionFragment(fragment, saveStack);
     }
 
     @Override
@@ -139,6 +144,6 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onWordClicked(String word) {
-        loadWord(word);
+        loadWord(word, true);
     }
 }

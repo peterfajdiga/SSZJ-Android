@@ -10,6 +10,9 @@ import peterfajdiga.sszj.R;
 public class AboutFragment extends SectionFragment {
 
     @Override
+    protected void init() {}
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
