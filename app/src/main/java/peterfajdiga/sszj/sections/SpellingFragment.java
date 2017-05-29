@@ -1,5 +1,6 @@
 package peterfajdiga.sszj.sections;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -13,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import peterfajdiga.sszj.R;
+import peterfajdiga.sszj.WordButton;
 
 
 public class SpellingFragment extends SectionFragment {
@@ -53,7 +55,7 @@ public class SpellingFragment extends SectionFragment {
         return getContext().getString(R.string.nav_spelling);
     }
 
-    private void layCards(String word) {
+    private void layCards(final String word) {
         final LinearLayout container = (LinearLayout)self.findViewById(R.id.letter_container);
         container.removeAllViews();
         final int n = word.length();
@@ -63,19 +65,34 @@ public class SpellingFragment extends SectionFragment {
         }
     }
 
-    private CardView buildCard(char letter) {
+    private CardView buildCard(final char letter) {
+        final String letter_str = Character.toString(letter);
+
         final CardView card = (CardView)LayoutInflater.from(getActivity()).inflate(R.layout.letter_card, null);
 
         final ImageView cardImage = (ImageView)card.findViewById(R.id.card_letter_image);
         cardImage.setImageDrawable(getLetterImage(letter));
 
         final TextView cardText = (TextView)card.findViewById(R.id.card_letter_text);
-        cardText.setText(new char[]{letter}, 0, 1);
+        cardText.setText(letter_str);
+
+        card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Context context = getContext();
+                if (context instanceof WordButton.Owner) {
+                    ((WordButton.Owner)context).onWordClicked(letter_str);
+                } else {
+                    throw new RuntimeException(context.toString()
+                            + " must implement WordButton.Owner");
+                }
+            }
+        });
 
         return card;
     }
 
-    private Drawable getLetterImage(char letter) {
+    private Drawable getLetterImage(final char letter) {
         int id;
         switch (letter) {
             case 'A': id = R.drawable.abeceda_a; break;
