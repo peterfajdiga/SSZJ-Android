@@ -4,6 +4,7 @@ package peterfajdiga.sszj.sections;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutCompat;
+import android.text.Spanned;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,10 +18,13 @@ import peterfajdiga.sszj.R;
 import peterfajdiga.sszj.WordButton;
 import peterfajdiga.sszj.pojo.Word;
 import peterfajdiga.sszj.requests.Constants;
+import peterfajdiga.sszj.requests.DefinitionRequest;
 import peterfajdiga.sszj.requests.WordRequest;
 
 
-public class WordFragment extends SectionFragment implements WordRequest.Owner {
+public class WordFragment extends SectionFragment implements
+        WordRequest.Owner,
+        DefinitionRequest.Owner {
 
     public static final String BUNDLE_KEY_WORD = "BUNDLE_KEY_WORD";
 
@@ -44,8 +48,10 @@ public class WordFragment extends SectionFragment implements WordRequest.Owner {
 
         final RequestQueue queue = Constants.initQueue(getContext());
         final WordRequest request = new WordRequest(this, word);
-        // TODO: Cancel request when closing fragment
+        final DefinitionRequest request_def = new DefinitionRequest(this, word);
         queue.add(request);
+        queue.add(request_def);
+        // TODO: Cancel requests when closing fragment
     }
 
     @Override
@@ -55,12 +61,6 @@ public class WordFragment extends SectionFragment implements WordRequest.Owner {
 
     @Override
     public void onWordLoaded(Word word) {
-        if (word.definition != null) {
-            final AppCompatTextView definitionView = (AppCompatTextView)self.findViewById(R.id.definition_view);
-            definitionView.setText(word.definition);
-            definitionView.setVisibility(View.VISIBLE);
-        }
-
         final AppCompatTextView baseText = (AppCompatTextView)self.findViewById(R.id.word_base_text);
         switch (word.base.length) {
             case 0: {
@@ -93,6 +93,16 @@ public class WordFragment extends SectionFragment implements WordRequest.Owner {
         final AppCompatTextView baseText = (AppCompatTextView)self.findViewById(R.id.word_base_text);
         baseText.setText(getString(R.string.word_base_error));
     }
+
+    @Override
+    public void onWordDefinitionLoaded(Spanned definition) {
+        final AppCompatTextView definitionView = (AppCompatTextView)self.findViewById(R.id.definition_view);
+        definitionView.setText(definition);
+        definitionView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onWordDefinitionFailed() {}
 
     @Override
     public void onWordAnimationLoaded(AnimationDrawable animation) {

@@ -11,7 +11,7 @@ import com.android.volley.toolbox.ImageRequest;
 
 public class BitmapRequest extends ImageRequest {
 
-    public BitmapRequest(Owner owner, String url, int index) {
+    public BitmapRequest(final Owner owner, final String url, final int index) {
         super(url, new Listener(owner, index), 0, 0, ImageView.ScaleType.FIT_CENTER, Bitmap.Config.RGB_565, new ErrorListener(owner));
     }
 
