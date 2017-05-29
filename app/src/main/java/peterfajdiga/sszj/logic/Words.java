@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public final class Words {
 
@@ -40,6 +42,12 @@ public final class Words {
         final Collator sl = Collator.getInstance(new Locale("sl"));
         sl.setStrength(Collator.PRIMARY);  // ignore case
         return Arrays.binarySearch(words, word, sl) >= 0;
+    }
+
+    // ignores case
+    private static final Pattern spellingChars = Pattern.compile("[ABCČDEFGHIJKLMNOPRSŠTUVZŽ\\s]+");
+    public static boolean isValidWordSpelling(final String word) {
+        return spellingChars.matcher(word.toUpperCase()).matches();
     }
 
     public static String getCorrectCase(final String word) {

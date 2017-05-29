@@ -16,6 +16,8 @@ import android.widget.TextView;
 import peterfajdiga.sszj.R;
 import peterfajdiga.sszj.WordButton;
 
+import static peterfajdiga.sszj.sections.WordFragment.BUNDLE_KEY_WORD;
+
 
 public class SpellingFragment extends SectionFragment {
 
@@ -48,6 +50,12 @@ public class SpellingFragment extends SectionFragment {
 
             }
         });
+
+        final Bundle args = this.getArguments();
+        if (args != null) {
+            final String word = args.getString(BUNDLE_KEY_WORD);
+            input.setText(word.toUpperCase().replaceAll("\\s+",""));
+        }
     }
 
     @Override

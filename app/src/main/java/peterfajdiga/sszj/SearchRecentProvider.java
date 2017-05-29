@@ -25,6 +25,15 @@ public class SearchRecentProvider extends SearchRecentSuggestionsProvider {
         final String query = selectionArgs[0];
         final String[] matches = Words.getWordsStartingWith(query);
         final MatrixCursor autocomplete = new MatrixCursor(recents.getColumnNames(), matches.length);
+        if (!Words.isValidWord(query) && Words.isValidWordSpelling(query)) {
+            autocomplete.addRow(new String[]{
+                    "0",
+                    Uri.parse("android.resource://peterfajdiga.sszj/" + R.drawable.ic_letter).toString(),
+                    query,
+                    query,
+                    "-2"
+            });
+        }
         for (String match : matches) {
             if (cursorContains(recents, match)) {
                 continue;

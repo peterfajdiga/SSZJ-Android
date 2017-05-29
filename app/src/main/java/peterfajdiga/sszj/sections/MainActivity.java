@@ -54,6 +54,12 @@ public class MainActivity extends AppCompatActivity
             if (Words.isValidWord(query)) {
                 loadWord(query, false);
                 new SearchRecentSuggestions(this, SearchRecentProvider.AUTHORITY, SearchRecentProvider.MODE).saveRecentQuery(query, null);  // save search
+            } else if (Words.isValidWordSpelling(query)) {
+                final Fragment fragment = new SpellingFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString(WordFragment.BUNDLE_KEY_WORD, query);
+                fragment.setArguments(bundle);
+                loadSectionFragment(fragment, false);
             }
         }
     }
