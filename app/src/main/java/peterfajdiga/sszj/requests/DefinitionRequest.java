@@ -25,7 +25,7 @@ public class DefinitionRequest extends StringRequest {
 
         @Override
         public void onResponse(String response) {
-            Spanned definition = null;
+            Spanned definition;
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
                 definition = Html.fromHtml(response, Html.FROM_HTML_MODE_COMPACT);
             } else {
