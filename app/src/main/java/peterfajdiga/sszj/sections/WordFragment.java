@@ -50,12 +50,17 @@ public class WordFragment extends SectionFragment implements
         final DefinitionRequest request_def = new DefinitionRequest(this, word);
         queue.add(request);
         queue.add(request_def);
-        // TODO: Cancel requests when closing fragment
     }
 
     @Override
     protected String getTitle() {
         return word;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        Constants.initQueue(getContext()).cancelAll(this);
     }
 
     @Override

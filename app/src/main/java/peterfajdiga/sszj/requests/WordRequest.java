@@ -20,6 +20,7 @@ public class WordRequest extends JsonObjectRequest {
 
     public WordRequest(final Owner owner, final String word) {
         super(Request.Method.GET, Constants.buildUrl(feature, word), null, new Listener(owner), new ErrorListener(owner));
+        setTag(owner);
     }
 
 
@@ -40,7 +41,7 @@ public class WordRequest extends JsonObjectRequest {
                     bitmaps = new Bitmap[2];
                     final String jpg2 = response.getString("jpg2");
                     final BitmapRequest request = new BitmapRequest(this, jpg2, 1);
-                    // TODO: Cancel request when closing fragment
+                    request.setTag(requestOwner);
                     queue.add(request);
                 } else {
                     bitmaps = new Bitmap[1];
@@ -49,7 +50,7 @@ public class WordRequest extends JsonObjectRequest {
                 // load bitmap 1
                 final String jpg1 = response.getString("jpg1");
                 final BitmapRequest request = new BitmapRequest(this, jpg1, 0);
-                // TODO: Cancel request when closing fragment
+                request.setTag(requestOwner);
                 queue.add(request);
 
                 // base

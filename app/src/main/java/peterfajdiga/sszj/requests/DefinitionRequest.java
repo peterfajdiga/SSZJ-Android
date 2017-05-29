@@ -13,6 +13,7 @@ public class DefinitionRequest extends StringRequest {
 
     public DefinitionRequest(final Owner owner, final String word) {
         super(Method.GET, Constants.buildUrl(feature, word), new Listener(owner), new ErrorListener(owner));
+        setTag(owner);
     }
 
 
