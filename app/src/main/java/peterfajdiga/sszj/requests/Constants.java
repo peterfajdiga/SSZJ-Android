@@ -12,14 +12,13 @@ public final class Constants {
 
     public static final String url = "https://sszj.herokuapp.com/";
 
-    public static String buildUrl(String feature, String query) {
-//        try {
-//            return URLEncoder.encode(url + feature + "?q=" + query, "UTF-8");
-//        } catch (java.io.UnsupportedEncodingException e) {
-//            e.printStackTrace();
-//        }
-//        return null;
-        return url + feature + "?q=" + query;
+    public static String buildUrl(final String feature, final String query) {
+        try {
+            return url + feature + "?q=" + URLEncoder.encode(query, "UTF-8");
+        } catch (java.io.UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 
