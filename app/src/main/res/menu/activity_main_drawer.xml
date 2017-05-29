@@ -3,9 +3,6 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_search"
-            android:title="@string/nav_search" />
-        <item
             android:id="@+id/nav_sets"
             android:title="@string/nav_sets" />
         <item

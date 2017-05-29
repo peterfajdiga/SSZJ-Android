@@ -3,6 +3,7 @@ package peterfajdiga.sszj.sections;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.SearchRecentSuggestions;
 import android.support.v4.app.Fragment;
@@ -103,10 +104,9 @@ public class MainActivity extends AppCompatActivity
 
         // Handle navigation view item clicks here.
         switch (item.getItemId()) {
-            case R.id.nav_search:   break;
             case R.id.nav_sets:     break;
             case R.id.nav_spelling: loadSectionFragment(new SpellingFragment()); break;
-            case R.id.nav_practice: break;
+            case R.id.nav_practice: openPracticeWebsite(); break;
             case R.id.nav_about:    loadSectionFragment(new AboutFragment()); break;
         }
 
@@ -135,6 +135,11 @@ public class MainActivity extends AppCompatActivity
         bundle.putString(WordFragment.BUNDLE_KEY_WORD, word);
         fragment.setArguments(bundle);
         loadSectionFragment(fragment, saveStack);
+    }
+
+    private void openPracticeWebsite() {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://sszj.fri.uni-lj.si/?stran=vaje.index"));
+        startActivity(browserIntent);
     }
 
     @Override
