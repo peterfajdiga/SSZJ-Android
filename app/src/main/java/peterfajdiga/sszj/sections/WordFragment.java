@@ -3,16 +3,18 @@ package peterfajdiga.sszj.sections;
 
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
+import android.support.v7.widget.AppCompatTextView;
 
 import com.android.volley.RequestQueue;
 
 import peterfajdiga.sszj.R;
+import peterfajdiga.sszj.WordButton;
 import peterfajdiga.sszj.pojo.Word;
 import peterfajdiga.sszj.requests.Constants;
 import peterfajdiga.sszj.requests.WordRequest;
@@ -59,8 +61,36 @@ public class WordFragment extends SectionFragment implements WordRequest.Owner {
 
     @Override
     public void onWordLoaded(Word word) {
-        final TextView definitionView = (TextView)self.findViewById(R.id.definition_view);
-        definitionView.setText(word.definition);
+        if (word.definition != null) {
+            final AppCompatTextView definitionView = (AppCompatTextView)self.findViewById(R.id.definition_view);
+            definitionView.setText(word.definition);
+            definitionView.setVisibility(View.VISIBLE);
+        }
+
+        final AppCompatTextView baseText = (AppCompatTextView)self.findViewById(R.id.word_base_text);
+        switch (word.base.length) {
+            case 0: {
+                baseText.setText(getString(R.string.word_base_0));
+                break;
+            }
+            case 1: {
+                baseText.setText(getString(R.string.word_base_1));
+                break;
+            }
+            default: {
+                baseText.setText(getString(R.string.word_base_2));
+                break;
+            }
+        }
+
+        final LinearLayoutCompat container = (LinearLayoutCompat)self.findViewById(R.id.container_main);
+        int insertionIndex = container.indexOfChild(baseText) + 1;
+        for (String baseWord : word.base) {
+            final WordButton wordButton = new WordButton(getContext());
+            wordButton.setText(baseWord);
+            container.addView(wordButton, insertionIndex);
+            insertionIndex++;
+        }
     }
 
     @Override

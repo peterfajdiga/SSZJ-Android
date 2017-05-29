@@ -2,6 +2,8 @@ package peterfajdiga.sszj.requests;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.AnimationDrawable;
+import android.text.Html;
+import android.text.Spanned;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -52,8 +54,31 @@ public class WordRequest extends JsonObjectRequest {
                 // TODO: Cancel request when closing fragment
                 queue.add(request);
 
-                // load word
-                final Word word = new Word(response.getString("beseda"), "Ni še definicij.");
+                // lastnosti
+                final String beseda = response.getString("beseda");
+                Spanned definition = null;
+                if (response.has("sskjOpis")) {
+                    final String definitionHtml = response.getString("sskjOpis");
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                        definition = Html.fromHtml(definitionHtml, Html.FROM_HTML_MODE_COMPACT);
+                    } else {
+                        definition = Html.fromHtml(definitionHtml);
+                    }
+                }
+
+                // base
+                String[] base;
+                if (response.has("enaka")) {
+                    base = new String[] {response.getString("enaka")};
+                } else if (response.has("osnovna1")) {
+                    //assert response.has("osnovna2");
+                    base = new String[] {response.getString("osnovna1"), response.getString("osnovna2")};
+                } else {
+                    base = new String[0];
+                }
+
+                // build word
+                final Word word = new Word(beseda, definition, base);
                 requestOwner.onWordLoaded(word);
             } catch (Exception e) {
                 e.printStackTrace();

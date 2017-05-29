@@ -1,14 +1,18 @@
 <android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container_main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:layout_marginBottom="@dimen/activity_vertical_margin"
     tools:context="peterfajdiga.sszj.sections.WordFragment">
 
     <ProgressBar
         android:id="@+id/loading_spinner"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginBottom="@dimen/activity_vertical_margin" />
 
     <ImageView
         android:id="@+id/loading_failed_icon"
@@ -29,8 +33,14 @@
         android:background="@color/colorAccent" />
     <!--TODO: Remove background-->
 
-    <TextView
-        android:id="@+id/definition_view"
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/word_base_text"
+        android:text="@string/word_base_loading"
         style="@style/ContentText.Normal" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/definition_view"
+        style="@style/ContentText.Normal"
+        android:visibility="gone" />
 
 </android.support.v7.widget.LinearLayoutCompat>

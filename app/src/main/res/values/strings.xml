@@ -15,7 +15,12 @@
     <string name="nav_practice">Vaje</string>
     <string name="nav_about">O slovarju</string>
 
-    <string name="error_animation">Animation could not be loaded</string>
+    <string name="word_base_loading">Beseda se nalaga&#8230;</string>
+    <string name="word_base_0">Besedo izrazimo z eno kretnjo.</string>
+    <string name="word_base_1">Besedo kretamo enako kot besedo:</string>
+    <string name="word_base_2">Besedo kretamo s povezavo osnovnih kretenj za besede:</string>
+
+    <string name="error_animation">Napaka pri nalaganju animacije</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

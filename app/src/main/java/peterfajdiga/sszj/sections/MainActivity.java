@@ -19,11 +19,13 @@ import android.view.MenuItem;
 
 import peterfajdiga.sszj.R;
 import peterfajdiga.sszj.SearchRecentProvider;
+import peterfajdiga.sszj.WordButton;
 import peterfajdiga.sszj.logic.Words;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
-        SectionFragment.OnFragmentInteractionListener {
+        SectionFragment.OnFragmentInteractionListener,
+        WordButton.Owner {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,16 +49,9 @@ public class MainActivity extends AppCompatActivity
         Intent intent = getIntent();
         if (intent.getAction().equals(Intent.ACTION_SEARCH)) {
             final String query = intent.getStringExtra(SearchManager.QUERY);
-
             if (Words.isValidWord(query)) {
-                final Fragment fragment = new WordFragment();
-                Bundle bundle = new Bundle();
-                bundle.putString(WordFragment.BUNDLE_KEY_WORD, query);
-                fragment.setArguments(bundle);
-                loadSectionFragment(fragment);
-
-                // save search
-                new SearchRecentSuggestions(this, SearchRecentProvider.AUTHORITY, SearchRecentProvider.MODE).saveRecentQuery(query, null);
+                loadWord(query);
+                new SearchRecentSuggestions(this, SearchRecentProvider.AUTHORITY, SearchRecentProvider.MODE).saveRecentQuery(query, null);  // save search
             }
         }
     }
@@ -129,8 +124,21 @@ public class MainActivity extends AppCompatActivity
                 .commit();
     }
 
+    private void loadWord(String word) {
+        final Fragment fragment = new WordFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString(WordFragment.BUNDLE_KEY_WORD, word);
+        fragment.setArguments(bundle);
+        loadSectionFragment(fragment);
+    }
+
     @Override
     public void onSetTitle(String title) {
         setTitle(title);
+    }
+
+    @Override
+    public void onWordClicked(String word) {
+        loadWord(word);
     }
 }
