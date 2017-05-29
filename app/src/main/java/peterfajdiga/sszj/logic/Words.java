@@ -10,6 +10,10 @@ public final class Words {
 
     // ignores case
     public static String[] getWordsStartingWith(final String prefix) {
+        if (prefix.length() == 0) {
+            return new String[0];
+        }
+
         final Collator sl = Collator.getInstance(new Locale("sl"));
         sl.setStrength(Collator.PRIMARY);  // ignore case
 
@@ -18,10 +22,11 @@ public final class Words {
             topIndex = -topIndex - 1;
         }
 
+        final String prefixLower = prefix.toLowerCase();
         final List<String> matches = new ArrayList<>();
         for (int i = topIndex; i < words.length; i++) {
             final String word = words[i];
-            if (word.startsWith(prefix)) {
+            if (word.toLowerCase().startsWith(prefixLower)) {
                 matches.add(word);
             } else {
                 break;
