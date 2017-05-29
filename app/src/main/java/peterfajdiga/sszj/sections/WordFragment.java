@@ -89,25 +89,30 @@ public class WordFragment extends SectionFragment implements
 
     @Override
     public void onWordFailed() {
-        removeLoadingSpinner();
+        removeSpinnerAnimation();
         final AppCompatTextView baseText = (AppCompatTextView)self.findViewById(R.id.word_base_text);
         baseText.setText(getString(R.string.word_base_error));
     }
 
     @Override
     public void onWordDefinitionLoaded(Spanned definition) {
+        removeSpinnerDefinition();
         final AppCompatTextView definitionView = (AppCompatTextView)self.findViewById(R.id.definition_view);
         definitionView.setText(definition);
         definitionView.setVisibility(View.VISIBLE);
     }
 
     @Override
-    public void onWordDefinitionFailed() {}
+    public void onWordDefinitionFailed() {
+        removeSpinnerDefinition();
+        final AppCompatTextView definitionView = (AppCompatTextView)self.findViewById(R.id.definition_view);
+        definitionView.setText(getString(R.string.definition_error));
+        definitionView.setVisibility(View.VISIBLE);
+    }
 
     @Override
     public void onWordAnimationLoaded(AnimationDrawable animation) {
-        removeLoadingSpinner();
-
+        removeSpinnerAnimation();
         final ImageView animationView = (ImageView)self.findViewById(R.id.animation_view);
         animationView.setImageDrawable(animation);
         animation.start();
@@ -115,13 +120,18 @@ public class WordFragment extends SectionFragment implements
 
     @Override
     public void onWordAnimationFailed() {
-        removeLoadingSpinner();
+        removeSpinnerAnimation();
         final ImageView loadingFailedIcon = (ImageView)self.findViewById(R.id.loading_failed_icon);
         loadingFailedIcon.setVisibility(View.VISIBLE);
     }
 
-    private void removeLoadingSpinner() {
-        final ProgressBar spinner = (ProgressBar)self.findViewById(R.id.loading_spinner);
+    private void removeSpinnerAnimation() {
+        final View spinner = self.findViewById(R.id.loading_spinner_animation);
+        spinner.setVisibility(View.GONE);
+    }
+
+    private void removeSpinnerDefinition() {
+        final View spinner = self.findViewById(R.id.loading_spinner_definition);
         spinner.setVisibility(View.GONE);
     }
 }

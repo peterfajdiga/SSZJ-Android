@@ -4,23 +4,38 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:layout_marginBottom="@dimen/activity_vertical_margin"
+    android:layout_marginBottom="@dimen/content_item_spacing"
     tools:context="peterfajdiga.sszj.sections.WordFragment">
 
-    <ProgressBar
-        android:id="@+id/loading_spinner"
+    <!--TODO: Materialize!-->
+
+
+    <!--Animation-->
+
+    <android.support.v7.widget.LinearLayoutCompat
+        android:id="@+id/loading_spinner_animation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_vertical_margin" />
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/content_item_spacing">
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <TextView
+            android:text="@string/animation_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+    </android.support.v7.widget.LinearLayoutCompat>
 
     <ImageView
         android:id="@+id/loading_failed_icon"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginTop="@dimen/content_item_spacing"
         android:visibility="gone"
         android:src="@drawable/ic_broken_image"
-        android:contentDescription="@string/error_animation" />
+        android:contentDescription="@string/animation_error" />
 
     <ImageView
         android:id="@+id/animation_view"
@@ -31,10 +46,32 @@
         android:background="@color/colorAccent" />
     <!--TODO: Remove background-->
 
+
+    <!--Base-->
+
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/word_base_text"
         android:text="@string/word_base_loading"
         style="@style/ContentText.Normal" />
+
+
+    <!--Definition-->
+
+    <android.support.v7.widget.LinearLayoutCompat
+        android:id="@+id/loading_spinner_definition"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/content_item_spacing">
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <TextView
+            android:text="@string/definition_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+    </android.support.v7.widget.LinearLayoutCompat>
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/definition_view"
