@@ -16,6 +16,7 @@
     <string name="nav_about">O slovarju</string>
 
     <string name="word_base_loading">Beseda se nalaga&#8230;</string>
+    <string name="word_base_error">Napaka pri nalaganju besede :(</string>
     <string name="word_base_0">Besedo izrazimo z eno kretnjo.</string>
     <string name="word_base_1">Besedo kretamo enako kot besedo:</string>
     <string name="word_base_2">Besedo kretamo s povezavo osnovnih kretenj za besede:</string>

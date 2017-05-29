@@ -90,6 +90,8 @@ public class WordFragment extends SectionFragment implements WordRequest.Owner {
     @Override
     public void onWordFailed() {
         removeLoadingSpinner();
+        final AppCompatTextView baseText = (AppCompatTextView)self.findViewById(R.id.word_base_text);
+        baseText.setText(getString(R.string.word_base_error));
     }
 
     @Override
