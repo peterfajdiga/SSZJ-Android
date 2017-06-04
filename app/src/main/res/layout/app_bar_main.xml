@@ -21,11 +21,10 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <ScrollView
+    <FrameLayout
         android:id="@+id/content_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clipToPadding="false"
-        android:paddingBottom="@dimen/content_item_spacing" />
+        android:clipToPadding="false"/>
 
 </android.support.v7.widget.LinearLayoutCompat>

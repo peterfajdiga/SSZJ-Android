@@ -3,18 +3,18 @@ package peterfajdiga.sszj.sections;
 
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutCompat;
 import android.text.Spanned;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.support.v7.widget.AppCompatTextView;
+import android.widget.LinearLayout;
 
 import com.android.volley.RequestQueue;
 
 import peterfajdiga.sszj.R;
-import peterfajdiga.sszj.WordButton;
+import peterfajdiga.sszj.views.WordButton;
 import peterfajdiga.sszj.pojo.Word;
 import peterfajdiga.sszj.requests.Constants;
 import peterfajdiga.sszj.requests.DefinitionRequest;
@@ -81,7 +81,7 @@ public class WordFragment extends SectionFragment implements
             }
         }
 
-        final LinearLayoutCompat container = (LinearLayoutCompat)self.findViewById(R.id.container_main);
+        final LinearLayout container = (LinearLayout)self.findViewById(R.id.container_main);
         int insertionIndex = container.indexOfChild(baseText) + 1;
         for (String baseWord : word.base) {
             final WordButton wordButton = new WordButton(getContext());

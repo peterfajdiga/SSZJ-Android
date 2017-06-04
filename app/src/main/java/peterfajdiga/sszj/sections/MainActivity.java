@@ -21,13 +21,16 @@ import android.view.MenuItem;
 
 import peterfajdiga.sszj.R;
 import peterfajdiga.sszj.SearchRecentProvider;
-import peterfajdiga.sszj.WordButton;
+import peterfajdiga.sszj.pojo.Set;
+import peterfajdiga.sszj.views.SetsGridView;
+import peterfajdiga.sszj.views.WordButton;
 import peterfajdiga.sszj.logic.Words;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         SectionFragment.OnFragmentInteractionListener,
-        WordButton.Owner {
+        WordButton.Owner,
+        SetsGridView.Owner {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,7 +113,7 @@ public class MainActivity extends AppCompatActivity
 
         // Handle navigation view item clicks here.
         switch (item.getItemId()) {
-            case R.id.nav_sets:     break;
+            case R.id.nav_sets:     loadSectionFragment(new SetsFragment()); break;
             case R.id.nav_spelling: loadSectionFragment(new SpellingFragment()); break;
             case R.id.nav_practice: openPracticeWebsite(); break;
             case R.id.nav_about:    loadSectionFragment(new AboutFragment()); break;
@@ -156,5 +159,14 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onWordClicked(String word) {
         loadWord(word, true);
+    }
+
+    @Override
+    public void onSetClicked(Set set) {
+        final Fragment fragment = new SetFragment();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(SetFragment.BUNDLE_KEY_SET, set);
+        fragment.setArguments(bundle);
+        loadSectionFragment(fragment, true);
     }
 }

@@ -1,7 +1,5 @@
 package peterfajdiga.sszj.pojo;
 
-import android.text.Spanned;
-
 public class Word {
     public String word;
     public String[] base;

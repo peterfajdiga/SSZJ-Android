@@ -14,7 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import peterfajdiga.sszj.R;
-import peterfajdiga.sszj.WordButton;
+import peterfajdiga.sszj.views.WordButton;
 
 import static peterfajdiga.sszj.sections.WordFragment.BUNDLE_KEY_WORD;
 
@@ -76,7 +76,7 @@ public class SpellingFragment extends SectionFragment {
     private CardView buildCard(final char letter) {
         final String letter_str = Character.toString(letter);
 
-        final CardView card = (CardView)LayoutInflater.from(getActivity()).inflate(R.layout.letter_card, null);
+        final CardView card = (CardView)LayoutInflater.from(getActivity()).inflate(R.layout.card_letter, null);
 
         final ImageView cardImage = (ImageView)card.findViewById(R.id.card_letter_image);
         cardImage.setImageDrawable(getLetterImage(letter));

@@ -1,10 +1,12 @@
-package peterfajdiga.sszj;
+package peterfajdiga.sszj.views;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
+
+import peterfajdiga.sszj.R;
 
 public class WordButton extends android.support.v7.widget.AppCompatTextView {
     public WordButton(Context context) {

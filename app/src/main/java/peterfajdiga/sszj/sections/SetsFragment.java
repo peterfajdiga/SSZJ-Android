@@ -7,13 +7,13 @@ import android.view.ViewGroup;
 
 import peterfajdiga.sszj.R;
 
-public class AboutFragment extends SectionFragment {
+public class SetsFragment extends SectionFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_about, container, false);
+        return inflater.inflate(R.layout.fragment_sets, container, false);
     }
 
     @Override
@@ -21,6 +21,6 @@ public class AboutFragment extends SectionFragment {
 
     @Override
     protected String getTitle() {
-        return getContext().getString(R.string.nav_about);
+        return getContext().getString(R.string.nav_sets);
     }
 }
