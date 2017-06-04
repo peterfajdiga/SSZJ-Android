@@ -9,6 +9,13 @@ import android.view.View;
 import peterfajdiga.sszj.R;
 
 public class WordButton extends android.support.v7.widget.AppCompatTextView {
+
+    public WordButton(Context context, String word) {
+        super(context);
+        init();
+        setText(word);
+    }
+
     public WordButton(Context context) {
         super(context);
         init();

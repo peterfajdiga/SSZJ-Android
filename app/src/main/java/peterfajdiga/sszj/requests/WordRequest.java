@@ -3,7 +3,6 @@ package peterfajdiga.sszj.requests;
 import android.graphics.Bitmap;
 import android.graphics.drawable.AnimationDrawable;
 
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -19,7 +18,7 @@ public class WordRequest extends JsonObjectRequest {
     private static final String feature = "slovar";
 
     public WordRequest(final Owner owner, final String word) {
-        super(Request.Method.GET, Constants.buildUrl(feature, word), null, new Listener(owner), new ErrorListener(owner));
+        super(Method.GET, Constants.buildUrl(feature, word), null, new Listener(owner), new ErrorListener(owner));
         setTag(owner);
     }
 

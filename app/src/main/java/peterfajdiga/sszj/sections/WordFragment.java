@@ -84,9 +84,7 @@ public class WordFragment extends SectionFragment implements
         final LinearLayout container = (LinearLayout)self.findViewById(R.id.container_main);
         int insertionIndex = container.indexOfChild(baseText) + 1;
         for (String baseWord : word.base) {
-            final WordButton wordButton = new WordButton(getContext());
-            wordButton.setText(baseWord);
-            container.addView(wordButton, insertionIndex);
+            container.addView(new WordButton(getContext(), baseWord), insertionIndex);
             insertionIndex++;
         }
     }
