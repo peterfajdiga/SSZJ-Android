@@ -4,85 +4,58 @@
     android:layout_height="match_parent"
     tools:context="peterfajdiga.sszj.sections.WordFragment">
 
-    <LinearLayout
-        android:id="@+id/container_main"
+    <peterfajdiga.sszj.views.LoadingContainer
+        android:id="@+id/loading_container_main"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/content_item_spacing"
-        android:orientation="vertical"
-        android:layout_marginBottom="@dimen/content_item_spacing">
-
-        <!--TODO: Materialize!-->
-
-
-        <!--Animation-->
-
+        android:layout_height="wrap_content">
         <LinearLayout
-            android:id="@+id/loading_spinner_animation"
+            android:id="@+id/container_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="@dimen/content_item_spacing">
-            <ProgressBar
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
-            <TextView
-                android:text="@string/animation_loading"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center" />
+            android:paddingBottom="@dimen/content_item_spacing"
+            android:orientation="vertical"
+            android:layout_marginBottom="@dimen/content_item_spacing">
+
+            <!--TODO: Materialize!-->
+
+
+            <!--Animation-->
+
+            <peterfajdiga.sszj.views.LoadingContainer
+                android:id="@+id/loading_container_animation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/animation_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scaleType="fitCenter"
+                    android:adjustViewBounds="true"
+                    android:background="@color/colorAccent" />
+            </peterfajdiga.sszj.views.LoadingContainer>
+
+
+            <!--Base-->
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/word_base_text"
+                android:text="@string/word_base_loading"
+                style="@style/ContentText.Normal" />
+
+
+            <!--Definition-->
+
+            <peterfajdiga.sszj.views.LoadingContainer
+                android:id="@+id/loading_container_definition"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/definition_view"
+                    style="@style/ContentText.Normal"
+                    android:visibility="gone" />
+            </peterfajdiga.sszj.views.LoadingContainer>
+
         </LinearLayout>
-
-        <ImageView
-            android:id="@+id/loading_failed_icon"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/content_item_spacing"
-            android:visibility="gone"
-            android:src="@drawable/ic_broken_image"
-            android:contentDescription="@string/animation_error" />
-
-        <ImageView
-            android:id="@+id/animation_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleType="fitCenter"
-            android:adjustViewBounds="true"
-            android:background="@color/colorAccent" />
-        <!--TODO: Remove background-->
-
-
-        <!--Base-->
-
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/word_base_text"
-            android:text="@string/word_base_loading"
-            style="@style/ContentText.Normal" />
-
-
-        <!--Definition-->
-
-        <LinearLayout
-            android:id="@+id/loading_spinner_definition"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="@dimen/content_item_spacing">
-            <ProgressBar
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
-            <TextView
-                android:text="@string/definition_loading"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center" />
-        </LinearLayout>
-
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/definition_view"
-            style="@style/ContentText.Normal"
-            android:visibility="gone" />
-
-    </LinearLayout>
+    </peterfajdiga.sszj.views.LoadingContainer>
 
 </ScrollView>

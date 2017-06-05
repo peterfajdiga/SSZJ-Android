@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import com.android.volley.RequestQueue;
 
 import peterfajdiga.sszj.R;
+import peterfajdiga.sszj.views.LoadingContainer;
 import peterfajdiga.sszj.views.WordButton;
 import peterfajdiga.sszj.pojo.Word;
 import peterfajdiga.sszj.requests.Constants;
@@ -44,12 +45,49 @@ public class WordFragment extends SectionFragment implements
         if (args != null) {
             word = args.getString(BUNDLE_KEY_WORD);
         }
+        loadWord();
+        loadDefinition();
+
+        // setup retry buttons
+        final View.OnClickListener retryListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadWord();
+            }
+        };
+        final LoadingContainer loadingContainerMain = (LoadingContainer)self.findViewById(R.id.loading_container_main);
+        loadingContainerMain.setOnRetryClickedListener(retryListener);
+        final LoadingContainer loadingContainerAnimation = (LoadingContainer)self.findViewById(R.id.loading_container_animation);
+        loadingContainerAnimation.setOnRetryClickedListener(retryListener);
+
+        // setup retry button for definition
+        final LoadingContainer loadingContainerDefinition = (LoadingContainer)self.findViewById(R.id.loading_container_definition);
+        loadingContainerDefinition.setOnRetryClickedListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadDefinition();
+            }
+        });
+    }
+
+    private void loadWord() {
+        final LoadingContainer loadingContainerMain = (LoadingContainer)self.findViewById(R.id.loading_container_main);
+        loadingContainerMain.onLoading();
+        final LoadingContainer loadingContainerAnimation = (LoadingContainer)self.findViewById(R.id.loading_container_animation);
+        loadingContainerAnimation.onLoading();
 
         final RequestQueue queue = Constants.initQueue(getContext());
         final WordRequest request = new WordRequest(this, word);
-        final DefinitionRequest request_def = new DefinitionRequest(this, word);
         queue.add(request);
-        queue.add(request_def);
+    }
+
+    private void loadDefinition() {
+        final LoadingContainer loadingContainerDefinition = (LoadingContainer)self.findViewById(R.id.loading_container_definition);
+        loadingContainerDefinition.onLoading();
+
+        final RequestQueue queue = Constants.initQueue(getContext());
+        final DefinitionRequest request = new DefinitionRequest(this, word);
+        queue.add(request);
     }
 
     @Override
@@ -65,6 +103,9 @@ public class WordFragment extends SectionFragment implements
 
     @Override
     public void onWordLoaded(Word word) {
+        final LoadingContainer loadingContainer = (LoadingContainer)self.findViewById(R.id.loading_container_main);
+        loadingContainer.onLoaded();
+
         final AppCompatTextView baseText = (AppCompatTextView)self.findViewById(R.id.word_base_text);
         switch (word.base.length) {
             case 0: {
@@ -91,30 +132,15 @@ public class WordFragment extends SectionFragment implements
 
     @Override
     public void onWordFailed() {
-        removeSpinnerAnimation();
-        final AppCompatTextView baseText = (AppCompatTextView)self.findViewById(R.id.word_base_text);
-        baseText.setText(getString(R.string.word_base_error));
-    }
-
-    @Override
-    public void onWordDefinitionLoaded(Spanned definition) {
-        removeSpinnerDefinition();
-        final AppCompatTextView definitionView = (AppCompatTextView)self.findViewById(R.id.definition_view);
-        definitionView.setText(definition);
-        definitionView.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void onWordDefinitionFailed() {
-        removeSpinnerDefinition();
-        final AppCompatTextView definitionView = (AppCompatTextView)self.findViewById(R.id.definition_view);
-        definitionView.setText(getString(R.string.definition_error));
-        definitionView.setVisibility(View.VISIBLE);
+        final LoadingContainer loadingContainer = (LoadingContainer)self.findViewById(R.id.loading_container_main);
+        loadingContainer.onFailed();
     }
 
     @Override
     public void onWordAnimationLoaded(AnimationDrawable animation) {
-        removeSpinnerAnimation();
+        final LoadingContainer loadingContainerAnimation = (LoadingContainer)self.findViewById(R.id.loading_container_animation);
+        loadingContainerAnimation.onLoaded();
+
         final ImageView animationView = (ImageView)self.findViewById(R.id.animation_view);
         animationView.setImageDrawable(animation);
         animation.start();
@@ -122,18 +148,23 @@ public class WordFragment extends SectionFragment implements
 
     @Override
     public void onWordAnimationFailed() {
-        removeSpinnerAnimation();
-        final ImageView loadingFailedIcon = (ImageView)self.findViewById(R.id.loading_failed_icon);
-        loadingFailedIcon.setVisibility(View.VISIBLE);
+        final LoadingContainer loadingContainerAnimation = (LoadingContainer)self.findViewById(R.id.loading_container_animation);
+        loadingContainerAnimation.onFailed();
     }
 
-    private void removeSpinnerAnimation() {
-        final View spinner = self.findViewById(R.id.loading_spinner_animation);
-        spinner.setVisibility(View.GONE);
+    @Override
+    public void onWordDefinitionLoaded(Spanned definition) {
+        final LoadingContainer loadingContainerDefinition = (LoadingContainer)self.findViewById(R.id.loading_container_definition);
+        loadingContainerDefinition.onLoaded();
+
+        final AppCompatTextView definitionView = (AppCompatTextView)self.findViewById(R.id.definition_view);
+        definitionView.setText(definition);
+        definitionView.setVisibility(View.VISIBLE);
     }
 
-    private void removeSpinnerDefinition() {
-        final View spinner = self.findViewById(R.id.loading_spinner_definition);
-        spinner.setVisibility(View.GONE);
+    @Override
+    public void onWordDefinitionFailed() {
+        final LoadingContainer loadingContainerDefinition = (LoadingContainer)self.findViewById(R.id.loading_container_definition);
+        loadingContainerDefinition.onFailed();
     }
 }

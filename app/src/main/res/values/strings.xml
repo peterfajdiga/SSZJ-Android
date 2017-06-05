@@ -8,6 +8,8 @@
     <string name="action_settings">Nastavitve</string>
     <string name="action_search">Iskanje</string>
 
+    <string name="retry">Poskusi ponovno</string>
+
     <string name="search_hint">Vnesite besedo</string>
 
     <string name="nav_sets">Tematski sklopi</string>

@@ -12,15 +12,13 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 
+import peterfajdiga.sszj.R;
+
 public class LoadingContainer extends FrameLayout {
 
-//    private String loading = "Loading";
-//    private String error = "Error loading";
     private String retry = "Retry";
 
     private ProgressBar view_spinner;
-//    private TextView view_loading;
-//    private TextView view_error;
     private Button retryButton;
 
     public LoadingContainer(@NonNull Context context) {
@@ -46,16 +44,20 @@ public class LoadingContainer extends FrameLayout {
     }
 
     private void init(final @NonNull Context context) {
+
+        // TODO: Move outside
+        retry = context.getString(R.string.retry);
         final LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        params.setMargins(
+                (int)context.getResources().getDimension(R.dimen.activity_horizontal_margin),
+                (int)context.getResources().getDimension(R.dimen.content_item_spacing),
+                (int)context.getResources().getDimension(R.dimen.activity_horizontal_margin),
+                0
+        );
 
         view_spinner = new ProgressBar(context);
         view_spinner.setLayoutParams(params);
         addView(view_spinner, 0);
-
-//        view_error = new TextView(context);
-//        view_error.setLayoutParams(params);
-//        view_error.setText(error);
-//        addView(view_error, 0);
 
         retryButton = new Button(context);
         retryButton.setLayoutParams(params);
