@@ -37,7 +37,7 @@
 
             <!--Base-->
 
-            <android.support.v7.widget.AppCompatTextView
+            <TextView
                 android:id="@+id/word_base_text"
                 android:text="@string/word_base_loading"
                 style="@style/ContentText.Normal" />
@@ -49,7 +49,7 @@
                 android:id="@+id/loading_container_definition"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <android.support.v7.widget.AppCompatTextView
+                <TextView
                     android:id="@+id/definition_view"
                     style="@style/ContentText.Normal"
                     android:visibility="gone" />

@@ -8,8 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.support.v7.widget.AppCompatTextView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
 
@@ -106,7 +106,7 @@ public class WordFragment extends SectionFragment implements
         final LoadingContainer loadingContainer = (LoadingContainer)self.findViewById(R.id.loading_container_main);
         loadingContainer.onLoaded();
 
-        final AppCompatTextView baseText = (AppCompatTextView)self.findViewById(R.id.word_base_text);
+        final TextView baseText = (TextView)self.findViewById(R.id.word_base_text);
         switch (word.base.length) {
             case 0: {
                 baseText.setText(getString(R.string.word_base_0));
@@ -157,7 +157,7 @@ public class WordFragment extends SectionFragment implements
         final LoadingContainer loadingContainerDefinition = (LoadingContainer)self.findViewById(R.id.loading_container_definition);
         loadingContainerDefinition.onLoaded();
 
-        final AppCompatTextView definitionView = (AppCompatTextView)self.findViewById(R.id.definition_view);
+        final TextView definitionView = (TextView)self.findViewById(R.id.definition_view);
         definitionView.setText(definition);
         definitionView.setVisibility(View.VISIBLE);
     }
