@@ -11,6 +11,7 @@ import peterfajdiga.sszj.R;
 import peterfajdiga.sszj.pojo.Set;
 import peterfajdiga.sszj.requests.Constants;
 import peterfajdiga.sszj.requests.SetRequest;
+import peterfajdiga.sszj.views.LoadingContainer;
 import peterfajdiga.sszj.views.WordButton;
 
 public class SetFragment extends SectionFragment implements SetRequest.Owner {
@@ -34,6 +35,21 @@ public class SetFragment extends SectionFragment implements SetRequest.Owner {
         if (args != null) {
             set = (Set)args.getSerializable(BUNDLE_KEY_SET);
         }
+        loadSet();
+
+        // setup retry button
+        final LoadingContainer loadingContainer = (LoadingContainer)self.findViewById(R.id.loading_container_main);
+        loadingContainer.setOnRetryClickedListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadSet();
+            }
+        });
+    }
+
+    private void loadSet() {
+        final LoadingContainer loadingContainer = (LoadingContainer)self.findViewById(R.id.loading_container_main);
+        loadingContainer.onLoading();
 
         final RequestQueue queue = Constants.initQueue(getContext());
         final SetRequest request = new SetRequest(this, set.getKeyword());
@@ -55,6 +71,9 @@ public class SetFragment extends SectionFragment implements SetRequest.Owner {
 
     @Override
     public void onSetLoaded(String[] words) {
+        final LoadingContainer loadingContainer = (LoadingContainer)self.findViewById(R.id.loading_container_main);
+        loadingContainer.onLoaded();
+
         final ViewGroup wordsContainer = (ViewGroup)self.findViewById(R.id.container_main);
         for (String word : words) {
             wordsContainer.addView(new WordButton(getContext(), word));
@@ -63,6 +82,7 @@ public class SetFragment extends SectionFragment implements SetRequest.Owner {
 
     @Override
     public void onSetFailed() {
-        // TODO: Handle loading failure
+        final LoadingContainer loadingContainer = (LoadingContainer)self.findViewById(R.id.loading_container_main);
+        loadingContainer.onFailed();
     }
 }

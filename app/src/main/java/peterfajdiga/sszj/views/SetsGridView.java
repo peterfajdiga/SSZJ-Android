@@ -48,7 +48,7 @@ public class SetsGridView extends GridView {
             return (Owner)context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement SetsGridView.Owner");
+                    + " must implement SetsGridView.OnRetryClickListener");
         }
     }
 

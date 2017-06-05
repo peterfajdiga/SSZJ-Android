@@ -92,7 +92,7 @@ public class SpellingFragment extends SectionFragment {
                     ((WordButton.Owner)context).onWordClicked(letter_str);
                 } else {
                     throw new RuntimeException(context.toString()
-                            + " must implement WordButton.Owner");
+                            + " must implement WordButton.OnRetryClickListener");
                 }
             }
         });

@@ -58,7 +58,7 @@ public class WordButton extends android.support.v7.widget.AppCompatTextView {
             return (Owner)context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement WordButton.Owner");
+                    + " must implement WordButton.OnRetryClickListener");
         }
     }
 
