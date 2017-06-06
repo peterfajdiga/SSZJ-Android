@@ -1,6 +1,7 @@
 package peterfajdiga.sszj.sections;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -134,10 +135,21 @@ public class WordFragment extends SectionFragment implements
             }
         }
 
+        // cast context
+        final Context context = getContext();
+        final WordsAdapter.OnWordClickedListener mainActivity;
+        if (context instanceof WordsAdapter.OnWordClickedListener) {
+            mainActivity = (WordsAdapter.OnWordClickedListener)context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + "must implement WordsAdapter.OnWordClickedListener");
+        }
 
         // show base words
         final RecyclerView wordBaseContainer = (RecyclerView)self.findViewById(R.id.word_base_container);
-        wordBaseContainer.setAdapter(new WordsAdapter(word.base, R.layout.item_word));
+        final WordsAdapter adapter = new WordsAdapter(word.base, R.layout.item_word);
+        adapter.setOnWordClickedListener(mainActivity);
+        wordBaseContainer.setAdapter(adapter);
     }
 
     @Override
@@ -155,10 +167,11 @@ public class WordFragment extends SectionFragment implements
         animationView.setImageDrawable(animation);
         animation.start();
 
-        animation.setOnFrameListener(this);
-
-        final ProgressBar animationProgress = (ProgressBar)self.findViewById(R.id.animation_progress);
-        animationProgress.setMax(animation.getNumberOfFrames());
+        if (frameCounts.length > 1) {
+            animation.setOnFrameListener(this);
+            final ProgressBar animationProgress = (ProgressBar) self.findViewById(R.id.animation_progress);
+            animationProgress.setMax(animation.getNumberOfFrames());
+        }
 
         final RecyclerView wordBaseContainer = (RecyclerView)self.findViewById(R.id.word_base_container);
         final WeightedLinearLayoutManager layoutManager = (WeightedLinearLayoutManager)wordBaseContainer.getLayoutManager();
