@@ -26,6 +26,7 @@
     <string name="animation_loading">Animacija se nalaga&#8230;</string>
     <string name="animation_error">Napaka pri nalaganju animacije</string>
 
+    <string name="definition">Definicija iz SSKJ</string>
     <string name="definition_loading">Definicija iz SSKJ se nalaga&#8230;</string>
     <string name="definition_error">Napaka pri nalaganju definicije iz SSKJ</string>
 

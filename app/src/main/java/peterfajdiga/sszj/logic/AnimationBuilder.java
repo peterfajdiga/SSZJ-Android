@@ -1,7 +1,6 @@
 package peterfajdiga.sszj.logic;
 
 import android.graphics.Bitmap;
-import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.BitmapDrawable;
 
 public class AnimationBuilder {
@@ -10,8 +9,8 @@ public class AnimationBuilder {
     private static final int frameHeight = 256;
     private static final int frameDuration = 60;
 
-    public static AnimationDrawable build(Bitmap[] bitmaps) {
-        final AnimationDrawable animation = new AnimationDrawable();
+    public static ReportingAnimationDrawable build(Bitmap[] bitmaps) {
+        final ReportingAnimationDrawable animation = new ReportingAnimationDrawable();
 
         for (Bitmap bitmap : bitmaps) {
             final int fullWidth = bitmap.getWidth();
@@ -22,5 +21,9 @@ public class AnimationBuilder {
         }
 
         return animation;
+    }
+
+    public static int getFrameCount(Bitmap bitmap) {
+        return bitmap.getWidth() / frameWidth;
     }
 }

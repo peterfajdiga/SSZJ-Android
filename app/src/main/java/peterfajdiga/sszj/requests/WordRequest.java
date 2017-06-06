@@ -1,7 +1,6 @@
 package peterfajdiga.sszj.requests;
 
 import android.graphics.Bitmap;
-import android.graphics.drawable.AnimationDrawable;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -11,6 +10,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import org.json.JSONObject;
 
 import peterfajdiga.sszj.logic.AnimationBuilder;
+import peterfajdiga.sszj.logic.ReportingAnimationDrawable;
 import peterfajdiga.sszj.pojo.Word;
 
 public class WordRequest extends JsonObjectRequest {
@@ -83,7 +83,11 @@ public class WordRequest extends JsonObjectRequest {
                 }
             }
             if (!hasNull) {
-                requestOwner.onWordAnimationLoaded(AnimationBuilder.build(bitmaps));
+                int[] frameCounts = new int[bitmaps.length];
+                for (int i = 0; i < bitmaps.length; i++) {
+                    frameCounts[i] = AnimationBuilder.getFrameCount(bitmaps[i]);
+                }
+                requestOwner.onWordAnimationLoaded(AnimationBuilder.build(bitmaps), frameCounts);
             }
         }
 
@@ -113,7 +117,7 @@ public class WordRequest extends JsonObjectRequest {
     public interface Owner {
         void onWordLoaded(Word word);
         void onWordFailed();
-        void onWordAnimationLoaded(AnimationDrawable animation);
+        void onWordAnimationLoaded(ReportingAnimationDrawable animation, int[] frameCounts);
         void onWordAnimationFailed();
     }
 }

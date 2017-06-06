@@ -28,6 +28,7 @@
                     android:id="@+id/animation_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/activity_vertical_margin"
                     android:scaleType="fitCenter"
                     android:adjustViewBounds="true"
                     android:background="@color/colorAccent" />
@@ -36,10 +37,33 @@
 
             <!--Base-->
 
-            <TextView
-                android:id="@+id/word_base_text"
-                android:text="@string/word_base_loading"
-                style="@style/ContentText.Normal" />
+            <android.support.v7.widget.CardView style="@style/Card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/word_base_text"
+                        android:text="@string/word_base_loading"
+                        style="@style/CardText" />
+
+                    <ProgressBar
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:id="@+id/animation_progress"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginBottom="0dp" />
+
+                    <LinearLayout
+                        android:id="@+id/word_base_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
 
 
             <!--Definition-->
@@ -51,7 +75,7 @@
                     android:orientation="vertical">
                     <TextView
                         style="@style/CardText.Header"
-                        android:text="Definicija" />
+                        android:text="@string/definition" />
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"

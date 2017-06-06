@@ -1,19 +1,22 @@
 package peterfajdiga.sszj.sections;
 
 
-import android.graphics.drawable.AnimationDrawable;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.Spanned;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
 
 import peterfajdiga.sszj.R;
+import peterfajdiga.sszj.logic.ReportingAnimationDrawable;
 import peterfajdiga.sszj.views.LoadingContainer;
 import peterfajdiga.sszj.views.WordButton;
 import peterfajdiga.sszj.pojo.Word;
@@ -24,7 +27,8 @@ import peterfajdiga.sszj.requests.WordRequest;
 
 public class WordFragment extends SectionFragment implements
         WordRequest.Owner,
-        DefinitionRequest.Owner {
+        DefinitionRequest.Owner,
+        ReportingAnimationDrawable.OnFrameListener {
 
     public static final String BUNDLE_KEY_WORD = "BUNDLE_KEY_WORD";
 
@@ -122,11 +126,17 @@ public class WordFragment extends SectionFragment implements
             }
         }
 
-        final LinearLayout container = (LinearLayout)self.findViewById(R.id.container_main);
-        int insertionIndex = container.indexOfChild(baseText) + 1;
+
+        // show base words
+        final LinearLayout wordBaseContainer = (LinearLayout)self.findViewById(R.id.word_base_container);
+        wordBaseContainer.removeAllViews();
         for (String baseWord : word.base) {
-            container.addView(new WordButton(getContext(), baseWord), insertionIndex);
-            insertionIndex++;
+            final WordButton baseWordButton = new WordButton(getContext());
+            baseWordButton.setText(baseWord);
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                baseWordButton.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            }
+            wordBaseContainer.addView(new WordButton(getContext(), baseWord));
         }
     }
 
@@ -137,19 +147,40 @@ public class WordFragment extends SectionFragment implements
     }
 
     @Override
-    public void onWordAnimationLoaded(AnimationDrawable animation) {
+    public void onWordAnimationLoaded(ReportingAnimationDrawable animation, int[] frameCounts) {
         final LoadingContainer loadingContainerAnimation = (LoadingContainer)self.findViewById(R.id.loading_container_animation);
         loadingContainerAnimation.onLoaded();
 
         final ImageView animationView = (ImageView)self.findViewById(R.id.animation_view);
         animationView.setImageDrawable(animation);
         animation.start();
+
+        animation.setOnFrameListener(this);
+
+        final ProgressBar animationProgress = (ProgressBar)self.findViewById(R.id.animation_progress);
+        animationProgress.setMax(animation.getNumberOfFrames());
+
+        final LinearLayout wordBaseContainer = (LinearLayout)self.findViewById(R.id.word_base_container);
+        for (int i = 0; i < frameCounts.length; i++) {
+            final LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    1.0f / frameCounts[i]
+            );
+            wordBaseContainer.getChildAt(i).setLayoutParams(params);
+        }
     }
 
     @Override
     public void onWordAnimationFailed() {
         final LoadingContainer loadingContainerAnimation = (LoadingContainer)self.findViewById(R.id.loading_container_animation);
         loadingContainerAnimation.onFailed();
+    }
+
+    @Override
+    public void onFrame(int index) {
+        final ProgressBar animationProgress = (ProgressBar)self.findViewById(R.id.animation_progress);
+        animationProgress.setProgress(index);
     }
 
     @Override
