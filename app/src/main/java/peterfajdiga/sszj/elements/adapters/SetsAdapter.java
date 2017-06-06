@@ -1,4 +1,4 @@
-package peterfajdiga.sszj.views;
+package peterfajdiga.sszj.elements.adapters;
 
 import android.app.Activity;
 import android.content.Context;
@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import peterfajdiga.sszj.R;
-import peterfajdiga.sszj.pojo.Set;
+import peterfajdiga.sszj.logic.pojo.Set;
 
 public class SetsAdapter extends ArrayAdapter<Set> {
 

@@ -1,4 +1,4 @@
-package peterfajdiga.sszj.views;
+package peterfajdiga.sszj.elements.adapters;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;

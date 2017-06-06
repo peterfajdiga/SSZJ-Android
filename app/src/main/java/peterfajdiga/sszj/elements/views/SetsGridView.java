@@ -1,4 +1,4 @@
-package peterfajdiga.sszj.views;
+package peterfajdiga.sszj.elements.views;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -6,7 +6,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
-import peterfajdiga.sszj.pojo.Set;
+import peterfajdiga.sszj.logic.pojo.Set;
+import peterfajdiga.sszj.elements.adapters.SetsAdapter;
 
 public class SetsGridView extends GridView {
 

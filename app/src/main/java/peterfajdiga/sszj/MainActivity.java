@@ -1,4 +1,4 @@
-package peterfajdiga.sszj.sections;
+package peterfajdiga.sszj;
 
 import android.app.SearchManager;
 import android.content.Context;
@@ -19,12 +19,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import peterfajdiga.sszj.R;
-import peterfajdiga.sszj.SearchRecentProvider;
-import peterfajdiga.sszj.pojo.Set;
-import peterfajdiga.sszj.views.SetsGridView;
-import peterfajdiga.sszj.views.WordButton;
+import peterfajdiga.sszj.logic.pojo.Set;
+import peterfajdiga.sszj.elements.views.SetsGridView;
+import peterfajdiga.sszj.elements.views.WordButton;
 import peterfajdiga.sszj.logic.Words;
+import peterfajdiga.sszj.sections.AboutFragment;
+import peterfajdiga.sszj.sections.SectionFragment;
+import peterfajdiga.sszj.sections.SetFragment;
+import peterfajdiga.sszj.sections.SetsFragment;
+import peterfajdiga.sszj.sections.SpellingFragment;
+import peterfajdiga.sszj.sections.WordFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,

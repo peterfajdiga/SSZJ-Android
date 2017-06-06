@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     tools:context="peterfajdiga.sszj.sections.WordFragment">
 
-    <peterfajdiga.sszj.views.LoadingContainer
+    <peterfajdiga.sszj.elements.views.LoadingContainer
         android:id="@+id/loading_container_main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -20,7 +20,7 @@
 
             <!--Animation-->
 
-            <peterfajdiga.sszj.views.LoadingContainer
+            <peterfajdiga.sszj.elements.views.LoadingContainer
                 android:id="@+id/loading_container_animation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -32,7 +32,7 @@
                     android:scaleType="fitCenter"
                     android:adjustViewBounds="true"
                     android:background="@color/colorAccent" />
-            </peterfajdiga.sszj.views.LoadingContainer>
+            </peterfajdiga.sszj.elements.views.LoadingContainer>
 
 
             <!--Base-->
@@ -79,7 +79,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:background="@color/cardSeparator" />
-                    <peterfajdiga.sszj.views.LoadingContainer
+                    <peterfajdiga.sszj.elements.views.LoadingContainer
                         android:id="@+id/loading_container_definition"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
@@ -87,11 +87,11 @@
                             android:id="@+id/definition_view"
                             style="@style/CardText"
                             android:visibility="gone" />
-                    </peterfajdiga.sszj.views.LoadingContainer>
+                    </peterfajdiga.sszj.elements.views.LoadingContainer>
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
         </LinearLayout>
-    </peterfajdiga.sszj.views.LoadingContainer>
+    </peterfajdiga.sszj.elements.views.LoadingContainer>
 
 </ScrollView>

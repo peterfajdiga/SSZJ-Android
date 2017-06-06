@@ -8,11 +8,11 @@ import android.view.ViewGroup;
 import com.android.volley.RequestQueue;
 
 import peterfajdiga.sszj.R;
-import peterfajdiga.sszj.pojo.Set;
-import peterfajdiga.sszj.requests.Constants;
-import peterfajdiga.sszj.requests.SetRequest;
-import peterfajdiga.sszj.views.LoadingContainer;
-import peterfajdiga.sszj.views.WordButton;
+import peterfajdiga.sszj.logic.pojo.Set;
+import peterfajdiga.sszj.logic.requests.Constants;
+import peterfajdiga.sszj.logic.requests.SetRequest;
+import peterfajdiga.sszj.elements.views.LoadingContainer;
+import peterfajdiga.sszj.elements.views.WordButton;
 
 public class SetFragment extends SectionFragment implements SetRequest.Owner {
 

@@ -1,4 +1,4 @@
-package peterfajdiga.sszj.views;
+package peterfajdiga.sszj.elements;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

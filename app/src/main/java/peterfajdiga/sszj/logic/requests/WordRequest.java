@@ -1,4 +1,4 @@
-package peterfajdiga.sszj.requests;
+package peterfajdiga.sszj.logic.requests;
 
 import android.graphics.Bitmap;
 
@@ -11,7 +11,7 @@ import org.json.JSONObject;
 
 import peterfajdiga.sszj.logic.AnimationBuilder;
 import peterfajdiga.sszj.logic.ReportingAnimationDrawable;
-import peterfajdiga.sszj.pojo.Word;
+import peterfajdiga.sszj.logic.pojo.Word;
 
 public class WordRequest extends JsonObjectRequest {
 

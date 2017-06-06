@@ -1,4 +1,4 @@
-package peterfajdiga.sszj.requests;
+package peterfajdiga.sszj.logic.requests;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

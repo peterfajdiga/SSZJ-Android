@@ -1,4 +1,4 @@
-package peterfajdiga.sszj.pojo;
+package peterfajdiga.sszj.logic.pojo;
 
 public class Word {
     public String word;

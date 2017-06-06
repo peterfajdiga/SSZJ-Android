@@ -14,7 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import peterfajdiga.sszj.R;
-import peterfajdiga.sszj.views.WordButton;
+import peterfajdiga.sszj.elements.views.WordButton;
 
 import static peterfajdiga.sszj.sections.WordFragment.BUNDLE_KEY_WORD;
 

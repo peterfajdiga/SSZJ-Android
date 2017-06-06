@@ -1,4 +1,4 @@
-package peterfajdiga.sszj.views;
+package peterfajdiga.sszj.elements.views;
 
 import android.content.Context;
 import android.support.annotation.AttrRes;

@@ -1,4 +1,4 @@
-package peterfajdiga.sszj.views;
+package peterfajdiga.sszj.elements;
 
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;

@@ -2,7 +2,6 @@ package peterfajdiga.sszj.sections;
 
 
 import android.os.Bundle;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Spanned;
@@ -17,14 +16,14 @@ import com.android.volley.RequestQueue;
 
 import peterfajdiga.sszj.R;
 import peterfajdiga.sszj.logic.ReportingAnimationDrawable;
-import peterfajdiga.sszj.views.DividerItemDecorationNoLast;
-import peterfajdiga.sszj.views.LoadingContainer;
-import peterfajdiga.sszj.pojo.Word;
-import peterfajdiga.sszj.requests.Constants;
-import peterfajdiga.sszj.requests.DefinitionRequest;
-import peterfajdiga.sszj.requests.WordRequest;
-import peterfajdiga.sszj.views.WeightedLinearLayoutManager;
-import peterfajdiga.sszj.views.WordsAdapter;
+import peterfajdiga.sszj.elements.DividerItemDecorationNoLast;
+import peterfajdiga.sszj.elements.views.LoadingContainer;
+import peterfajdiga.sszj.logic.pojo.Word;
+import peterfajdiga.sszj.logic.requests.Constants;
+import peterfajdiga.sszj.logic.requests.DefinitionRequest;
+import peterfajdiga.sszj.logic.requests.WordRequest;
+import peterfajdiga.sszj.elements.WeightedLinearLayoutManager;
+import peterfajdiga.sszj.elements.adapters.WordsAdapter;
 
 
 public class WordFragment extends SectionFragment implements
