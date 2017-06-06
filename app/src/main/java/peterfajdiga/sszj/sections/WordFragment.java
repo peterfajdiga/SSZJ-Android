@@ -1,15 +1,15 @@
 package peterfajdiga.sszj.sections;
 
 
-import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Spanned;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -17,12 +17,14 @@ import com.android.volley.RequestQueue;
 
 import peterfajdiga.sszj.R;
 import peterfajdiga.sszj.logic.ReportingAnimationDrawable;
+import peterfajdiga.sszj.views.DividerItemDecorationNoLast;
 import peterfajdiga.sszj.views.LoadingContainer;
-import peterfajdiga.sszj.views.WordButton;
 import peterfajdiga.sszj.pojo.Word;
 import peterfajdiga.sszj.requests.Constants;
 import peterfajdiga.sszj.requests.DefinitionRequest;
 import peterfajdiga.sszj.requests.WordRequest;
+import peterfajdiga.sszj.views.WeightedLinearLayoutManager;
+import peterfajdiga.sszj.views.WordsAdapter;
 
 
 public class WordFragment extends SectionFragment implements
@@ -72,6 +74,13 @@ public class WordFragment extends SectionFragment implements
                 loadDefinition();
             }
         });
+
+        // setup word_base_container
+        final RecyclerView wordBaseContainer = (RecyclerView)self.findViewById(R.id.word_base_container);
+        wordBaseContainer.setLayoutManager(new WeightedLinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        DividerItemDecorationNoLast dividerItemDecoration = new DividerItemDecorationNoLast(getContext(), LinearLayoutManager.HORIZONTAL);
+        wordBaseContainer.addItemDecoration(dividerItemDecoration);
+        wordBaseContainer.setNestedScrollingEnabled(false);
     }
 
     private void loadWord() {
@@ -128,16 +137,8 @@ public class WordFragment extends SectionFragment implements
 
 
         // show base words
-        final LinearLayout wordBaseContainer = (LinearLayout)self.findViewById(R.id.word_base_container);
-        wordBaseContainer.removeAllViews();
-        for (String baseWord : word.base) {
-            final WordButton baseWordButton = new WordButton(getContext());
-            baseWordButton.setText(baseWord);
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN_MR1) {
-                baseWordButton.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-            }
-            wordBaseContainer.addView(new WordButton(getContext(), baseWord));
-        }
+        final RecyclerView wordBaseContainer = (RecyclerView)self.findViewById(R.id.word_base_container);
+        wordBaseContainer.setAdapter(new WordsAdapter(word.base, R.layout.item_word));
     }
 
     @Override
@@ -160,15 +161,9 @@ public class WordFragment extends SectionFragment implements
         final ProgressBar animationProgress = (ProgressBar)self.findViewById(R.id.animation_progress);
         animationProgress.setMax(animation.getNumberOfFrames());
 
-        final LinearLayout wordBaseContainer = (LinearLayout)self.findViewById(R.id.word_base_container);
-        for (int i = 0; i < frameCounts.length; i++) {
-            final LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT,
-                    1.0f / frameCounts[i]
-            );
-            wordBaseContainer.getChildAt(i).setLayoutParams(params);
-        }
+        final RecyclerView wordBaseContainer = (RecyclerView)self.findViewById(R.id.word_base_container);
+        final WeightedLinearLayoutManager layoutManager = (WeightedLinearLayoutManager)wordBaseContainer.getLayoutManager();
+        layoutManager.setWeights(frameCounts);
     }
 
     @Override
