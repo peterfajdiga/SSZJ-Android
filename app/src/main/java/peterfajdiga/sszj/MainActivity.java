@@ -53,20 +53,27 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 
-        // do search
-        // Get the intent, verify the action and get the query
-        Intent intent = getIntent();
-        if (intent.getAction().equals(Intent.ACTION_SEARCH)) {
-            final String query = intent.getStringExtra(SearchManager.QUERY);
-            if (Words.isValidWord(query)) {
-                loadWord(query, false);
-                new SearchRecentSuggestions(this, SearchRecentProvider.AUTHORITY, SearchRecentProvider.MODE).saveRecentQuery(query, null);  // save search
-            } else if (Words.isValidWordSpelling(query)) {
-                final Fragment fragment = new SpellingFragment();
-                Bundle bundle = new Bundle();
-                bundle.putString(WordFragment.BUNDLE_KEY_WORD, query);
-                fragment.setArguments(bundle);
-                loadSectionFragment(fragment, false);
+
+        final Intent intent = getIntent();
+        switch (intent.getAction()) {
+            case Intent.ACTION_MAIN: {
+                // show SetsFragment by default
+                loadSectionFragment(new SetsFragment(), false);
+                break;
+            }
+            case Intent.ACTION_SEARCH: {
+                final String query = intent.getStringExtra(SearchManager.QUERY);
+                if (Words.isValidWord(query)) {
+                    loadWord(query, false);
+                    new SearchRecentSuggestions(this, SearchRecentProvider.AUTHORITY, SearchRecentProvider.MODE).saveRecentQuery(query, null);  // save search
+                } else if (Words.isValidWordSpelling(query)) {
+                    final Fragment fragment = new SpellingFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putString(WordFragment.BUNDLE_KEY_WORD, query);
+                    fragment.setArguments(bundle);
+                    loadSectionFragment(fragment, false);
+                }
+                break;
             }
         }
     }
