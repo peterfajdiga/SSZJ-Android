@@ -52,7 +52,7 @@ public class LoadingContainer extends FrameLayout {
                 (int)context.getResources().getDimension(R.dimen.activity_horizontal_margin),
                 (int)context.getResources().getDimension(R.dimen.content_item_spacing),
                 (int)context.getResources().getDimension(R.dimen.activity_horizontal_margin),
-                0
+                (int)context.getResources().getDimension(R.dimen.content_item_spacing)
         );
 
         view_spinner = new ProgressBar(context);

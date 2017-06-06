@@ -10,4 +10,6 @@
     <dimen name="wordbutton_vertical_padding">12dp</dimen>
     <dimen name="wordbutton_textsize">16sp</dimen>
     <dimen name="card_footer_size">40dp</dimen>
+    <dimen name="card_margin_horizontal">8dp</dimen>
+    <dimen name="card_margin_vertical">8dp</dimen>
 </resources>

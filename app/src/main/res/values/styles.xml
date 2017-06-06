@@ -17,6 +17,7 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+
     <style name="ContentText">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -29,7 +30,31 @@
     <style name="ContentText.Normal" parent="ContentText"></style>
 
     <style name="ContentText.Heading" parent="ContentText">
+        <item name="android:textColor">@android:color/primary_text_light</item>
         <item name="android:textSize">24sp</item>
+    </style>
+
+
+    <style name="Card">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">@dimen/card_margin_horizontal</item>
+        <item name="android:layout_marginRight">@dimen/card_margin_horizontal</item>
+        <item name="android:layout_marginBottom">@dimen/card_margin_vertical</item>
+    </style>
+
+    <style name="CardText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/activity_vertical_margin</item>
+        <item name="android:layout_marginBottom">@dimen/activity_vertical_margin</item>
+        <item name="android:layout_marginLeft">@dimen/activity_horizontal_margin</item>
+        <item name="android:layout_marginRight">@dimen/activity_horizontal_margin</item>
+    </style>
+    
+    <style name="CardText.Header" parent="CardText">
+        <item name="android:textColor">@android:color/primary_text_light</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
 </resources>
