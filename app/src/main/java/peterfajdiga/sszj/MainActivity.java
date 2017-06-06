@@ -22,7 +22,6 @@ import android.view.MenuItem;
 import peterfajdiga.sszj.elements.adapters.WordsAdapter;
 import peterfajdiga.sszj.logic.pojo.Set;
 import peterfajdiga.sszj.elements.views.SetsGridView;
-import peterfajdiga.sszj.elements.views.WordButton;
 import peterfajdiga.sszj.logic.Words;
 import peterfajdiga.sszj.sections.AboutFragment;
 import peterfajdiga.sszj.sections.SectionFragment;
@@ -34,7 +33,6 @@ import peterfajdiga.sszj.sections.WordFragment;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         SectionFragment.OnFragmentInteractionListener,
-        WordButton.Owner,
         WordsAdapter.OnWordClickedListener,
         SetsGridView.Owner {
 

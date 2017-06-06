@@ -1,6 +1,9 @@
 package peterfajdiga.sszj.sections;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,11 +11,12 @@ import android.view.ViewGroup;
 import com.android.volley.RequestQueue;
 
 import peterfajdiga.sszj.R;
+import peterfajdiga.sszj.elements.DividerItemDecorationNoLast;
+import peterfajdiga.sszj.elements.adapters.WordsAdapter;
 import peterfajdiga.sszj.logic.pojo.Set;
 import peterfajdiga.sszj.logic.requests.Constants;
 import peterfajdiga.sszj.logic.requests.SetRequest;
 import peterfajdiga.sszj.elements.views.LoadingContainer;
-import peterfajdiga.sszj.elements.views.WordButton;
 
 public class SetFragment extends SectionFragment implements SetRequest.Owner {
 
@@ -45,6 +49,12 @@ public class SetFragment extends SectionFragment implements SetRequest.Owner {
                 loadSet();
             }
         });
+
+        // setup container
+        final RecyclerView container = (RecyclerView)self.findViewById(R.id.container_main);
+        container.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        final DividerItemDecorationNoLast dividerItemDecoration = new DividerItemDecorationNoLast(getContext(), LinearLayoutManager.VERTICAL);
+        container.addItemDecoration(dividerItemDecoration);
     }
 
     private void loadSet() {
@@ -71,13 +81,24 @@ public class SetFragment extends SectionFragment implements SetRequest.Owner {
 
     @Override
     public void onSetLoaded(String[] words) {
+        // cast context
+        final Context context = getContext();
+        final WordsAdapter.OnWordClickedListener mainActivity;
+        if (context instanceof WordsAdapter.OnWordClickedListener) {
+            mainActivity = (WordsAdapter.OnWordClickedListener)context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + "must implement WordsAdapter.OnWordClickedListener");
+        }
+
+        // show loaded words
+        final RecyclerView container = (RecyclerView)self.findViewById(R.id.container_main);
+        final WordsAdapter adapter = new WordsAdapter(words, R.layout.item_word_vertical);
+        adapter.setOnWordClickedListener(mainActivity);
+        container.setAdapter(adapter);
+
         final LoadingContainer loadingContainer = (LoadingContainer)self.findViewById(R.id.loading_container_main);
         loadingContainer.onLoaded();
-
-        final ViewGroup wordsContainer = (ViewGroup)self.findViewById(R.id.container_main);
-        for (String word : words) {
-            wordsContainer.addView(new WordButton(getContext(), word));
-        }
     }
 
     @Override

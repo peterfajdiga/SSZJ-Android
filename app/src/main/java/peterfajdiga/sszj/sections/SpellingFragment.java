@@ -9,12 +9,13 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import peterfajdiga.sszj.R;
-import peterfajdiga.sszj.elements.views.WordButton;
+import peterfajdiga.sszj.elements.adapters.WordsAdapter;
 
 import static peterfajdiga.sszj.sections.WordFragment.BUNDLE_KEY_WORD;
 
@@ -88,11 +89,18 @@ public class SpellingFragment extends SectionFragment {
             @Override
             public void onClick(View v) {
                 final Context context = getContext();
-                if (context instanceof WordButton.Owner) {
-                    ((WordButton.Owner)context).onWordClicked(letter_str);
+
+                // hide soft keyboard
+                InputMethodManager imm = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+
+                // cast context and open word
+                if (context instanceof WordsAdapter.OnWordClickedListener) {
+                    // TODO: Make own Owner
+                    ((WordsAdapter.OnWordClickedListener)context).onWordClicked(letter_str);
                 } else {
                     throw new RuntimeException(context.toString()
-                            + " must implement WordButton.OnRetryClickListener");
+                            + " must implement WordsAdapter.OnWordClickedListener");
                 }
             }
         });

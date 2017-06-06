@@ -5,10 +5,9 @@
     android:layout_height="match_parent"
     tools:context="peterfajdiga.sszj.sections.SetFragment">
 
-    <LinearLayout
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/container_main"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" />
+        android:layout_height="wrap_content" />
 
 </peterfajdiga.sszj.elements.views.LoadingContainer>

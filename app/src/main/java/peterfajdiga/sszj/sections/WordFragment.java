@@ -78,9 +78,8 @@ public class WordFragment extends SectionFragment implements
         // setup word_base_container
         final RecyclerView wordBaseContainer = (RecyclerView)self.findViewById(R.id.word_base_container);
         wordBaseContainer.setLayoutManager(new WeightedLinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        DividerItemDecorationNoLast dividerItemDecoration = new DividerItemDecorationNoLast(getContext(), LinearLayoutManager.HORIZONTAL);
+        final DividerItemDecorationNoLast dividerItemDecoration = new DividerItemDecorationNoLast(getContext(), LinearLayoutManager.HORIZONTAL);
         wordBaseContainer.addItemDecoration(dividerItemDecoration);
-        wordBaseContainer.setNestedScrollingEnabled(false);
     }
 
     private void loadWord() {
@@ -127,14 +126,19 @@ public class WordFragment extends SectionFragment implements
             }
             case 1: {
                 baseText.setText(getString(R.string.word_base_1));
+                showBaseWords(word.base);
                 break;
             }
             default: {
                 baseText.setText(getString(R.string.word_base_2));
+                showBaseWords(word.base);
                 break;
             }
         }
 
+    }
+
+    private void showBaseWords(String[] words) {
         // cast context
         final Context context = getContext();
         final WordsAdapter.OnWordClickedListener mainActivity;
@@ -145,9 +149,14 @@ public class WordFragment extends SectionFragment implements
                     + "must implement WordsAdapter.OnWordClickedListener");
         }
 
-        // show base words
+        // set visibility
+        final View animationProgress = self.findViewById(R.id.animation_progress);
+        animationProgress.setVisibility(View.VISIBLE);
         final RecyclerView wordBaseContainer = (RecyclerView)self.findViewById(R.id.word_base_container);
-        final WordsAdapter adapter = new WordsAdapter(word.base, R.layout.item_word);
+        wordBaseContainer.setVisibility(View.VISIBLE);
+
+        // show base words
+        final WordsAdapter adapter = new WordsAdapter(words, R.layout.item_word_horizontal);
         adapter.setOnWordClickedListener(mainActivity);
         wordBaseContainer.setAdapter(adapter);
     }
