@@ -3,8 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/content_item_spacing"
-    app:cardUseCompatPadding="true"
+    android:layout_marginLeft="@dimen/card_margin_horizontal"
+    android:layout_marginRight="@dimen/card_margin_horizontal"
+    android:layout_marginBottom="@dimen/card_margin_vertical"
     android:foreground="?android:attr/selectableItemBackground"
     android:clickable="true">
 
@@ -16,7 +17,7 @@
 
         <ImageView
             android:id="@+id/card_letter_image"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/letter_image_width"
             android:layout_height="wrap_content" />
 
         <TextView
