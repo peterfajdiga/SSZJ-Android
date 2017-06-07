@@ -19,6 +19,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import peterfajdiga.sszj.elements.adapters.OnWordClickedListener;
 import peterfajdiga.sszj.elements.adapters.WordsAdapter;
 import peterfajdiga.sszj.logic.pojo.Set;
 import peterfajdiga.sszj.elements.views.SetsGridView;
@@ -33,7 +34,7 @@ import peterfajdiga.sszj.sections.WordFragment;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         SectionFragment.OnFragmentInteractionListener,
-        WordsAdapter.OnWordClickedListener,
+        OnWordClickedListener,
         SetsGridView.Owner {
 
     @Override

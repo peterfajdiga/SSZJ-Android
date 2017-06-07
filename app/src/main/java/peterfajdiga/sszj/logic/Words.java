@@ -38,6 +38,7 @@ public final class Words {
     }
 
     // ignores case
+    // empty returns false
     public static boolean isValidWord(final String word) {
         final Collator sl = Collator.getInstance(new Locale("sl"));
         sl.setStrength(Collator.PRIMARY);  // ignore case
@@ -45,6 +46,7 @@ public final class Words {
     }
 
     // ignores case
+    // empty returns false
     private static final Pattern spellingChars = Pattern.compile("[ABCČDEFGHIJKLMNOPRSŠTUVZŽ\\s]+");
     public static boolean isValidWordSpelling(final String word) {
         return spellingChars.matcher(word.toUpperCase()).matches();

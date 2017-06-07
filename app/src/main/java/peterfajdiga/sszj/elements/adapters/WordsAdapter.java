@@ -31,7 +31,6 @@ public class WordsAdapter extends RecyclerView.Adapter<WordsAdapter.WordViewHold
         final View view = LayoutInflater.from(parent.getContext())
                 .inflate(layoutResource, parent, false);
         view.setOnClickListener(new ItemClickListener());
-
         return new WordViewHolder(view);
     }
 
@@ -50,10 +49,6 @@ public class WordsAdapter extends RecyclerView.Adapter<WordsAdapter.WordViewHold
             super(itemView);
             view = (TextView)itemView;
         }
-    }
-
-    public interface OnWordClickedListener {
-        void onWordClicked(String word);
     }
 
     private class ItemClickListener implements View.OnClickListener {

@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.android.volley.RequestQueue;
 
+import peterfajdiga.sszj.elements.adapters.OnWordClickedListener;
 import peterfajdiga.sszj.R;
 import peterfajdiga.sszj.elements.DividerItemDecorationNoLast;
 import peterfajdiga.sszj.elements.adapters.WordsAdapter;
@@ -83,12 +84,12 @@ public class SetFragment extends SectionFragment implements SetRequest.Owner {
     public void onSetLoaded(String[] words) {
         // cast context
         final Context context = getContext();
-        final WordsAdapter.OnWordClickedListener mainActivity;
-        if (context instanceof WordsAdapter.OnWordClickedListener) {
-            mainActivity = (WordsAdapter.OnWordClickedListener)context;
+        final OnWordClickedListener mainActivity;
+        if (context instanceof OnWordClickedListener) {
+            mainActivity = (OnWordClickedListener)context;
         } else {
             throw new RuntimeException(context.toString()
-                    + "must implement WordsAdapter.OnWordClickedListener");
+                    + "must implement OnWordClickedListener");
         }
 
         // show loaded words
