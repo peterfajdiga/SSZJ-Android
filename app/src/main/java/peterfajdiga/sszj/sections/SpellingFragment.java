@@ -26,7 +26,7 @@ import peterfajdiga.sszj.elements.adapters.WordsAdapter;
 import static peterfajdiga.sszj.sections.WordFragment.BUNDLE_KEY_WORD;
 
 
-public class SpellingFragment extends SectionFragment {
+public class SpellingFragment extends SectionFragment implements OnWordClickedListener {
 
     private View self;
 
@@ -40,20 +40,11 @@ public class SpellingFragment extends SectionFragment {
 
     @Override
     protected void init() {
-        // cast context
-        final Context context = getContext();
-        final OnWordClickedListener mainActivity;
-        if (context instanceof OnWordClickedListener) {
-            mainActivity = (OnWordClickedListener)context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + "must implement OnWordClickedListener");
-        }
-
         final RecyclerView letterContainer = (RecyclerView)self.findViewById(R.id.letter_container);
         final int letterWidth = getResources().getDimensionPixelSize(R.dimen.letter_image_width);
-        letterContainer.setLayoutManager(new GridAutofitLayoutManager(context, letterWidth));
+        letterContainer.setLayoutManager(new GridAutofitLayoutManager(getContext(), letterWidth));
         final LettersAdapter lettersAdapter = new LettersAdapter();
+        lettersAdapter.setOnWordClickedListener(this);
         letterContainer.setAdapter(lettersAdapter);
 
         final TextView input = (TextView)self.findViewById(R.id.editText);
@@ -85,5 +76,25 @@ public class SpellingFragment extends SectionFragment {
     @Override
     protected String getTitle() {
         return getContext().getString(R.string.nav_spelling);
+    }
+
+    @Override
+    public void onWordClicked(String word) {
+        // cast context
+        final Context context = getContext();
+        final OnWordClickedListener mainActivity;
+        if (context instanceof OnWordClickedListener) {
+            mainActivity = (OnWordClickedListener)context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + "must implement OnWordClickedListener");
+        }
+
+        // hide soft keyboard
+        InputMethodManager imm = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(self.getWindowToken(), 0);
+
+        // load word
+        mainActivity.onWordClicked(word);
     }
 }
