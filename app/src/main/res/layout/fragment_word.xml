@@ -67,6 +67,15 @@
             </android.support.v7.widget.CardView>
 
 
+            <!--Spelling-->
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/spelling_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="horizontal" />
+
+
             <!--Definition-->
 
             <android.support.v7.widget.CardView style="@style/Card">

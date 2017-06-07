@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
 
+import peterfajdiga.sszj.elements.adapters.LettersAdapter;
 import peterfajdiga.sszj.elements.adapters.OnWordClickedListener;
 import peterfajdiga.sszj.R;
 import peterfajdiga.sszj.logic.ReportingAnimationDrawable;
@@ -81,6 +82,10 @@ public class WordFragment extends SectionFragment implements
         wordBaseContainer.setLayoutManager(new WeightedLinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         final DividerItemDecorationNoLast dividerItemDecoration = new DividerItemDecorationNoLast(getContext(), LinearLayoutManager.HORIZONTAL);
         wordBaseContainer.addItemDecoration(dividerItemDecoration);
+
+        // setup spelling container
+        final RecyclerView spellingContainer = (RecyclerView)self.findViewById(R.id.spelling_container);
+        spellingContainer.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
     }
 
     private void loadWord() {
@@ -137,6 +142,24 @@ public class WordFragment extends SectionFragment implements
             }
         }
 
+        if (word.word.length() > 1) {
+            // cast context
+            final Context context = getContext();
+            final OnWordClickedListener mainActivity;
+            if (context instanceof OnWordClickedListener) {
+                mainActivity = (OnWordClickedListener)context;
+            } else {
+                throw new RuntimeException(context.toString()
+                        + "must implement OnWordClickedListener");
+            }
+
+            // show letters
+            final RecyclerView spellingContainer = (RecyclerView)self.findViewById(R.id.spelling_container);
+            spellingContainer.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+            final LettersAdapter adapter = new LettersAdapter(word.word);
+            adapter.setOnWordClickedListener(mainActivity);
+            spellingContainer.setAdapter(adapter);
+        }
     }
 
     private void showBaseWords(String[] words) {
