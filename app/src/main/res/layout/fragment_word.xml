@@ -15,8 +15,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!--TODO: Materialize!-->
-
 
             <!--Animation-->
 
@@ -30,8 +28,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/activity_vertical_margin"
                     android:scaleType="fitCenter"
-                    android:adjustViewBounds="true"
-                    android:background="@color/colorAccent" />
+                    android:adjustViewBounds="true" />
             </peterfajdiga.sszj.elements.views.LoadingContainer>
 
 

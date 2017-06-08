@@ -1,0 +1,115 @@
+<peterfajdiga.sszj.elements.views.LoadingContainer xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/loading_container_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="peterfajdiga.sszj.sections.WordFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+
+        <!--Animation-->
+
+        <peterfajdiga.sszj.elements.views.LoadingContainer
+            android:id="@+id/loading_container_animation"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/animation_view"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true" />
+        </peterfajdiga.sszj.elements.views.LoadingContainer>
+
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/container_main"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/activity_vertical_margin"
+                    android:orientation="vertical">
+
+
+                    <!--Base-->
+
+                    <android.support.v7.widget.CardView style="@style/Card"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+                            <TextView
+                                android:id="@+id/word_base_text"
+                                android:text="@string/word_base_loading"
+                                style="@style/CardText" />
+
+                            <ProgressBar
+                                style="?android:attr/progressBarStyleHorizontal"
+                                android:id="@+id/animation_progress"
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginTop="0dp"
+                                android:layout_marginBottom="0dp"
+                                android:visibility="gone" />
+
+                            <android.support.v7.widget.RecyclerView
+                                android:id="@+id/word_base_container"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:nestedScrollingEnabled="false"
+                                android:visibility="gone" />
+                        </LinearLayout>
+                    </android.support.v7.widget.CardView>
+
+
+                    <!--Spelling-->
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/spelling_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:scrollbars="horizontal"
+                        android:nestedScrollingEnabled="false" />
+
+
+                    <!--Definition-->
+
+                    <android.support.v7.widget.CardView style="@style/Card">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+                            <TextView
+                                style="@style/CardText.Header"
+                                android:text="@string/definition" />
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/cardSeparator" />
+                            <peterfajdiga.sszj.elements.views.LoadingContainer
+                                android:id="@+id/loading_container_definition"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                                <TextView
+                                    android:id="@+id/definition_view"
+                                    style="@style/CardText"
+                                    android:visibility="gone" />
+                            </peterfajdiga.sszj.elements.views.LoadingContainer>
+                        </LinearLayout>
+                    </android.support.v7.widget.CardView>
+
+                </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</peterfajdiga.sszj.elements.views.LoadingContainer>
