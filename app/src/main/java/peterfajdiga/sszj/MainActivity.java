@@ -20,7 +20,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import peterfajdiga.sszj.elements.adapters.OnWordClickedListener;
-import peterfajdiga.sszj.elements.adapters.WordsAdapter;
 import peterfajdiga.sszj.logic.pojo.Set;
 import peterfajdiga.sszj.elements.views.SetsGridView;
 import peterfajdiga.sszj.logic.Words;
@@ -36,6 +35,9 @@ public class MainActivity extends AppCompatActivity
         SectionFragment.OnFragmentInteractionListener,
         OnWordClickedListener,
         SetsGridView.Owner {
+
+    private SearchView searchView;
+    private MenuItem searchViewItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,7 +99,8 @@ public class MainActivity extends AppCompatActivity
 
         // Get the SearchView and set the searchable configuration
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+        searchViewItem = menu.findItem(R.id.action_search);
+        searchView = (SearchView)searchViewItem.getActionView();
         // Assumes current activity is the searchable activity
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
 
@@ -126,6 +129,8 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         switch (item.getItemId()) {
             case R.id.nav_sets:     loadSectionFragment(new SetsFragment()); break;
+//            case R.id.nav_search:   searchView.setIconified(false); break;
+            case R.id.nav_search:   searchViewItem.expandActionView(); break;
             case R.id.nav_spelling: loadSectionFragment(new SpellingFragment()); break;
             case R.id.nav_practice: openPracticeWebsite(); break;
             case R.id.nav_about:    loadSectionFragment(new AboutFragment()); break;

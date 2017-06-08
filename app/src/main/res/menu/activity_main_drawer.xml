@@ -6,6 +6,9 @@
             android:id="@+id/nav_sets"
             android:title="@string/nav_sets" />
         <item
+            android:id="@+id/nav_search"
+            android:title="@string/nav_search" />
+        <item
             android:id="@+id/nav_spelling"
             android:title="@string/nav_spelling" />
         <item
