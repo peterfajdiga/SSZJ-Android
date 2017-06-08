@@ -4,19 +4,30 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_sets"
+            android:icon="@drawable/ic_drawer_sets"
             android:title="@string/nav_sets" />
         <item
             android:id="@+id/nav_search"
+            android:icon="@drawable/ic_search"
             android:title="@string/nav_search" />
         <item
             android:id="@+id/nav_spelling"
+            android:icon="@drawable/ic_drawer_spelling"
             android:title="@string/nav_spelling" />
-        <item
-            android:id="@+id/nav_practice"
-            android:title="@string/nav_practice" />
-        <item
-            android:id="@+id/nav_about"
-            android:title="@string/nav_about" />
+
+        <group
+            android:id="@+id/menu_bottom"
+            android:checkableBehavior="none">
+
+            <item
+                android:id="@+id/nav_practice"
+                android:icon="@drawable/ic_drawer_practice"
+                android:title="@string/nav_practice" />
+            <item
+                android:id="@+id/nav_about"
+                android:icon="@drawable/ic_drawer_about"
+                android:title="@string/nav_about" />
+        </group>
     </group>
 
 </menu>
