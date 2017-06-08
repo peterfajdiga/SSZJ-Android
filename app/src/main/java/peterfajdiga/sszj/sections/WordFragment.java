@@ -198,17 +198,19 @@ public class WordFragment extends SectionFragment implements
 
         final ImageView animationView = (ImageView)self.findViewById(R.id.animation_view);
         animationView.setImageDrawable(animation);
+        animation.setOneShot(false);
         animation.start();
 
         if (frameCounts.length > 1) {
             animation.setOnFrameListener(this);
-            final ProgressBar animationProgress = (ProgressBar) self.findViewById(R.id.animation_progress);
+            final ProgressBar animationProgress = (ProgressBar)self.findViewById(R.id.animation_progress);
             animationProgress.setMax(animation.getNumberOfFrames());
         }
 
         final RecyclerView wordBaseContainer = (RecyclerView)self.findViewById(R.id.word_base_container);
         final WeightedLinearLayoutManager layoutManager = (WeightedLinearLayoutManager)wordBaseContainer.getLayoutManager();
         layoutManager.setWeights(frameCounts);
+        layoutManager.requestLayout();
     }
 
     @Override
