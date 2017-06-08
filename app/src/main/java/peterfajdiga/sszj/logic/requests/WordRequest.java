@@ -7,6 +7,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import peterfajdiga.sszj.logic.AnimationBuilder;
@@ -35,30 +36,26 @@ public class WordRequest extends JsonObjectRequest {
         public void onResponse(JSONObject response) {
             final RequestQueue queue = Constants.getQueue();
             try {
-                // load bitmap 2
-                if (response.has("jpg2")) {
-                    bitmaps = new Bitmap[2];
-                    final String jpg2 = response.getString("jpg2");
-                    final BitmapRequest request = new BitmapRequest(this, jpg2, 1);
+                // load animation
+                final JSONArray jpgs = response.getJSONArray("jpg");
+                final int n = jpgs.length();
+                bitmaps = new Bitmap[n];
+                for (int i = 0; i < n; i++) {
+                    final String jpg = jpgs.getString(i);
+                    final BitmapRequest request = new BitmapRequest(this, jpg, i);
                     request.setTag(requestOwner);
                     queue.add(request);
-                } else {
-                    bitmaps = new Bitmap[1];
                 }
 
-                // load bitmap 1
-                final String jpg1 = response.getString("jpg1");
-                final BitmapRequest request = new BitmapRequest(this, jpg1, 0);
-                request.setTag(requestOwner);
-                queue.add(request);
-
                 // base
-                String[] base;
-                if (response.has("enaka")) {
-                    base = new String[] {response.getString("enaka")};
-                } else if (response.has("osnovna1")) {
-                    //assert response.has("osnovna2");
-                    base = new String[] {response.getString("osnovna1"), response.getString("osnovna2")};
+                final String[] base;
+                if (response.has("osnovne")) {
+                    final JSONArray baseWords = response.getJSONArray("osnovne");
+                    //assert n == baseWords.length();
+                    base = new String[n];
+                    for (int i = 0; i < n; i++) {
+                        base[i] = baseWords.getString(i);
+                    }
                 } else {
                     base = new String[0];
                 }

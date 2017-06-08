@@ -47,9 +47,17 @@ public final class Words {
 
     // ignores case
     // empty returns false
+    // may contain space
     private static final Pattern spellingChars = Pattern.compile("[ABCČDEFGHIJKLMNOPRSŠTUVZŽ\\s]+");
     public static boolean isValidWordSpelling(final String word) {
         return spellingChars.matcher(word.toUpperCase()).matches();
+    }
+
+    // converts to upper case
+    // removes spaces
+    private static final Pattern illegalChars = Pattern.compile("[^ABCČDEFGHIJKLMNOPRSŠTUVZŽ]+");
+    public static String makeValidWordSpelling(final String word) {
+        return illegalChars.matcher(word.toUpperCase()).replaceAll("");
     }
 
     public static String getCorrectCase(final String word) {

@@ -24,11 +24,7 @@ public class LettersAdapter extends RecyclerView.Adapter<LettersAdapter.LetterVi
     }
 
     public void setWord(String word) {
-        if (Words.isValidWordSpelling(word)) {
-            this.word = word.toUpperCase();
-        } else {
-            this.word = "";
-        }
+        this.word = Words.makeValidWordSpelling(word);
     }
 
     public void setOnWordClickedListener(OnWordClickedListener listener) {
