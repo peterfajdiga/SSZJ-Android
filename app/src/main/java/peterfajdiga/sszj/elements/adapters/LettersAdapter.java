@@ -15,11 +15,15 @@ import peterfajdiga.sszj.logic.Words;
 public class LettersAdapter extends RecyclerView.Adapter<LettersAdapter.LetterViewHolder> {
 
     private String word = "";
+    private int layoutResource;
     private OnWordClickedListener onWordClickedListener = null;
 
-    public LettersAdapter() {}
+    public LettersAdapter(int layoutResource) {
+        this.layoutResource = layoutResource;
+    }
 
-    public LettersAdapter(String word) {
+    public LettersAdapter(int layoutResource, String word) {
+        this.layoutResource = layoutResource;
         setWord(word);
     }
 
@@ -39,7 +43,7 @@ public class LettersAdapter extends RecyclerView.Adapter<LettersAdapter.LetterVi
     @Override
     public LetterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         final View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.card_letter, parent, false);
+                .inflate(layoutResource, parent, false);
         view.setOnClickListener(new ItemClickListener());
         return new LetterViewHolder(view);
     }
@@ -64,7 +68,7 @@ public class LettersAdapter extends RecyclerView.Adapter<LettersAdapter.LetterVi
             case 'A': id = R.drawable.abeceda_a; break;
             case 'B': id = R.drawable.abeceda_b; break;
             case 'C': id = R.drawable.abeceda_c; break;
-            case 'Č': id = R.drawable.abeceda_cc; break;
+            case 'Č': id = R.drawable.abeceda_cc;break;
             case 'D': id = R.drawable.abeceda_d; break;
             case 'E': id = R.drawable.abeceda_e; break;
             case 'F': id = R.drawable.abeceda_f; break;
@@ -80,12 +84,12 @@ public class LettersAdapter extends RecyclerView.Adapter<LettersAdapter.LetterVi
             case 'P': id = R.drawable.abeceda_p; break;
             case 'R': id = R.drawable.abeceda_r; break;
             case 'S': id = R.drawable.abeceda_s; break;
-            case 'Š': id = R.drawable.abeceda_ss; break;
+            case 'Š': id = R.drawable.abeceda_ss;break;
             case 'T': id = R.drawable.abeceda_t; break;
             case 'U': id = R.drawable.abeceda_u; break;
             case 'V': id = R.drawable.abeceda_v; break;
             case 'Z': id = R.drawable.abeceda_z; break;
-            case 'Ž': id = R.drawable.abeceda_zz; break;
+            case 'Ž': id = R.drawable.abeceda_zz;break;
             default: throw new RuntimeException(letter + " is not a valid letter of the Slovenian alphabet");
         }
 

@@ -156,7 +156,7 @@ public class WordFragment extends SectionFragment implements
             // show letters
             final RecyclerView spellingContainer = (RecyclerView)self.findViewById(R.id.spelling_container);
             spellingContainer.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-            final LettersAdapter adapter = new LettersAdapter(word.word);
+            final LettersAdapter adapter = new LettersAdapter(R.layout.card_letter_fixed, word.word);
             adapter.setOnWordClickedListener(mainActivity);
             spellingContainer.setAdapter(adapter);
         }
@@ -180,7 +180,7 @@ public class WordFragment extends SectionFragment implements
         wordBaseContainer.setVisibility(View.VISIBLE);
 
         // show base words
-        final WordsAdapter adapter = new WordsAdapter(words, R.layout.item_word_horizontal);
+        final WordsAdapter adapter = new WordsAdapter(R.layout.item_word_horizontal, words);
         adapter.setOnWordClickedListener(mainActivity);
         wordBaseContainer.setAdapter(adapter);
     }

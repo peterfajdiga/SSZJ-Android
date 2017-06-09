@@ -1,11 +1,7 @@
 package peterfajdiga.sszj.sections;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,15 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import peterfajdiga.sszj.R;
 import peterfajdiga.sszj.elements.GridAutofitLayoutManager;
 import peterfajdiga.sszj.elements.adapters.LettersAdapter;
 import peterfajdiga.sszj.elements.adapters.OnWordClickedListener;
-import peterfajdiga.sszj.elements.adapters.WordsAdapter;
 
 import static peterfajdiga.sszj.sections.WordFragment.BUNDLE_KEY_WORD;
 
@@ -41,9 +34,9 @@ public class SpellingFragment extends SectionFragment implements OnWordClickedLi
     @Override
     protected void init() {
         final RecyclerView letterContainer = (RecyclerView)self.findViewById(R.id.letter_container);
-        final int letterWidth = getResources().getDimensionPixelSize(R.dimen.letter_image_width);
+        final int letterWidth = getResources().getDimensionPixelSize(R.dimen.letter_image_size);
         letterContainer.setLayoutManager(new GridAutofitLayoutManager(getContext(), letterWidth));
-        final LettersAdapter lettersAdapter = new LettersAdapter();
+        final LettersAdapter lettersAdapter = new LettersAdapter(R.layout.card_letter_scaled);
         lettersAdapter.setOnWordClickedListener(this);
         letterContainer.setAdapter(lettersAdapter);
 

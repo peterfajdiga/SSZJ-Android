@@ -12,7 +12,7 @@ public class WordsAdapter extends RecyclerView.Adapter<WordsAdapter.WordViewHold
     private int layoutResource;  // must be a TextView
     private OnWordClickedListener onWordClickedListener = null;
 
-    public WordsAdapter(String[] words, int layoutResource) {
+    public WordsAdapter(int layoutResource, String[] words) {
         this.words = words;
         this.layoutResource = layoutResource;
     }
@@ -42,9 +42,7 @@ public class WordsAdapter extends RecyclerView.Adapter<WordsAdapter.WordViewHold
 
 
     class WordViewHolder extends RecyclerView.ViewHolder {
-
         TextView view;
-
         WordViewHolder(View itemView) {
             super(itemView);
             view = (TextView)itemView;

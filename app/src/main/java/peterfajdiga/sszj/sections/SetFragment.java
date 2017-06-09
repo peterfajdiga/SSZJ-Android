@@ -94,7 +94,7 @@ public class SetFragment extends SectionFragment implements SetRequest.Owner {
 
         // show loaded words
         final RecyclerView container = (RecyclerView)self.findViewById(R.id.container_main);
-        final WordsAdapter adapter = new WordsAdapter(words, R.layout.item_word_vertical);
+        final WordsAdapter adapter = new WordsAdapter(R.layout.item_word_vertical, words);
         adapter.setOnWordClickedListener(mainActivity);
         container.setAdapter(adapter);
 

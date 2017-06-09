@@ -20,8 +20,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import peterfajdiga.sszj.elements.adapters.OnWordClickedListener;
+import peterfajdiga.sszj.elements.adapters.SetsAdapter;
 import peterfajdiga.sszj.logic.pojo.Set;
-import peterfajdiga.sszj.elements.views.SetsGridView;
 import peterfajdiga.sszj.logic.Words;
 import peterfajdiga.sszj.sections.AboutFragment;
 import peterfajdiga.sszj.sections.SectionFragment;
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         SectionFragment.OnFragmentInteractionListener,
         OnWordClickedListener,
-        SetsGridView.Owner {
+        SetsAdapter.OnSetClickedListener {
 
     private MenuItem searchViewItem;
 
