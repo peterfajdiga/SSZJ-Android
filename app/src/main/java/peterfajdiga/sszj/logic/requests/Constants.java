@@ -1,6 +1,8 @@
 package peterfajdiga.sszj.logic.requests;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 
 import com.android.volley.RequestQueue;
@@ -36,5 +38,10 @@ public final class Constants {
             throw new RuntimeException("Queue has not yet been initialized.");
         }
         return queue;
+    }
+
+    public static void openWebsite(final Context context, final String url) {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        context.startActivity(browserIntent);
     }
 }

@@ -23,6 +23,7 @@ import peterfajdiga.sszj.elements.adapters.OnWordClickedListener;
 import peterfajdiga.sszj.elements.adapters.SetsAdapter;
 import peterfajdiga.sszj.logic.pojo.Set;
 import peterfajdiga.sszj.logic.Words;
+import peterfajdiga.sszj.logic.requests.Constants;
 import peterfajdiga.sszj.sections.AboutFragment;
 import peterfajdiga.sszj.sections.SectionFragment;
 import peterfajdiga.sszj.sections.SetFragment;
@@ -130,7 +131,7 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_sets:     loadSectionFragment(new SetsFragment()); break;
             case R.id.nav_search:   searchViewItem.expandActionView(); break;
             case R.id.nav_spelling: loadSectionFragment(new SpellingFragment()); break;
-            case R.id.nav_practice: openPracticeWebsite(); break;
+            case R.id.nav_practice: Constants.openWebsite(this, "http://sszj.fri.uni-lj.si/?stran=vaje.index"); break;
             case R.id.nav_about:    loadSectionFragment(new AboutFragment()); break;
         }
 
@@ -159,11 +160,6 @@ public class MainActivity extends AppCompatActivity
         bundle.putString(WordFragment.BUNDLE_KEY_WORD, word);
         fragment.setArguments(bundle);
         loadSectionFragment(fragment, saveStack);
-    }
-
-    private void openPracticeWebsite() {
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://sszj.fri.uni-lj.si/?stran=vaje.index"));
-        startActivity(browserIntent);
     }
 
     @Override
