@@ -22,9 +22,9 @@
             android:id="@+id/card_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/card_text_padding_horizontal"
-            android:paddingRight="@dimen/card_text_padding_horizontal"
-            android:minHeight="@dimen/card_footer_size"
+            android:paddingLeft="@dimen/card_item_text_padding_horizontal"
+            android:paddingRight="@dimen/card_item_text_padding_horizontal"
+            android:minHeight="@dimen/card_item_footer_size"
             android:textStyle="bold"
             android:gravity="center" />
 

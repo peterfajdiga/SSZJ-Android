@@ -22,8 +22,8 @@
             android:id="@+id/card_letter_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/card_text_padding_horizontal"
-            android:paddingRight="@dimen/card_text_padding_horizontal"
+            android:paddingLeft="@dimen/card_item_text_padding_horizontal"
+            android:paddingRight="@dimen/card_item_text_padding_horizontal"
             android:textSize="24sp"
             android:gravity="center" />
 

@@ -6,18 +6,19 @@
     <dimen name="nav_header_vertical_spacing">16dp</dimen>
     <dimen name="nav_header_height">160dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
-    <dimen name="card_footer_size">40dp</dimen>
-    <dimen name="card_margin_horizontal">8dp</dimen>
-    <dimen name="card_margin_vertical">16dp</dimen>
-    <dimen name="card_text_padding_horizontal">8dp</dimen>
-    <dimen name="letter_image_size">111dp</dimen>
-    <dimen name="set_image_size">128dp</dimen>
-    <dimen name="card_item_margin">4dp</dimen>
-    <dimen name="card_item_container_padding">4dp</dimen>
-    <dimen name="card_margin">8dp</dimen>
-    <dimen name="card_container_vertical_padding">8dp</dimen>
+
     <dimen name="content_horizontal_margin">16dp</dimen>
     <dimen name="content_vertical_margin">8dp</dimen>
     <dimen name="content_container_horizontal_padding">0dp</dimen>
     <dimen name="content_container_vertical_padding">8dp</dimen>
+
+    <dimen name="card_margin">8dp</dimen>
+    <dimen name="card_container_vertical_padding">8dp</dimen>
+
+    <dimen name="card_item_margin">4dp</dimen>
+    <dimen name="card_item_container_padding">4dp</dimen>
+    <dimen name="card_item_footer_size">40dp</dimen>
+    <dimen name="card_item_text_padding_horizontal">8dp</dimen>
+    <dimen name="letter_image_size">111dp</dimen>
+    <dimen name="set_image_size">128dp</dimen>
 </resources>
