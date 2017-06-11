@@ -50,9 +50,9 @@ public class LoadingContainer extends FrameLayout {
         final LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         params.setMargins(
                 (int)context.getResources().getDimension(R.dimen.activity_horizontal_margin),
-                (int)context.getResources().getDimension(R.dimen.content_item_spacing),
+                (int)context.getResources().getDimension(R.dimen.activity_vertical_margin),
                 (int)context.getResources().getDimension(R.dimen.activity_horizontal_margin),
-                (int)context.getResources().getDimension(R.dimen.content_item_spacing)
+                (int)context.getResources().getDimension(R.dimen.activity_vertical_margin)
         );
 
         view_spinner = new ProgressBar(context);
