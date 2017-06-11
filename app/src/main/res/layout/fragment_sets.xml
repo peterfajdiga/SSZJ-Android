@@ -4,6 +4,8 @@
     android:id="@+id/container_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="@dimen/card_item_container_padding"
+    android:clipToPadding="false"
     android:foregroundGravity="center_horizontal"
     android:scrollbars="vertical"
     tools:context="peterfajdiga.sszj.sections.SetsFragment" />
