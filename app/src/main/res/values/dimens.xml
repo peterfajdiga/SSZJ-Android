@@ -10,13 +10,14 @@
     <dimen name="content_horizontal_margin">16dp</dimen>
     <dimen name="content_vertical_margin">8dp</dimen>
     <dimen name="content_container_horizontal_padding">0dp</dimen>
-    <dimen name="content_container_vertical_padding">8dp</dimen>
+    <dimen name="content_container_vertical_padding">@dimen/content_vertical_margin</dimen>
 
-    <dimen name="card_margin">8dp</dimen>
-    <dimen name="card_container_vertical_padding">8dp</dimen>
+    <dimen name="card_horizontal_margin">8dp</dimen>
+    <dimen name="card_vertical_margin">6dp</dimen>
+    <dimen name="card_container_vertical_padding">@dimen/card_vertical_margin</dimen>
 
     <dimen name="card_item_margin">4dp</dimen>
-    <dimen name="card_item_container_padding">4dp</dimen>
+    <dimen name="card_item_container_padding">@dimen/card_item_margin</dimen>
     <dimen name="card_item_footer_size">40dp</dimen>
     <dimen name="card_item_text_padding_horizontal">8dp</dimen>
     <dimen name="letter_image_size">111dp</dimen>

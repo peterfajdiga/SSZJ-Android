@@ -36,7 +36,8 @@
                     android:id="@+id/container_main"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/activity_vertical_margin"
+                    android:paddingTop="@dimen/card_container_vertical_padding"
+                    android:paddingBottom="@dimen/card_container_vertical_padding"
                     android:orientation="vertical">
 
 
@@ -79,6 +80,11 @@
                         android:id="@+id/spelling_container"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:paddingLeft="@dimen/card_item_container_padding"
+                        android:paddingRight="@dimen/card_item_container_padding"
+                        android:paddingTop="@dimen/card_vertical_margin"
+                        android:paddingBottom="@dimen/card_vertical_margin"
+                        android:clipToPadding="false"
                         android:scrollbars="horizontal"
                         android:nestedScrollingEnabled="false" />
 

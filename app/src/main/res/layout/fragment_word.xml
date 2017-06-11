@@ -73,7 +73,10 @@
                 android:id="@+id/spelling_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/card_item_container_padding"
+                android:paddingLeft="@dimen/card_item_container_padding"
+                android:paddingRight="@dimen/card_item_container_padding"
+                android:paddingTop="@dimen/card_vertical_margin"
+                android:paddingBottom="@dimen/card_vertical_margin"
                 android:clipToPadding="false"
                 android:scrollbars="horizontal"
                 android:nestedScrollingEnabled="false" />
