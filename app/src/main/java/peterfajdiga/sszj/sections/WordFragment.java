@@ -204,7 +204,7 @@ public class WordFragment extends SectionFragment implements
         if (frameCounts.length > 1) {
             animation.setOnFrameListener(this);
             final ProgressBar animationProgress = (ProgressBar)self.findViewById(R.id.animation_progress);
-            animationProgress.setMax(animation.getNumberOfFrames());
+            animationProgress.setMax(animation.getNumberOfFrames() - 1);
         }
 
         final RecyclerView wordBaseContainer = (RecyclerView)self.findViewById(R.id.word_base_container);
