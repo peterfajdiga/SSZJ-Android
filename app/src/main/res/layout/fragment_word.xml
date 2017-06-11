@@ -78,6 +78,7 @@
                 android:paddingTop="@dimen/card_vertical_margin"
                 android:paddingBottom="@dimen/card_vertical_margin"
                 android:clipToPadding="false"
+                android:scrollbarStyle="outsideOverlay"
                 android:scrollbars="horizontal"
                 android:nestedScrollingEnabled="false" />
 
