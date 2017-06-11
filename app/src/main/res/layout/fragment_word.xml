@@ -9,10 +9,12 @@
         android:id="@+id/loading_container_main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <LinearLayout
             android:id="@+id/container_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/card_container_vertical_padding"
             android:orientation="vertical">
 
 
@@ -26,7 +28,7 @@
                     android:id="@+id/animation_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/activity_vertical_margin"
+                    android:layout_marginBottom="@dimen/card_container_vertical_padding"
                     android:scaleType="fitCenter"
                     android:adjustViewBounds="true" />
             </peterfajdiga.sszj.elements.views.LoadingContainer>
@@ -71,6 +73,8 @@
                 android:id="@+id/spelling_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="@dimen/card_item_container_padding"
+                android:clipToPadding="false"
                 android:scrollbars="horizontal"
                 android:nestedScrollingEnabled="false" />
 
