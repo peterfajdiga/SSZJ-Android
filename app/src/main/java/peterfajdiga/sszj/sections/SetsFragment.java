@@ -50,6 +50,11 @@ public class SetsFragment extends SectionFragment {
         return getContext().getString(R.string.nav_sets);
     }
 
+    @Override
+    protected int getDrawerItemId() {
+        return R.id.nav_sets;
+    }
+
 
 
     private final static Set[] sets = new Set[] {

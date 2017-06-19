@@ -72,6 +72,11 @@ public class SpellingFragment extends SectionFragment implements OnWordClickedLi
     }
 
     @Override
+    protected int getDrawerItemId() {
+        return R.id.nav_spelling;
+    }
+
+    @Override
     public void onWordClicked(String word) {
         // cast context
         final Context context = getContext();

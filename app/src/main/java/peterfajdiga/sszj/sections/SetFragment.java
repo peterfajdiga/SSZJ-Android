@@ -72,6 +72,11 @@ public class SetFragment extends SectionFragment implements SetRequest.Owner {
         return set.label;
     }
 
+    @Override
+    protected int getDrawerItemId() {
+        return R.id.nav_sets;
+    }
+
 
     @Override
     public void onDetach() {

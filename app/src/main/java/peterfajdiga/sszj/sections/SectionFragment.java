@@ -46,9 +46,11 @@ public abstract class SectionFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         init();
         mListener.onSetTitle(getTitle());
+        mListener.onSetDrawerItem(getDrawerItemId());
     }
 
     protected abstract String getTitle();
+    protected abstract int getDrawerItemId();
     protected abstract void init();
 
     /**
@@ -63,5 +65,6 @@ public abstract class SectionFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         void onSetTitle(String title);
+        void onSetDrawerItem(int drawerItemId);
     }
 }

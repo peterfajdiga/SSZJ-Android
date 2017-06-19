@@ -114,6 +114,11 @@ public class WordFragment extends SectionFragment implements
     }
 
     @Override
+    protected int getDrawerItemId() {
+        return 0;
+    }
+
+    @Override
     public void onDetach() {
         super.onDetach();
         Constants.initQueue(getContext()).cancelAll(this);

@@ -36,4 +36,9 @@ public class AboutFragment extends SectionFragment {
     protected String getTitle() {
         return getContext().getString(R.string.nav_about);
     }
+
+    @Override
+    protected int getDrawerItemId() {
+        return R.id.nav_about;
+    }
 }

@@ -42,16 +42,16 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        final Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        final NavigationView navigationView = (NavigationView)findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
 
@@ -143,7 +143,7 @@ public class MainActivity extends AppCompatActivity
         // Close the drawer
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
-        return true;
+        return false;  // don't check the menuitem
     }
 
     private void loadSectionFragment(final Fragment fragment, final boolean saveStack) {
@@ -170,6 +170,21 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onSetTitle(String title) {
         setTitle(title);
+    }
+
+    @Override
+    public void onSetDrawerItem(int drawerItemId) {
+        final Menu drawerMenu = ((NavigationView)findViewById(R.id.nav_view)).getMenu();
+
+        // uncheck all
+        final int n = drawerMenu.size();
+        for (int i = 0; i < n; i++) {
+            drawerMenu.getItem(i).setChecked(false);
+        }
+
+        if (drawerItemId != 0) {
+            drawerMenu.findItem(drawerItemId).setChecked(true);
+        }
     }
 
     @Override

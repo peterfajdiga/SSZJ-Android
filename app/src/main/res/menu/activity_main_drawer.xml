@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
+    <group android:checkableBehavior="all">
         <item
             android:id="@+id/nav_sets"
             android:icon="@drawable/ic_drawer_sets"
@@ -14,20 +14,19 @@
             android:id="@+id/nav_spelling"
             android:icon="@drawable/ic_drawer_spelling"
             android:title="@string/nav_spelling" />
+    </group>
 
-        <group
-            android:id="@+id/menu_bottom"
-            android:checkableBehavior="none">
+    <group android:checkableBehavior="all"
+        android:id="@+id/menu_bottom">
 
-            <item
-                android:id="@+id/nav_practice"
-                android:icon="@drawable/ic_drawer_practice"
-                android:title="@string/nav_practice" />
-            <item
-                android:id="@+id/nav_about"
-                android:icon="@drawable/ic_drawer_about"
-                android:title="@string/nav_about" />
-        </group>
+        <item
+            android:id="@+id/nav_practice"
+            android:icon="@drawable/ic_drawer_practice"
+            android:title="@string/nav_practice" />
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/ic_drawer_about"
+            android:title="@string/nav_about" />
     </group>
 
 </menu>
