@@ -16,7 +16,9 @@ public class AnimationBuilder {
             final int fullWidth = bitmap.getWidth();
             for (int x = 0; x < fullWidth; x += frameWidth) {
                 final Bitmap frame = Bitmap.createBitmap(bitmap, x, 0, frameWidth, frameHeight);
-                animation.addFrame(new BitmapDrawable(frame), frameDuration);
+                final BitmapDrawable frameDrawable = new BitmapDrawable(frame);
+                frameDrawable.setTargetDensity(bitmap.getDensity());
+                animation.addFrame(frameDrawable, frameDuration);
             }
         }
 

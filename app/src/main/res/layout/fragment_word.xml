@@ -23,14 +23,17 @@
             <peterfajdiga.sszj.elements.views.LoadingContainer
                 android:id="@+id/loading_container_animation"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/card_container_vertical_padding"
+                app:reserveSpace="true"
+                app:seeThrough="true">
                 <ImageView
                     android:id="@+id/animation_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/card_container_vertical_padding"
                     android:scaleType="fitCenter"
-                    android:adjustViewBounds="true" />
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/placeholder_animation" />
             </peterfajdiga.sszj.elements.views.LoadingContainer>
 
 
