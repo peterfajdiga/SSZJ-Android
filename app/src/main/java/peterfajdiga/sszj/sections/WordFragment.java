@@ -164,6 +164,7 @@ public class WordFragment extends SectionFragment implements
             final LettersAdapter adapter = new LettersAdapter(R.layout.card_letter_fixed, word.word);
             adapter.setOnWordClickedListener(mainActivity);
             spellingContainer.setAdapter(adapter);
+            spellingContainer.setVisibility(View.VISIBLE);
         }
     }
 

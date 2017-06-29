@@ -90,7 +90,8 @@
                         android:clipToPadding="false"
                         android:scrollbarStyle="outsideOverlay"
                         android:scrollbars="horizontal"
-                        android:nestedScrollingEnabled="false" />
+                        android:nestedScrollingEnabled="false"
+                        android:visibility="gone" />
 
 
                     <!--Definition-->
