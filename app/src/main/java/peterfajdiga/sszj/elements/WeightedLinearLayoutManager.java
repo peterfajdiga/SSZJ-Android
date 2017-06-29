@@ -35,13 +35,14 @@ public class WeightedLinearLayoutManager extends LinearLayoutManager {
         for (int weight : weights) {
             total += weight;
         }
+
         if (total <= 0) {
             this.weights = null;
-        }
-
-        this.weights = new float[weights.length];
-        for (int i = 0; i < weights.length; i++) {
-            this.weights[i] = weights[i] / total;
+        } else {
+            this.weights = new float[weights.length];
+            for (int i = 0; i < weights.length; i++) {
+                this.weights[i] = weights[i] / total;
+            }
         }
     }
 
@@ -56,7 +57,7 @@ public class WeightedLinearLayoutManager extends LinearLayoutManager {
                         - getLeftDecorationWidth(child)
                         - getRightDecorationWidth(child));
             }
-        } else {
+        } else {  // orientation is vertical
             final int parentHeight = getHeight();
             for (int i = 0; i < n; i++) {
                 final View child = getChildAt(i);
@@ -69,10 +70,10 @@ public class WeightedLinearLayoutManager extends LinearLayoutManager {
     }
 
     private float getWeightForChildAt(int index) {
-        if (weights == null) {
-            return 1.0f / getChildCount();
-        }
         final int n = getChildCount();
+        if (weights == null) {
+            return 1.0f / n;
+        }
         if (weights.length != n) {
             System.err.println("WeightedLinearLayoutManager: number of weights does not match number of children");
             return 1.0f / n;
