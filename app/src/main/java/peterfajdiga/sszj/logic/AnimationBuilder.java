@@ -16,14 +16,11 @@ public class AnimationBuilder {
             final int fullWidth = bitmap.getWidth();
             for (int x = 0; x < fullWidth; x += frameWidth) {
                 final Bitmap frame = Bitmap.createBitmap(bitmap, x, 0, frameWidth, frameHeight);
-                final BitmapDrawable frameDrawable = new BitmapDrawable(frame);
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN_MR2) {
-                    frameDrawable.setTargetDensity(bitmap.getDensity());
-                } else {
-                    // workaround for Android SDK < 18
-                    // TODO: Test
-                    frameDrawable.setTargetDensity(1);
+                if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN_MR2) {
+                    frame.setDensity(1);  // workaround for Android SDK < 18
                 }
+                final BitmapDrawable frameDrawable = new BitmapDrawable(frame);
+                frameDrawable.setTargetDensity(bitmap.getDensity());
                 animation.addFrame(frameDrawable, frameDuration);
             }
         }
