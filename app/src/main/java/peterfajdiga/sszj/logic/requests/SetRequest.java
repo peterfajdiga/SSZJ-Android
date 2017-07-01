@@ -51,7 +51,7 @@ public class SetRequest extends JsonObjectRequest {
 
         @Override
         public void onErrorResponse(VolleyError error) {
-            System.err.println(error.getMessage());
+            //System.err.println(error.getMessage());
             requestOwner.onSetFailed();
         }
     }

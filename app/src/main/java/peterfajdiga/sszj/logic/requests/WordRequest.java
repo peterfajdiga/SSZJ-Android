@@ -104,8 +104,7 @@ public class WordRequest extends JsonObjectRequest {
 
         @Override
         public void onErrorResponse(VolleyError error) {
-            // TODO: Handle non-existent word
-            System.err.println(error.getMessage());
+            //System.err.println(error.getMessage());
             requestOwner.onWordFailed();
         }
     }

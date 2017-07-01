@@ -46,7 +46,7 @@ public class DefinitionRequest extends StringRequest {
 
         @Override
         public void onErrorResponse(VolleyError error) {
-            System.err.println(error.getMessage());
+            //System.err.println(error.getMessage());
             requestOwner.onWordDefinitionFailed();
         }
     }

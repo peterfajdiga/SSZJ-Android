@@ -39,7 +39,7 @@ public class BitmapRequest extends ImageRequest {
 
         @Override
         public void onErrorResponse(VolleyError error) {
-            System.err.println(error.getMessage());
+            //System.err.println(error.getMessage());
             requestOwner.onBitmapFailed();
         }
     }
