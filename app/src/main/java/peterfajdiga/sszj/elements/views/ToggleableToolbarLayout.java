@@ -1,9 +1,10 @@
 package peterfajdiga.sszj.elements.views;
 
 import android.content.Context;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 public class ToggleableToolbarLayout extends CollapsingToolbarLayout {
 

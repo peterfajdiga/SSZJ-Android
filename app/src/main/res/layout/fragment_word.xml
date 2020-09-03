@@ -39,7 +39,7 @@
 
             <!--Base-->
 
-            <android.support.v7.widget.CardView style="@style/Card"
+            <androidx.cardview.widget.CardView style="@style/Card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <LinearLayout
@@ -60,19 +60,19 @@
                         android:layout_marginBottom="0dp"
                         android:visibility="gone" />
 
-                    <android.support.v7.widget.RecyclerView
+                    <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/word_base_container"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:nestedScrollingEnabled="false"
                         android:visibility="gone" />
                 </LinearLayout>
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
 
             <!--Spelling-->
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/spelling_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -89,7 +89,7 @@
 
             <!--Definition-->
 
-            <android.support.v7.widget.CardView style="@style/Card">
+            <androidx.cardview.widget.CardView style="@style/Card">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -111,7 +111,7 @@
                             android:visibility="gone" />
                     </peterfajdiga.sszj.elements.views.LoadingContainer>
                 </LinearLayout>
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
         </LinearLayout>
     </peterfajdiga.sszj.elements.views.LoadingContainer>

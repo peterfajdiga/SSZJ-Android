@@ -2,12 +2,13 @@ package peterfajdiga.sszj.elements.adapters;
 
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import peterfajdiga.sszj.R;
 import peterfajdiga.sszj.logic.Words;

@@ -2,7 +2,6 @@ package peterfajdiga.sszj.sections;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -10,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import peterfajdiga.sszj.R;
 import peterfajdiga.sszj.elements.GridAutofitLayoutManager;
