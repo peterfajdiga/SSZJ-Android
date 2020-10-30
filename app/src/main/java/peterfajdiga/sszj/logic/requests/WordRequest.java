@@ -50,7 +50,7 @@ public class WordRequest extends JsonObjectRequest {
                     for (int i = 0; i < n; i++) {
                         final String jpgUrl = jpgs.getString(i);
                         final String jpgFilename = new File(jpgUrl).getName();
-                        final Bitmap bitmap = ObbLoader.getBitmap(context, jpgFilename);
+                        final Bitmap bitmap = new ObbLoader(context).getBitmap(jpgFilename);
                         bitmaps[i] = bitmap;
                     }
                     requestOwner.onWordAnimationLoaded(AnimationBuilder.build(bitmaps), getFrameCounts(bitmaps));

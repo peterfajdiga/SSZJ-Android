@@ -12,19 +12,23 @@ import androidx.annotation.NonNull;
 import java.io.File;
 
 public class ObbLoader {
-    private ObbLoader() {}
+    private final StorageManager storageManager;
+    private final File obbFile;
+
+    public ObbLoader(@NonNull final Context context) {
+        this.storageManager = (StorageManager)context.getSystemService(Context.STORAGE_SERVICE);
+        this.obbFile = getObbFile(context);
+    }
 
     @NonNull
     private static File getObbFile(@NonNull final Context context) {
         return new File(new File(Environment.getExternalStorageDirectory(), context.getPackageName()), "data.obb");
     }
 
-    public static void mount(@NonNull final Context context) {
-        final File obbFile = getObbFile(context);
+    public void mount() {
         if (!obbFile.exists()) {
-            download(context, obbFile);
+            download();
         }
-        final StorageManager storageManager = (StorageManager)context.getSystemService(Context.STORAGE_SERVICE);
         final boolean done = storageManager.mountObb(obbFile.getPath(), null, new OnObbStateChangeListener() {
             @Override
             public void onObbStateChange(final String path, final int state) {
@@ -33,16 +37,13 @@ public class ObbLoader {
         });
     }
 
-    private static void download(@NonNull final Context context, @NonNull final File obbFile) {
+    private void download() {
         // TODO
     }
 
     @NonNull
-    public static Bitmap getBitmap(@NonNull final Context context, @NonNull final String filename) throws InvalidStateException {
-        final File obbFile = getObbFile(context);
+    public Bitmap getBitmap(@NonNull final String filename) throws InvalidStateException {
         final String obbPath = obbFile.getPath();
-
-        final StorageManager storageManager = (StorageManager)context.getSystemService(Context.STORAGE_SERVICE);
         if (!storageManager.isObbMounted(obbPath)) {
             throw new InvalidStateException(OnObbStateChangeListener.ERROR_NOT_MOUNTED);
         }

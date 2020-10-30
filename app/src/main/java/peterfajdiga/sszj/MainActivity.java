@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ObbLoader.mount(this);
+        new ObbLoader(this).mount();
 
         setContentView(R.layout.activity_main);
         final Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
