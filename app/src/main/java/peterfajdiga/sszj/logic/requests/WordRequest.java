@@ -41,7 +41,6 @@ public class WordRequest extends JsonObjectRequest {
 
         @Override
         public void onResponse(JSONObject response) {
-            final RequestQueue queue = Constants.getQueue();
             try {
                 // load animation
                 final JSONArray jpgs = response.getJSONArray("jpg");
@@ -51,8 +50,9 @@ public class WordRequest extends JsonObjectRequest {
                     final String jpgUrl = jpgs.getString(i);
                     final String jpgFilename = new File(jpgUrl).getName();
                     final Bitmap bitmap = ObbLoader.getBitmap(context, jpgFilename);
-                    onBitmapLoaded(i, bitmap);
+                    bitmaps[i] = bitmap;
                 }
+                requestOwner.onWordAnimationLoaded(AnimationBuilder.build(bitmaps), getFrameCounts(bitmaps));
 
                 // base
                 final String[] base;
@@ -76,23 +76,12 @@ public class WordRequest extends JsonObjectRequest {
             }
         }
 
-        // TODO: refactor (remove)
-        public void onBitmapLoaded(int index, Bitmap bitmap) {
-            bitmaps[index] = bitmap;
-            boolean hasNull = false;
+        private int[] getFrameCounts(@NonNull final Bitmap[] bitmaps) {
+            int[] frameCounts = new int[bitmaps.length];
             for (int i = 0; i < bitmaps.length; i++) {
-                if (bitmaps[i] == null) {
-                    hasNull = true;
-                    break;
-                }
+                frameCounts[i] = AnimationBuilder.getFrameCount(bitmaps[i]);
             }
-            if (!hasNull) {
-                int[] frameCounts = new int[bitmaps.length];
-                for (int i = 0; i < bitmaps.length; i++) {
-                    frameCounts[i] = AnimationBuilder.getFrameCount(bitmaps[i]);
-                }
-                requestOwner.onWordAnimationLoaded(AnimationBuilder.build(bitmaps), frameCounts);
-            }
+            return frameCounts;
         }
     }
 
