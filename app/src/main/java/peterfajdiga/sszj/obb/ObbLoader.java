@@ -25,15 +25,38 @@ public class ObbLoader {
         return new File(new File(Environment.getExternalStorageDirectory(), context.getPackageName()), "data.obb");
     }
 
-    public void mount(@NonNull final OnObbStateChangeListener listener) {
+    public void mount(@NonNull final OnObbMountedListener listener) {
+        if (storageManager.isObbMounted(obbFile.getPath())) {
+            listener.onObbMounted();
+            return;
+        }
+
         if (!obbFile.exists()) {
             download();
         }
-        storageManager.mountObb(obbFile.getPath(), null, listener);
+
+        final boolean success = storageManager.mountObb(obbFile.getPath(), null, new OnObbStateChangeListener() {
+            @Override
+            public void onObbStateChange(final String path, final int state) {
+                super.onObbStateChange(path, state);
+                switch (state) {
+                    case MOUNTED:
+                    case ERROR_ALREADY_MOUNTED:
+                        listener.onObbMounted();
+                        break;
+                    default:
+                        System.err.println("Failed to mount OBB, state: " + state);
+                        listener.onObbFailure();
+                }
+            }
+        });
+        if (!success) {
+            listener.onObbFailure();
+        }
     }
 
     public void mount() {
-        mount(new NoOpOnObbStateChangeListener());
+        mount(new NoOpOnObbMountedListener());
     }
 
     private void download() {
@@ -52,5 +75,16 @@ public class ObbLoader {
         return BitmapFactory.decodeFile(wordFile.getPath());
     }
 
-    private static final class NoOpOnObbStateChangeListener extends OnObbStateChangeListener {}
+    public interface OnObbMountedListener {
+        void onObbMounted();
+        void onObbFailure();
+    }
+
+    private static final class NoOpOnObbMountedListener implements OnObbMountedListener {
+        @Override
+        public void onObbMounted() {}
+
+        @Override
+        public void onObbFailure() {}
+    }
 }
