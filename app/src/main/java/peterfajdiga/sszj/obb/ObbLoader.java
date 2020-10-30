@@ -29,7 +29,7 @@ public class ObbLoader {
         if (!obbFile.exists()) {
             download();
         }
-        final boolean done = storageManager.mountObb(obbFile.getPath(), null, new OnObbStateChangeListener() {
+        storageManager.mountObb(obbFile.getPath(), null, new OnObbStateChangeListener() {
             @Override
             public void onObbStateChange(final String path, final int state) {
                 super.onObbStateChange(path, state);
