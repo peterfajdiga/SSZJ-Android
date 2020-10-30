@@ -24,18 +24,18 @@ import peterfajdiga.sszj.obb.ObbLoader;
 public class WordRequest extends JsonObjectRequest {
     private static final String feature = "slovar";
 
-    public WordRequest(@NonNull final Context context, final Owner owner, final String word) {
-        super(Method.GET, Constants.buildUrl(feature, word), null, new Listener(context, owner), new ErrorListener(owner));
+    public WordRequest(@NonNull final ObbLoader obbLoader, final Owner owner, final String word) {
+        super(Method.GET, Constants.buildUrl(feature, word), null, new Listener(obbLoader, owner), new ErrorListener(owner));
         setTag(owner);
     }
 
     private static class Listener implements Response.Listener<JSONObject> {
-        private final Context context;
+        private final ObbLoader obbLoader;
         private Owner requestOwner;
         private Bitmap[] bitmaps;
 
-        Listener(@NonNull final Context context, final Owner requestOwner) {
-            this.context = context;
+        Listener(@NonNull final ObbLoader obbLoader, final Owner requestOwner) {
+            this.obbLoader = obbLoader;
             this.requestOwner = requestOwner;
         }
 
@@ -50,7 +50,7 @@ public class WordRequest extends JsonObjectRequest {
                     for (int i = 0; i < n; i++) {
                         final String jpgUrl = jpgs.getString(i);
                         final String jpgFilename = new File(jpgUrl).getName();
-                        final Bitmap bitmap = new ObbLoader(context).getBitmap(jpgFilename);
+                        final Bitmap bitmap = obbLoader.getBitmap(jpgFilename);
                         bitmaps[i] = bitmap;
                     }
                     requestOwner.onWordAnimationLoaded(AnimationBuilder.build(bitmaps), getFrameCounts(bitmaps));

@@ -28,7 +28,7 @@ import peterfajdiga.sszj.logic.requests.DefinitionRequest;
 import peterfajdiga.sszj.logic.requests.WordRequest;
 import peterfajdiga.sszj.elements.WeightedLinearLayoutManager;
 import peterfajdiga.sszj.elements.adapters.WordsAdapter;
-
+import peterfajdiga.sszj.obb.ObbLoader;
 
 public class WordFragment extends SectionFragment implements
         WordRequest.Owner,
@@ -96,7 +96,7 @@ public class WordFragment extends SectionFragment implements
         loadingContainerAnimation.onLoading();
 
         final RequestQueue queue = Constants.initQueue(getContext());
-        final WordRequest request = new WordRequest(getContext(), this, word);
+        final WordRequest request = new WordRequest(new ObbLoader(getContext()), this, word);
         queue.add(request);
     }
 
