@@ -46,13 +46,17 @@ public class WordRequest extends JsonObjectRequest {
                 final JSONArray jpgs = response.getJSONArray("jpg");
                 final int n = jpgs.length();
                 bitmaps = new Bitmap[n];
-                for (int i = 0; i < n; i++) {
-                    final String jpgUrl = jpgs.getString(i);
-                    final String jpgFilename = new File(jpgUrl).getName();
-                    final Bitmap bitmap = ObbLoader.getBitmap(context, jpgFilename);
-                    bitmaps[i] = bitmap;
+                try {
+                    for (int i = 0; i < n; i++) {
+                        final String jpgUrl = jpgs.getString(i);
+                        final String jpgFilename = new File(jpgUrl).getName();
+                        final Bitmap bitmap = ObbLoader.getBitmap(context, jpgFilename);
+                        bitmaps[i] = bitmap;
+                    }
+                    requestOwner.onWordAnimationLoaded(AnimationBuilder.build(bitmaps), getFrameCounts(bitmaps));
+                } catch (final Exception e) {
+                    requestOwner.onWordAnimationFailed();
                 }
-                requestOwner.onWordAnimationLoaded(AnimationBuilder.build(bitmaps), getFrameCounts(bitmaps));
 
                 // base
                 final String[] base;
