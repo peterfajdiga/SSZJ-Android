@@ -96,7 +96,7 @@ public class WordFragment extends SectionFragment implements
         loadingContainerAnimation.onLoading();
 
         final RequestQueue queue = Constants.initQueue(getContext());
-        final WordRequest request = new WordRequest(this, word);
+        final WordRequest request = new WordRequest(getContext(), this, word);
         queue.add(request);
     }
 

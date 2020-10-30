@@ -25,6 +25,7 @@ import peterfajdiga.sszj.elements.adapters.SetsAdapter;
 import peterfajdiga.sszj.logic.pojo.Set;
 import peterfajdiga.sszj.logic.Words;
 import peterfajdiga.sszj.logic.requests.Constants;
+import peterfajdiga.sszj.obb.ObbLoader;
 import peterfajdiga.sszj.sections.AboutFragment;
 import peterfajdiga.sszj.sections.SectionFragment;
 import peterfajdiga.sszj.sections.SetFragment;
@@ -43,6 +44,9 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        ObbLoader.mount(this);
+
         setContentView(R.layout.activity_main);
         final Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

@@ -1,6 +1,9 @@
 package peterfajdiga.sszj.logic.requests;
 
+import android.content.Context;
 import android.graphics.Bitmap;
+
+import androidx.annotation.NonNull;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -10,25 +13,29 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.File;
+
 import peterfajdiga.sszj.logic.AnimationBuilder;
 import peterfajdiga.sszj.logic.ReportingAnimationDrawable;
 import peterfajdiga.sszj.logic.pojo.Word;
+import peterfajdiga.sszj.obb.ObbLoader;
 
+// TODO: refactor
 public class WordRequest extends JsonObjectRequest {
-
     private static final String feature = "slovar";
 
-    public WordRequest(final Owner owner, final String word) {
-        super(Method.GET, Constants.buildUrl(feature, word), null, new Listener(owner), new ErrorListener(owner));
+    public WordRequest(@NonNull final Context context, final Owner owner, final String word) {
+        super(Method.GET, Constants.buildUrl(feature, word), null, new Listener(context, owner), new ErrorListener(owner));
         setTag(owner);
     }
 
-
-    private static class Listener implements Response.Listener<JSONObject>, BitmapRequest.Owner {
+    private static class Listener implements Response.Listener<JSONObject> {
+        private final Context context;
         private Owner requestOwner;
         private Bitmap[] bitmaps;
 
-        Listener(final Owner requestOwner) {
+        Listener(@NonNull final Context context, final Owner requestOwner) {
+            this.context = context;
             this.requestOwner = requestOwner;
         }
 
@@ -41,10 +48,10 @@ public class WordRequest extends JsonObjectRequest {
                 final int n = jpgs.length();
                 bitmaps = new Bitmap[n];
                 for (int i = 0; i < n; i++) {
-                    final String jpg = jpgs.getString(i);
-                    final BitmapRequest request = new BitmapRequest(this, jpg, i);
-                    request.setTag(requestOwner);
-                    queue.add(request);
+                    final String jpgUrl = jpgs.getString(i);
+                    final String jpgFilename = new File(jpgUrl).getName();
+                    final Bitmap bitmap = ObbLoader.getBitmap(context, jpgFilename);
+                    onBitmapLoaded(i, bitmap);
                 }
 
                 // base
@@ -69,7 +76,7 @@ public class WordRequest extends JsonObjectRequest {
             }
         }
 
-        @Override
+        // TODO: refactor (remove)
         public void onBitmapLoaded(int index, Bitmap bitmap) {
             bitmaps[index] = bitmap;
             boolean hasNull = false;
@@ -86,11 +93,6 @@ public class WordRequest extends JsonObjectRequest {
                 }
                 requestOwner.onWordAnimationLoaded(AnimationBuilder.build(bitmaps), frameCounts);
             }
-        }
-
-        @Override
-        public void onBitmapFailed() {
-            requestOwner.onWordAnimationFailed();
         }
     }
 
