@@ -25,16 +25,15 @@ public class ObbLoader {
         return new File(new File(Environment.getExternalStorageDirectory(), context.getPackageName()), "data.obb");
     }
 
-    public void mount() {
+    public void mount(@NonNull final OnObbStateChangeListener listener) {
         if (!obbFile.exists()) {
             download();
         }
-        storageManager.mountObb(obbFile.getPath(), null, new OnObbStateChangeListener() {
-            @Override
-            public void onObbStateChange(final String path, final int state) {
-                super.onObbStateChange(path, state);
-            }
-        });
+        storageManager.mountObb(obbFile.getPath(), null, listener);
+    }
+
+    public void mount() {
+        mount(new NoOpOnObbStateChangeListener());
     }
 
     private void download() {
@@ -52,4 +51,6 @@ public class ObbLoader {
         final File wordFile = new File(new File(dir, "gestures"), filename);
         return BitmapFactory.decodeFile(wordFile.getPath());
     }
+
+    private static final class NoOpOnObbStateChangeListener extends OnObbStateChangeListener {}
 }
