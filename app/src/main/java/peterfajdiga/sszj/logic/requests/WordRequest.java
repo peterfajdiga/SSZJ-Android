@@ -1,11 +1,9 @@
 package peterfajdiga.sszj.logic.requests;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 
 import androidx.annotation.NonNull;
 
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -17,7 +15,7 @@ import java.io.File;
 
 import peterfajdiga.sszj.logic.AnimationBuilder;
 import peterfajdiga.sszj.logic.ReportingAnimationDrawable;
-import peterfajdiga.sszj.logic.pojo.Word;
+import peterfajdiga.sszj.logic.pojo.WordLegacy;
 import peterfajdiga.sszj.obb.ObbLoader;
 
 // TODO: refactor
@@ -72,7 +70,7 @@ public class WordRequest extends JsonObjectRequest {
                 }
 
                 // build word
-                final Word word = new Word(response.getString("beseda"), base);
+                final WordLegacy word = new WordLegacy(response.getString("beseda"), base);
                 requestOwner.onWordLoaded(word);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -106,7 +104,7 @@ public class WordRequest extends JsonObjectRequest {
 
 
     public interface Owner {
-        void onWordLoaded(Word word);
+        void onWordLoaded(WordLegacy word);
         void onWordFailed();
         void onWordAnimationLoaded(ReportingAnimationDrawable animation, int[] frameCounts);
         void onWordAnimationFailed();

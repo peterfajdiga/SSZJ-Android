@@ -22,7 +22,7 @@ import peterfajdiga.sszj.R;
 import peterfajdiga.sszj.logic.ReportingAnimationDrawable;
 import peterfajdiga.sszj.elements.DividerItemDecorationNoLast;
 import peterfajdiga.sszj.elements.views.LoadingContainer;
-import peterfajdiga.sszj.logic.pojo.Word;
+import peterfajdiga.sszj.logic.pojo.WordLegacy;
 import peterfajdiga.sszj.logic.requests.Constants;
 import peterfajdiga.sszj.logic.requests.DefinitionRequest;
 import peterfajdiga.sszj.logic.requests.WordRequest;
@@ -126,7 +126,7 @@ public class WordFragment extends SectionFragment implements
     }
 
     @Override
-    public void onWordLoaded(Word word) {
+    public void onWordLoaded(WordLegacy word) {
         final LoadingContainer loadingContainer = (LoadingContainer)self.findViewById(R.id.loading_container_main);
         loadingContainer.onLoaded();
 
