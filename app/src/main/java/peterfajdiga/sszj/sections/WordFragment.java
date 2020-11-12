@@ -2,6 +2,7 @@ package peterfajdiga.sszj.sections;
 
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.text.Spanned;
 import android.view.LayoutInflater;
@@ -19,25 +20,25 @@ import com.android.volley.RequestQueue;
 import peterfajdiga.sszj.elements.adapters.LettersAdapter;
 import peterfajdiga.sszj.elements.adapters.OnWordClickedListener;
 import peterfajdiga.sszj.R;
+import peterfajdiga.sszj.logic.AnimationBuilder;
 import peterfajdiga.sszj.logic.ReportingAnimationDrawable;
 import peterfajdiga.sszj.elements.DividerItemDecorationNoLast;
 import peterfajdiga.sszj.elements.views.LoadingContainer;
-import peterfajdiga.sszj.logic.pojo.WordLegacy;
+import peterfajdiga.sszj.logic.pojo.Word;
 import peterfajdiga.sszj.logic.requests.Constants;
 import peterfajdiga.sszj.logic.requests.DefinitionRequest;
-import peterfajdiga.sszj.logic.requests.WordRequest;
 import peterfajdiga.sszj.elements.WeightedLinearLayoutManager;
 import peterfajdiga.sszj.elements.adapters.WordsAdapter;
+import peterfajdiga.sszj.obb.InvalidStateException;
 import peterfajdiga.sszj.obb.ObbLoader;
 
 public class WordFragment extends SectionFragment implements
-        WordRequest.Owner,
         DefinitionRequest.Owner,
         ReportingAnimationDrawable.OnFrameListener {
 
     public static final String BUNDLE_KEY_WORD = "BUNDLE_KEY_WORD";
 
-    private String word;
+    private Word word;
     private View self;
 
     @Override
@@ -52,10 +53,8 @@ public class WordFragment extends SectionFragment implements
     protected void init() {
         final Bundle args = this.getArguments();
         if (args != null) {
-            word = args.getString(BUNDLE_KEY_WORD);
+            word = Word.wordMap.get(args.getString(BUNDLE_KEY_WORD));
         }
-        loadWord();
-        loadDefinition();
 
         // setup retry buttons
         final View.OnClickListener retryListener = new View.OnClickListener() {
@@ -87,6 +86,9 @@ public class WordFragment extends SectionFragment implements
         // setup spelling container
         final RecyclerView spellingContainer = (RecyclerView)self.findViewById(R.id.spelling_container);
         spellingContainer.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+
+        loadWord();
+        loadDefinition();
     }
 
     private void loadWord() {
@@ -95,9 +97,20 @@ public class WordFragment extends SectionFragment implements
         final LoadingContainer loadingContainerAnimation = (LoadingContainer)self.findViewById(R.id.loading_container_animation);
         loadingContainerAnimation.onLoading();
 
-        final RequestQueue queue = Constants.initQueue(getContext());
-        final WordRequest request = new WordRequest(new ObbLoader(getContext()), this, word);
-        queue.add(request);
+        onWordLoaded(word);
+
+        try {
+            final ObbLoader obbLoader = new ObbLoader(getContext());
+            final String[] gestureFiles = word.getGestureFiles();
+            final Bitmap[] bitmaps = new Bitmap[gestureFiles.length];
+            for (int i = 0; i < gestureFiles.length; i++) {
+                bitmaps[i] = obbLoader.getBitmap(gestureFiles[i]);
+            }
+            onWordAnimationLoaded(AnimationBuilder.build(bitmaps), AnimationBuilder.getFrameCounts(bitmaps));
+        } catch (final InvalidStateException e) {
+            e.printStackTrace();
+            onWordAnimationFailed();
+        }
     }
 
     private void loadDefinition() {
@@ -105,13 +118,13 @@ public class WordFragment extends SectionFragment implements
         loadingContainerDefinition.onLoading();
 
         final RequestQueue queue = Constants.initQueue(getContext());
-        final DefinitionRequest request = new DefinitionRequest(this, word);
+        final DefinitionRequest request = new DefinitionRequest(this, word.word);
         queue.add(request);
     }
 
     @Override
     protected String getTitle() {
-        return word;
+        return word.word;
     }
 
     @Override
@@ -125,8 +138,8 @@ public class WordFragment extends SectionFragment implements
         Constants.initQueue(getContext()).cancelAll(this);
     }
 
-    @Override
-    public void onWordLoaded(WordLegacy word) {
+    // TODO: refactor
+    public void onWordLoaded(final Word word) {
         final LoadingContainer loadingContainer = (LoadingContainer)self.findViewById(R.id.loading_container_main);
         loadingContainer.onLoaded();
 
@@ -192,13 +205,7 @@ public class WordFragment extends SectionFragment implements
         wordBaseContainer.setAdapter(adapter);
     }
 
-    @Override
-    public void onWordFailed() {
-        final LoadingContainer loadingContainer = (LoadingContainer)self.findViewById(R.id.loading_container_main);
-        loadingContainer.onFailed();
-    }
-
-    @Override
+    // TODO: refactor
     public void onWordAnimationLoaded(ReportingAnimationDrawable animation, int[] frameCounts) {
         final LoadingContainer loadingContainerAnimation = (LoadingContainer)self.findViewById(R.id.loading_container_animation);
         loadingContainerAnimation.onLoaded();
@@ -220,7 +227,7 @@ public class WordFragment extends SectionFragment implements
         layoutManager.requestLayout();
     }
 
-    @Override
+    // TODO: refactor
     public void onWordAnimationFailed() {
         final LoadingContainer loadingContainerAnimation = (LoadingContainer)self.findViewById(R.id.loading_container_animation);
         loadingContainerAnimation.onFailed();

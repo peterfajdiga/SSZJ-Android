@@ -67,6 +67,7 @@ public final class Words {
         return words[index];
     }
 
+    // TODO: replace with Word.words
     private static final String[] words = new String[] {
             "a",
             "abstrakten",

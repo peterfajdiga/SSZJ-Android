@@ -9,7 +9,7 @@ public class AnimationBuilder {
     private static final int frameHeight = 256;
     private static final int frameDuration = 60;
 
-    public static ReportingAnimationDrawable build(Bitmap[] bitmaps) {
+    public static ReportingAnimationDrawable build(final Bitmap[] bitmaps) {
         final ReportingAnimationDrawable animation = new ReportingAnimationDrawable();
 
         for (Bitmap bitmap : bitmaps) {
@@ -28,7 +28,15 @@ public class AnimationBuilder {
         return animation;
     }
 
-    public static int getFrameCount(Bitmap bitmap) {
+    public static int[] getFrameCounts(final Bitmap[] bitmaps) {
+        int[] frameCounts = new int[bitmaps.length];
+        for (int i = 0; i < bitmaps.length; i++) {
+            frameCounts[i] = getFrameCount(bitmaps[i]);
+        }
+        return frameCounts;
+    }
+
+    public static int getFrameCount(final Bitmap bitmap) {
         return bitmap.getWidth() / frameWidth;
     }
 }
