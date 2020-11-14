@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AllWords {
-    private AllWords() {}
+public class Words {
+    private Words() {}
 
     private static class Combination {
         String headword;

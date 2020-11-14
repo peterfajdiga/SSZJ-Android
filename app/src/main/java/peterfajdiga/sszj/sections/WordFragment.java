@@ -24,7 +24,7 @@ import peterfajdiga.sszj.logic.AnimationBuilder;
 import peterfajdiga.sszj.logic.ReportingAnimationDrawable;
 import peterfajdiga.sszj.elements.DividerItemDecorationNoLast;
 import peterfajdiga.sszj.elements.views.LoadingContainer;
-import peterfajdiga.sszj.logic.words.AllWords;
+import peterfajdiga.sszj.logic.words.Words;
 import peterfajdiga.sszj.logic.words.CombinedWord;
 import peterfajdiga.sszj.logic.words.Word;
 import peterfajdiga.sszj.logic.requests.Constants;
@@ -55,7 +55,7 @@ public class WordFragment extends SectionFragment implements
     protected void init() {
         final Bundle args = this.getArguments();
         if (args != null) {
-            word = AllWords.wordMap.get(args.getString(BUNDLE_KEY_WORD));
+            word = Words.wordMap.get(args.getString(BUNDLE_KEY_WORD));
         }
 
         // setup retry buttons

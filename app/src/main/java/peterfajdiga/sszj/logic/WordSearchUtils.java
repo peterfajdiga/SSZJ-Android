@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.regex.Pattern;
 
-import peterfajdiga.sszj.logic.words.AllWords;
+import peterfajdiga.sszj.logic.words.Words;
 
 public final class WordSearchUtils {
     private WordSearchUtils() {}
@@ -21,15 +21,15 @@ public final class WordSearchUtils {
         final Collator sl = Collator.getInstance(new Locale("sl"));
         sl.setStrength(Collator.PRIMARY);  // ignore case
 
-        int topIndex = Arrays.binarySearch(AllWords.headwords, prefix, sl);
+        int topIndex = Arrays.binarySearch(Words.headwords, prefix, sl);
         if (topIndex < 0) {
             topIndex = -topIndex - 1;
         }
 
         final String prefixLower = prefix.toLowerCase();
         final List<String> matches = new ArrayList<>();
-        for (int i = topIndex; i < AllWords.headwords.length; i++) {
-            final String word = AllWords.headwords[i];
+        for (int i = topIndex; i < Words.headwords.length; i++) {
+            final String word = Words.headwords[i];
             if (word.toLowerCase().startsWith(prefixLower)) {
                 matches.add(word);
             } else {
@@ -44,7 +44,7 @@ public final class WordSearchUtils {
     public static boolean isValidWord(final String word) {
         final Collator sl = Collator.getInstance(new Locale("sl"));
         sl.setStrength(Collator.PRIMARY);  // ignore case
-        return Arrays.binarySearch(AllWords.headwords, word, sl) >= 0;
+        return Arrays.binarySearch(Words.headwords, word, sl) >= 0;
     }
 
     // ignores case
@@ -65,7 +65,7 @@ public final class WordSearchUtils {
     public static String getCorrectCase(final String word) {
         final Collator sl = Collator.getInstance(new Locale("sl"));
         sl.setStrength(Collator.PRIMARY);  // ignore case
-        final int index = Arrays.binarySearch(AllWords.headwords, word, sl);
-        return AllWords.headwords[index];
+        final int index = Arrays.binarySearch(Words.headwords, word, sl);
+        return Words.headwords[index];
     }
 }
