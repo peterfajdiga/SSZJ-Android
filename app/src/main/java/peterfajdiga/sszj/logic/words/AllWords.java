@@ -1,5 +1,6 @@
 package peterfajdiga.sszj.logic.words;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -2541,6 +2542,7 @@ public class AllWords {
     };
 
     public static final Map<String, Word> wordMap = generateWordMap(baseWords, combinations);
+    public static final String[] headwords = extractHeadwords(baseWords, combinations);
 
     private static Map<String, Word> generateWordMap(final BaseWord[] baseWords, final Combination[] combinations) {
         final Map<String, Word> wordMap = new HashMap<>(baseWords.length+combinations.length);
@@ -2557,5 +2559,18 @@ public class AllWords {
             wordMap.put(combination.headword, combinedWord);
         }
         return wordMap;
+    }
+
+    private static String[] extractHeadwords(final BaseWord[] baseWords, final Combination[] combinations) {
+        final String[] headwords = new String[baseWords.length + combinations.length];
+        int i = 0;
+        for (final Word word : baseWords) {
+            headwords[i++] = word.getHeadword();
+        }
+        for (final Combination combination : combinations) {
+            headwords[i++] = combination.headword;
+        }
+        Arrays.sort(headwords);
+        return headwords;
     }
 }
