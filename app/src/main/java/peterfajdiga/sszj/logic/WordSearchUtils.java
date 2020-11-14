@@ -8,6 +8,7 @@ import java.util.Locale;
 import java.util.regex.Pattern;
 
 public final class WordSearchUtils {
+    private WordSearchUtils() {}
 
     // ignores case
     public static String[] getWordsStartingWith(final String prefix) {

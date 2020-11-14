@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AllWords {
+    private AllWords() {}
+
     // TODO: put in resource file
     static final Word[] words = new Word[]{
         new BaseWord("Afrika", "Afrika.jpg"),
