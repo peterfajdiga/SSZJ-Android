@@ -1,4 +1,4 @@
-package peterfajdiga.sszj.logic.pojo;
+package peterfajdiga.sszj.logic.words;
 
 import java.io.Serializable;
 

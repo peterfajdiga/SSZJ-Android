@@ -1,4 +1,4 @@
-package peterfajdiga.sszj.logic.pojo;
+package peterfajdiga.sszj.logic.words;
 
 public class WordLegacy {
     public String word;

@@ -22,7 +22,7 @@ import com.google.android.material.navigation.NavigationView;
 
 import peterfajdiga.sszj.elements.adapters.OnWordClickedListener;
 import peterfajdiga.sszj.elements.adapters.SetsAdapter;
-import peterfajdiga.sszj.logic.pojo.Set;
+import peterfajdiga.sszj.logic.words.Set;
 import peterfajdiga.sszj.logic.Words;
 import peterfajdiga.sszj.logic.requests.Constants;
 import peterfajdiga.sszj.obb.ObbLoader;

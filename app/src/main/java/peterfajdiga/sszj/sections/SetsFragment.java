@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import peterfajdiga.sszj.R;
 import peterfajdiga.sszj.elements.GridAutofitLayoutManager;
 import peterfajdiga.sszj.elements.adapters.SetsAdapter;
-import peterfajdiga.sszj.logic.pojo.Set;
+import peterfajdiga.sszj.logic.words.Set;
 
 public class SetsFragment extends SectionFragment {
 

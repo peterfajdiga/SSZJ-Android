@@ -24,7 +24,7 @@ import peterfajdiga.sszj.logic.AnimationBuilder;
 import peterfajdiga.sszj.logic.ReportingAnimationDrawable;
 import peterfajdiga.sszj.elements.DividerItemDecorationNoLast;
 import peterfajdiga.sszj.elements.views.LoadingContainer;
-import peterfajdiga.sszj.logic.pojo.Word;
+import peterfajdiga.sszj.logic.words.Word;
 import peterfajdiga.sszj.logic.requests.Constants;
 import peterfajdiga.sszj.logic.requests.DefinitionRequest;
 import peterfajdiga.sszj.elements.WeightedLinearLayoutManager;

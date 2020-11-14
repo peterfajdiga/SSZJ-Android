@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import peterfajdiga.sszj.R;
-import peterfajdiga.sszj.logic.pojo.Set;
+import peterfajdiga.sszj.logic.words.Set;
 
 public class SetsAdapter extends RecyclerView.Adapter<SetsAdapter.SetViewHolder> {
 
