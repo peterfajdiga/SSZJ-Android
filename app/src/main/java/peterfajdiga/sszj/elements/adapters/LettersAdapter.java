@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import peterfajdiga.sszj.R;
-import peterfajdiga.sszj.logic.Words;
+import peterfajdiga.sszj.logic.WordSearchUtils;
 
 public class LettersAdapter extends RecyclerView.Adapter<LettersAdapter.LetterViewHolder> {
 
@@ -29,7 +29,7 @@ public class LettersAdapter extends RecyclerView.Adapter<LettersAdapter.LetterVi
     }
 
     public void setWord(String word) {
-        this.word = Words.makeValidWordSpelling(word);
+        this.word = WordSearchUtils.makeValidWordSpelling(word);
     }
 
     public void setOnWordClickedListener(OnWordClickedListener listener) {

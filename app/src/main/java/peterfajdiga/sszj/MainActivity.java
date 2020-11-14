@@ -23,7 +23,7 @@ import com.google.android.material.navigation.NavigationView;
 import peterfajdiga.sszj.elements.adapters.OnWordClickedListener;
 import peterfajdiga.sszj.elements.adapters.SetsAdapter;
 import peterfajdiga.sszj.logic.words.Set;
-import peterfajdiga.sszj.logic.Words;
+import peterfajdiga.sszj.logic.WordSearchUtils;
 import peterfajdiga.sszj.logic.requests.Constants;
 import peterfajdiga.sszj.obb.ObbLoader;
 import peterfajdiga.sszj.sections.AboutFragment;
@@ -72,10 +72,10 @@ public class MainActivity extends AppCompatActivity
             }
             case Intent.ACTION_SEARCH: {
                 final String query = intent.getStringExtra(SearchManager.QUERY);
-                if (Words.isValidWord(query)) {
+                if (WordSearchUtils.isValidWord(query)) {
                     loadWord(query, false);
                     new SearchRecentSuggestions(this, SearchRecentProvider.AUTHORITY, SearchRecentProvider.MODE).saveRecentQuery(query, null);  // save search
-                } else if (Words.isValidWordSpelling(query)) {
+                } else if (WordSearchUtils.isValidWordSpelling(query)) {
                     final Fragment fragment = new SpellingFragment();
                     Bundle bundle = new Bundle();
                     bundle.putString(WordFragment.BUNDLE_KEY_WORD, query);

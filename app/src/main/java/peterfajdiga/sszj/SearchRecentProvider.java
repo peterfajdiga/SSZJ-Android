@@ -6,7 +6,7 @@ import android.database.MatrixCursor;
 import android.database.MergeCursor;
 import android.net.Uri;
 
-import peterfajdiga.sszj.logic.Words;
+import peterfajdiga.sszj.logic.WordSearchUtils;
 
 public class SearchRecentProvider extends SearchRecentSuggestionsProvider {
     public static final String AUTHORITY = "peterfajdiga.sszj.SearchRecentAuthority";
@@ -23,9 +23,9 @@ public class SearchRecentProvider extends SearchRecentSuggestionsProvider {
         final Cursor recents = super.query(uri, projection, selection, selectionArgs, sortOrder);
 
         final String query = selectionArgs[0];
-        final String[] matches = Words.getWordsStartingWith(query);
+        final String[] matches = WordSearchUtils.getWordsStartingWith(query);
         final MatrixCursor autocomplete = new MatrixCursor(recents.getColumnNames(), matches.length);
-        if (!Words.isValidWord(query) && Words.isValidWordSpelling(query)) {
+        if (!WordSearchUtils.isValidWord(query) && WordSearchUtils.isValidWordSpelling(query)) {
             autocomplete.addRow(new String[]{
                     "0",
                     Uri.parse("android.resource://peterfajdiga.sszj/" + R.drawable.ic_letter).toString(),
