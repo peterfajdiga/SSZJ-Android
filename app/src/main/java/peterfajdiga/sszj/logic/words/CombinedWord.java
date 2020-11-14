@@ -4,9 +4,9 @@ import androidx.annotation.NonNull;
 
 public class CombinedWord implements Word {
     private final String headword;
-    private final String[] base;
+    private final BaseWord[] base;
 
-    public CombinedWord(final String headword, final String... base) {
+    CombinedWord(final String headword, final BaseWord... base) {
         this.headword = headword;
         this.base = base;
     }
@@ -22,14 +22,22 @@ public class CombinedWord implements Word {
     public String[] getGestureFiles() {
         final String[] filenames = new String[base.length];
         for (int i = 0; i < base.length; i++) {
-            final Word baseWord = AllWords.wordMap.get(base[i]);
-            filenames[i] = ((BaseWord)baseWord).gestureFile;
+            filenames[i] = base[i].gestureFile;
         }
         return filenames;
     }
 
     @NonNull
-    public String[] getBase() {
+    public BaseWord[] getBase() {
         return base;
+    }
+
+    @NonNull
+    public String[] getBaseHeadwords() {
+        final String[] headwords = new String[base.length];
+        for (int i = 0; i < headwords.length; i++) {
+            headwords[i] = base[i].getHeadword();
+        }
+        return headwords;
     }
 }

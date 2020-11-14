@@ -147,7 +147,7 @@ public class WordFragment extends SectionFragment implements
 
         final TextView baseText = (TextView)self.findViewById(R.id.word_base_text);
         if (word instanceof CombinedWord) {
-            final String[] base = ((CombinedWord)word).getBase();
+            final String[] base = ((CombinedWord)word).getBaseHeadwords();
             switch (base.length) {
                 case 0: {
                     assert false;

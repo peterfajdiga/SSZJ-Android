@@ -6,7 +6,7 @@ public class BaseWord implements Word {
     private final String headword;
     final String gestureFile;
 
-    public BaseWord(final String headword, final String gestureFile) {
+    BaseWord(final String headword, final String gestureFile) {
         this.headword = headword;
         this.gestureFile = gestureFile;
     }
