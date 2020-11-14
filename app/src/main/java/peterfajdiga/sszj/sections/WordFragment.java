@@ -24,6 +24,8 @@ import peterfajdiga.sszj.logic.AnimationBuilder;
 import peterfajdiga.sszj.logic.ReportingAnimationDrawable;
 import peterfajdiga.sszj.elements.DividerItemDecorationNoLast;
 import peterfajdiga.sszj.elements.views.LoadingContainer;
+import peterfajdiga.sszj.logic.words.AllWords;
+import peterfajdiga.sszj.logic.words.CombinedWord;
 import peterfajdiga.sszj.logic.words.Word;
 import peterfajdiga.sszj.logic.requests.Constants;
 import peterfajdiga.sszj.logic.requests.DefinitionRequest;
@@ -53,7 +55,7 @@ public class WordFragment extends SectionFragment implements
     protected void init() {
         final Bundle args = this.getArguments();
         if (args != null) {
-            word = Word.wordMap.get(args.getString(BUNDLE_KEY_WORD));
+            word = AllWords.wordMap.get(args.getString(BUNDLE_KEY_WORD));
         }
 
         // setup retry buttons
@@ -118,13 +120,13 @@ public class WordFragment extends SectionFragment implements
         loadingContainerDefinition.onLoading();
 
         final RequestQueue queue = Constants.initQueue(getContext());
-        final DefinitionRequest request = new DefinitionRequest(this, word.word);
+        final DefinitionRequest request = new DefinitionRequest(this, word.getHeadword());
         queue.add(request);
     }
 
     @Override
     protected String getTitle() {
-        return word.word;
+        return word.getHeadword();
     }
 
     @Override
@@ -144,24 +146,30 @@ public class WordFragment extends SectionFragment implements
         loadingContainer.onLoaded();
 
         final TextView baseText = (TextView)self.findViewById(R.id.word_base_text);
-        switch (word.base.length) {
-            case 0: {
-                baseText.setText(getString(R.string.word_base_0));
-                break;
+        if (word instanceof CombinedWord) {
+            final String[] base = ((CombinedWord)word).getBase();
+            switch (base.length) {
+                case 0: {
+                    assert false;
+                    baseText.setText(getString(R.string.word_base_0));
+                    break;
+                }
+                case 1: {
+                    baseText.setText(getString(R.string.word_base_1));
+                    showBaseWords(base);
+                    break;
+                }
+                default: {
+                    baseText.setText(getString(R.string.word_base_2));
+                    showBaseWords(base);
+                    break;
+                }
             }
-            case 1: {
-                baseText.setText(getString(R.string.word_base_1));
-                showBaseWords(word.base);
-                break;
-            }
-            default: {
-                baseText.setText(getString(R.string.word_base_2));
-                showBaseWords(word.base);
-                break;
-            }
+        } else {
+            baseText.setText(getString(R.string.word_base_0));
         }
 
-        if (word.word.length() > 1) {
+        if (word.getHeadword().length() > 1) {
             // cast context
             final Context context = getContext();
             final OnWordClickedListener mainActivity;
@@ -175,7 +183,7 @@ public class WordFragment extends SectionFragment implements
             // show letters
             final RecyclerView spellingContainer = (RecyclerView)self.findViewById(R.id.spelling_container);
             spellingContainer.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-            final LettersAdapter adapter = new LettersAdapter(R.layout.card_letter_fixed, word.word);
+            final LettersAdapter adapter = new LettersAdapter(R.layout.card_letter_fixed, word.getHeadword());
             adapter.setOnWordClickedListener(mainActivity);
             spellingContainer.setAdapter(adapter);
             spellingContainer.setVisibility(View.VISIBLE);
