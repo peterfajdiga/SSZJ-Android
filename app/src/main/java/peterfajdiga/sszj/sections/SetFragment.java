@@ -9,19 +9,16 @@ import android.view.ViewGroup;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.volley.RequestQueue;
-
 import peterfajdiga.sszj.elements.adapters.OnWordClickedListener;
 import peterfajdiga.sszj.R;
 import peterfajdiga.sszj.elements.DividerItemDecorationNoLast;
 import peterfajdiga.sszj.elements.adapters.WordsAdapter;
 import peterfajdiga.sszj.logic.sets.Set;
 import peterfajdiga.sszj.logic.requests.Constants;
-import peterfajdiga.sszj.logic.requests.SetRequest;
 import peterfajdiga.sszj.elements.views.LoadingContainer;
 import peterfajdiga.sszj.logic.sets.Sets;
 
-public class SetFragment extends SectionFragment implements SetRequest.Owner {
+public class SetFragment extends SectionFragment {
 
     public static final String BUNDLE_KEY_SET = "BUNDLE_KEY_SET";
 
@@ -78,15 +75,13 @@ public class SetFragment extends SectionFragment implements SetRequest.Owner {
         return R.id.nav_sets;
     }
 
-
     @Override
     public void onDetach() {
         super.onDetach();
         Constants.initQueue(getContext()).cancelAll(this);
     }
 
-
-    @Override
+    // TODO: refactor
     public void onSetLoaded(String[] words) {
         // cast context
         final Context context = getContext();
@@ -106,11 +101,5 @@ public class SetFragment extends SectionFragment implements SetRequest.Owner {
 
         final LoadingContainer loadingContainer = (LoadingContainer)self.findViewById(R.id.loading_container_main);
         loadingContainer.onLoaded();
-    }
-
-    @Override
-    public void onSetFailed() {
-        final LoadingContainer loadingContainer = (LoadingContainer)self.findViewById(R.id.loading_container_main);
-        loadingContainer.onFailed();
     }
 }
