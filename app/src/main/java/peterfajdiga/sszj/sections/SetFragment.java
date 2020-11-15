@@ -19,6 +19,7 @@ import peterfajdiga.sszj.logic.sets.Set;
 import peterfajdiga.sszj.logic.requests.Constants;
 import peterfajdiga.sszj.logic.requests.SetRequest;
 import peterfajdiga.sszj.elements.views.LoadingContainer;
+import peterfajdiga.sszj.logic.sets.Sets;
 
 public class SetFragment extends SectionFragment implements SetRequest.Owner {
 
@@ -39,7 +40,8 @@ public class SetFragment extends SectionFragment implements SetRequest.Owner {
     protected void init() {
         final Bundle args = this.getArguments();
         if (args != null) {
-            set = (Set)args.getSerializable(BUNDLE_KEY_SET);
+            final String setLabel = args.getString(BUNDLE_KEY_SET);
+            set = Sets.SET_MAP.get(setLabel);
         }
         loadSet();
 

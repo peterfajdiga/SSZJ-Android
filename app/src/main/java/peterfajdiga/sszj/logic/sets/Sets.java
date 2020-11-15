@@ -1,5 +1,8 @@
 package peterfajdiga.sszj.logic.sets;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import peterfajdiga.sszj.R;
 
 public class Sets {
@@ -45,4 +48,14 @@ public class Sets {
         new Set("Abeceda",                      R.drawable.sets_37),
         new Set("Neopredeljeno",                R.drawable.sets_38),
     };
+
+    public static final Map<String, Set> SET_MAP = generateSetMap(SETS);
+
+    private static Map<String, Set> generateSetMap(final Set[] sets) {
+        final Map<String, Set> setMap = new HashMap<>(sets.length);
+        for (final Set set : sets) {
+            setMap.put(set.label, set);
+        }
+        return setMap;
+    }
 }

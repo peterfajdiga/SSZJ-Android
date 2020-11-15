@@ -203,7 +203,7 @@ public class MainActivity extends AppCompatActivity
     public void onSetClicked(Set set) {
         final Fragment fragment = new SetFragment();
         Bundle bundle = new Bundle();
-        bundle.putSerializable(SetFragment.BUNDLE_KEY_SET, set);
+        bundle.putString(SetFragment.BUNDLE_KEY_SET, set.label);
         fragment.setArguments(bundle);
         loadSectionFragment(fragment, true);
     }

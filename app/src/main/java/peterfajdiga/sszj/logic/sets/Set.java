@@ -1,8 +1,6 @@
 package peterfajdiga.sszj.logic.sets;
 
-import java.io.Serializable;
-
-public class Set implements Serializable {
+public class Set {
     public String label;
     public int imageResource;
 
