@@ -55,7 +55,7 @@ public class WordFragment extends SectionFragment implements
     protected void init() {
         final Bundle args = this.getArguments();
         if (args != null) {
-            word = Words.wordMap.get(args.getString(BUNDLE_KEY_WORD));
+            word = Words.WORD_MAP.get(args.getString(BUNDLE_KEY_WORD));
         }
 
         // setup retry buttons

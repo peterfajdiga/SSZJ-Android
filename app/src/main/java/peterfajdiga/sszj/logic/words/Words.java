@@ -18,7 +18,7 @@ public class Words {
     }
 
     // TODO: put in resource file
-    static final BaseWord[] baseWords = new BaseWord[]{
+    static final BaseWord[] BASE_WORDS = new BaseWord[]{
         new BaseWord("Afrika", "Afrika.jpg"),
         new BaseWord("Amerika", "Amerika.jpg"),
         new BaseWord("Avstralija", "Avstrali.jpg"),
@@ -1814,7 +1814,7 @@ public class Words {
         new BaseWord("žvečilni gumi", "zvecilni.jpg"),
     };
 
-    static final Combination[] combinations = new Combination[]{
+    static final Combination[] COMBINATIONS = new Combination[]{
         new Combination("Dravograd", "reka", "grad"),
         new Combination("Južna Amerika", "jug", "Amerika"),
         new Combination("Kranjska Gora", "Kranj", "gora"),
@@ -2541,8 +2541,8 @@ public class Words {
         new Combination("župnik", "duhovnik"),
     };
 
-    public static final Map<String, Word> wordMap = generateWordMap(baseWords, combinations);
-    public static final String[] headwords = extractHeadwords(baseWords, combinations);
+    public static final Map<String, Word> WORD_MAP = generateWordMap(BASE_WORDS, COMBINATIONS);
+    public static final String[] HEADWORDS = extractHeadwords(BASE_WORDS, COMBINATIONS);
 
     private static Map<String, Word> generateWordMap(final BaseWord[] baseWords, final Combination[] combinations) {
         final Map<String, Word> wordMap = new HashMap<>(baseWords.length+combinations.length);

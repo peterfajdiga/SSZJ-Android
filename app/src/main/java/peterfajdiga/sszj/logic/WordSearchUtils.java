@@ -21,15 +21,15 @@ public final class WordSearchUtils {
         final Collator sl = Collator.getInstance(new Locale("sl"));
         sl.setStrength(Collator.PRIMARY);  // ignore case
 
-        int topIndex = Arrays.binarySearch(Words.headwords, prefix, sl);
+        int topIndex = Arrays.binarySearch(Words.HEADWORDS, prefix, sl);
         if (topIndex < 0) {
             topIndex = -topIndex - 1;
         }
 
         final String prefixLower = prefix.toLowerCase();
         final List<String> matches = new ArrayList<>();
-        for (int i = topIndex; i < Words.headwords.length; i++) {
-            final String word = Words.headwords[i];
+        for (int i = topIndex; i < Words.HEADWORDS.length; i++) {
+            final String word = Words.HEADWORDS[i];
             if (word.toLowerCase().startsWith(prefixLower)) {
                 matches.add(word);
             } else {
@@ -44,7 +44,7 @@ public final class WordSearchUtils {
     public static boolean isValidWord(final String word) {
         final Collator sl = Collator.getInstance(new Locale("sl"));
         sl.setStrength(Collator.PRIMARY);  // ignore case
-        return Arrays.binarySearch(Words.headwords, word, sl) >= 0;
+        return Arrays.binarySearch(Words.HEADWORDS, word, sl) >= 0;
     }
 
     // ignores case
@@ -65,7 +65,7 @@ public final class WordSearchUtils {
     public static String getCorrectCase(final String word) {
         final Collator sl = Collator.getInstance(new Locale("sl"));
         sl.setStrength(Collator.PRIMARY);  // ignore case
-        final int index = Arrays.binarySearch(Words.headwords, word, sl);
-        return Words.headwords[index];
+        final int index = Arrays.binarySearch(Words.HEADWORDS, word, sl);
+        return Words.HEADWORDS[index];
     }
 }
