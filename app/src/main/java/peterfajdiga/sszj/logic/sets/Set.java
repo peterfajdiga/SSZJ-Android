@@ -1,12 +1,14 @@
 package peterfajdiga.sszj.logic.sets;
 
 public class Set {
-    public String label;
-    public int imageResource;
+    public final String label;
+    public final int imageResource;
+    public final String[] words;
 
-    public Set(String label, int imageResource) {
+    public Set(final String label, final int imageResource, final String... words) {
         this.label = label;
         this.imageResource = imageResource;
+        this.words = words;
     }
 
     public String getKeyword() {

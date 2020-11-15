@@ -65,9 +65,7 @@ public class SetFragment extends SectionFragment implements SetRequest.Owner {
         final LoadingContainer loadingContainer = (LoadingContainer)self.findViewById(R.id.loading_container_main);
         loadingContainer.onLoading();
 
-        final RequestQueue queue = Constants.initQueue(getContext());
-        final SetRequest request = new SetRequest(this, set.getKeyword());
-        queue.add(request);
+        onSetLoaded(set.words);
     }
 
     @Override

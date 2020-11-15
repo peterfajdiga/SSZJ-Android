@@ -17,7 +17,7 @@ public class Words {
         }
     }
 
-    // TODO: put in resource file
+    // TODO: put in a raw resource file
     static final BaseWord[] BASE_WORDS = new BaseWord[]{
         new BaseWord("Afrika", "Afrika.jpg"),
         new BaseWord("Amerika", "Amerika.jpg"),
