@@ -26,6 +26,7 @@ import peterfajdiga.sszj.logic.sets.Set;
 import peterfajdiga.sszj.logic.WordSearchUtils;
 import peterfajdiga.sszj.logic.requests.Constants;
 import peterfajdiga.sszj.obb.ObbLoader;
+import peterfajdiga.sszj.obb.ObbMounter;
 import peterfajdiga.sszj.sections.AboutFragment;
 import peterfajdiga.sszj.sections.SectionFragment;
 import peterfajdiga.sszj.sections.SetFragment;
@@ -45,8 +46,13 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        new ObbLoader(this).mount();
-        new ObbLoader(this).mount();
+        new ObbMounter(this).mount(new ObbMounter.OnObbMountedListener() {
+            @Override
+            public void onObbMounted(final ObbLoader obbLoader) {}
+
+            @Override
+            public void onObbFailure() {}
+        });
 
         setContentView(R.layout.activity_main);
         final Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);

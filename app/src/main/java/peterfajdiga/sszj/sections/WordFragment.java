@@ -31,8 +31,8 @@ import peterfajdiga.sszj.logic.requests.Constants;
 import peterfajdiga.sszj.logic.requests.DefinitionRequest;
 import peterfajdiga.sszj.elements.WeightedLinearLayoutManager;
 import peterfajdiga.sszj.elements.adapters.WordsAdapter;
-import peterfajdiga.sszj.obb.InvalidStateException;
 import peterfajdiga.sszj.obb.ObbLoader;
+import peterfajdiga.sszj.obb.ObbMounter;
 
 public class WordFragment extends SectionFragment implements
         DefinitionRequest.Owner,
@@ -101,18 +101,23 @@ public class WordFragment extends SectionFragment implements
 
         onWordLoaded(word);
 
-        try {
-            final ObbLoader obbLoader = new ObbLoader(getContext());
-            final String[] gestureFiles = word.getGestureFiles();
-            final Bitmap[] bitmaps = new Bitmap[gestureFiles.length];
-            for (int i = 0; i < gestureFiles.length; i++) {
-                bitmaps[i] = obbLoader.getBitmap(gestureFiles[i]);
+        final ObbMounter obbMounter = new ObbMounter(getContext());
+        obbMounter.mount(new ObbMounter.OnObbMountedListener() {
+            @Override
+            public void onObbMounted(final ObbLoader obbLoader) {
+                final String[] gestureFiles = word.getGestureFiles();
+                final Bitmap[] bitmaps = new Bitmap[gestureFiles.length];
+                for (int i = 0; i < gestureFiles.length; i++) {
+                    bitmaps[i] = obbLoader.getBitmap(gestureFiles[i]);
+                }
+                onWordAnimationLoaded(AnimationBuilder.build(bitmaps), AnimationBuilder.getFrameCounts(bitmaps));
             }
-            onWordAnimationLoaded(AnimationBuilder.build(bitmaps), AnimationBuilder.getFrameCounts(bitmaps));
-        } catch (final InvalidStateException e) {
-            e.printStackTrace();
-            onWordAnimationFailed();
-        }
+
+            @Override
+            public void onObbFailure() {
+                onWordAnimationFailed();
+            }
+        });
     }
 
     private void loadDefinition() {
