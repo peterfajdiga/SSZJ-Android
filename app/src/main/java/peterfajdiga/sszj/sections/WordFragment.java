@@ -95,11 +95,12 @@ public class WordFragment extends SectionFragment implements
 
     private void loadWord() {
         final LoadingContainer loadingContainerMain = self.findViewById(R.id.loading_container_main);
-        loadingContainerMain.onLoading();
+        loadingContainerMain.onLoaded();
         final LoadingContainer loadingContainerAnimation = self.findViewById(R.id.loading_container_animation);
         loadingContainerAnimation.onLoading();
 
-        onWordLoaded(word);
+        showBaseText();
+        showSpelling();
 
         final ObbMounter obbMounter = new ObbMounter(getContext());
         obbMounter.mount(new ObbMounter.OnObbMountedListener() {
@@ -145,11 +146,7 @@ public class WordFragment extends SectionFragment implements
         Constants.initQueue(getContext()).cancelAll(this);
     }
 
-    // TODO: refactor
-    public void onWordLoaded(final Word word) {
-        final LoadingContainer loadingContainer = self.findViewById(R.id.loading_container_main);
-        loadingContainer.onLoaded();
-
+    private void showBaseText() {
         final TextView baseText = self.findViewById(R.id.word_base_text);
         if (word instanceof CombinedWord) {
             final String[] base = ((CombinedWord)word).getBaseHeadwords();
@@ -172,26 +169,6 @@ public class WordFragment extends SectionFragment implements
             }
         } else {
             baseText.setText(getString(R.string.word_base_0));
-        }
-
-        if (word.getHeadword().length() > 1) {
-            // cast context
-            final Context context = getContext();
-            final OnWordClickedListener mainActivity;
-            if (context instanceof OnWordClickedListener) {
-                mainActivity = (OnWordClickedListener)context;
-            } else {
-                throw new RuntimeException(context.toString()
-                        + "must implement OnWordClickedListener");
-            }
-
-            // show letters
-            final RecyclerView spellingContainer = self.findViewById(R.id.spelling_container);
-            spellingContainer.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-            final LettersAdapter adapter = new LettersAdapter(R.layout.card_letter_fixed, word.getHeadword());
-            adapter.setOnWordClickedListener(mainActivity);
-            spellingContainer.setAdapter(adapter);
-            spellingContainer.setVisibility(View.VISIBLE);
         }
     }
 
@@ -218,7 +195,29 @@ public class WordFragment extends SectionFragment implements
         wordBaseContainer.setAdapter(adapter);
     }
 
-    public void showWordAnimation(ReportingAnimationDrawable animation, int[] frameCounts) {
+    private void showSpelling() {
+        if (word.getHeadword().length() > 1) {
+            // cast context
+            final Context context = getContext();
+            final OnWordClickedListener mainActivity;
+            if (context instanceof OnWordClickedListener) {
+                mainActivity = (OnWordClickedListener)context;
+            } else {
+                throw new RuntimeException(context.toString()
+                    + "must implement OnWordClickedListener");
+            }
+
+            // show letters
+            final RecyclerView spellingContainer = self.findViewById(R.id.spelling_container);
+            spellingContainer.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+            final LettersAdapter adapter = new LettersAdapter(R.layout.card_letter_fixed, word.getHeadword());
+            adapter.setOnWordClickedListener(mainActivity);
+            spellingContainer.setAdapter(adapter);
+            spellingContainer.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void showWordAnimation(ReportingAnimationDrawable animation, int[] frameCounts) {
         final LoadingContainer loadingContainerAnimation = self.findViewById(R.id.loading_container_animation);
         loadingContainerAnimation.onLoaded();
 
