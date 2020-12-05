@@ -115,7 +115,7 @@ public class WordFragment extends SectionFragment implements
 
             @Override
             public void onObbFailure() {
-                onWordAnimationFailed();
+                loadingContainerAnimation.onFailed();
             }
         });
     }
@@ -238,12 +238,6 @@ public class WordFragment extends SectionFragment implements
         final WeightedLinearLayoutManager layoutManager = (WeightedLinearLayoutManager)wordBaseContainer.getLayoutManager();
         layoutManager.setWeights(frameCounts);
         layoutManager.requestLayout();
-    }
-
-    // TODO: refactor
-    public void onWordAnimationFailed() {
-        final LoadingContainer loadingContainerAnimation = self.findViewById(R.id.loading_container_animation);
-        loadingContainerAnimation.onFailed();
     }
 
     @Override
