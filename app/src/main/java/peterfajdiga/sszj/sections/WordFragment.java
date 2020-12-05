@@ -110,7 +110,7 @@ public class WordFragment extends SectionFragment implements
                 for (int i = 0; i < gestureFiles.length; i++) {
                     bitmaps[i] = obbLoader.getBitmap(gestureFiles[i]);
                 }
-                onWordAnimationLoaded(AnimationBuilder.build(bitmaps), AnimationBuilder.getFrameCounts(bitmaps));
+                showWordAnimation(AnimationBuilder.build(bitmaps), AnimationBuilder.getFrameCounts(bitmaps));
             }
 
             @Override
@@ -218,8 +218,7 @@ public class WordFragment extends SectionFragment implements
         wordBaseContainer.setAdapter(adapter);
     }
 
-    // TODO: refactor
-    public void onWordAnimationLoaded(ReportingAnimationDrawable animation, int[] frameCounts) {
+    public void showWordAnimation(ReportingAnimationDrawable animation, int[] frameCounts) {
         final LoadingContainer loadingContainerAnimation = self.findViewById(R.id.loading_container_animation);
         loadingContainerAnimation.onLoaded();
 
