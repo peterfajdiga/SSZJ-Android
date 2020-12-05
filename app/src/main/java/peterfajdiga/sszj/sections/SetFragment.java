@@ -43,7 +43,7 @@ public class SetFragment extends SectionFragment {
         loadSet();
 
         // setup retry button
-        final LoadingContainer loadingContainer = (LoadingContainer)self.findViewById(R.id.loading_container_main);
+        final LoadingContainer loadingContainer = self.findViewById(R.id.loading_container_main);
         loadingContainer.setOnRetryClickedListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,17 +52,31 @@ public class SetFragment extends SectionFragment {
         });
 
         // setup container
-        final RecyclerView container = (RecyclerView)self.findViewById(R.id.container_main);
+        final RecyclerView container = self.findViewById(R.id.container_main);
         container.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         final DividerItemDecorationNoLast dividerItemDecoration = new DividerItemDecorationNoLast(getContext(), LinearLayoutManager.VERTICAL);
         container.addItemDecoration(dividerItemDecoration);
     }
 
     private void loadSet() {
-        final LoadingContainer loadingContainer = (LoadingContainer)self.findViewById(R.id.loading_container_main);
+        final LoadingContainer loadingContainer = self.findViewById(R.id.loading_container_main);
         loadingContainer.onLoading();
 
-        onSetLoaded(set.words);
+        final Context context = getContext();
+        final OnWordClickedListener mainActivity;
+        if (context instanceof OnWordClickedListener) {
+            mainActivity = (OnWordClickedListener)context;
+        } else {
+            throw new RuntimeException(context.toString()
+                + "must implement OnWordClickedListener");
+        }
+
+        final RecyclerView container = self.findViewById(R.id.container_main);
+        final WordsAdapter adapter = new WordsAdapter(R.layout.item_word_vertical, set.words);
+        adapter.setOnWordClickedListener(mainActivity);
+        container.setAdapter(adapter);
+
+        loadingContainer.onLoaded();
     }
 
     @Override
@@ -79,27 +93,5 @@ public class SetFragment extends SectionFragment {
     public void onDetach() {
         super.onDetach();
         Constants.initQueue(getContext()).cancelAll(this);
-    }
-
-    // TODO: refactor
-    public void onSetLoaded(String[] words) {
-        // cast context
-        final Context context = getContext();
-        final OnWordClickedListener mainActivity;
-        if (context instanceof OnWordClickedListener) {
-            mainActivity = (OnWordClickedListener)context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + "must implement OnWordClickedListener");
-        }
-
-        // show loaded words
-        final RecyclerView container = (RecyclerView)self.findViewById(R.id.container_main);
-        final WordsAdapter adapter = new WordsAdapter(R.layout.item_word_vertical, words);
-        adapter.setOnWordClickedListener(mainActivity);
-        container.setAdapter(adapter);
-
-        final LoadingContainer loadingContainer = (LoadingContainer)self.findViewById(R.id.loading_container_main);
-        loadingContainer.onLoaded();
     }
 }
