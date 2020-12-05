@@ -1,7 +1,9 @@
 package peterfajdiga.sszj.logic.words;
 
+import java.text.Collator;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class Words {
@@ -2547,7 +2549,7 @@ public class Words {
     private static Map<String, Word> generateWordMap(final BaseWord[] baseWords, final Combination[] combinations) {
         final Map<String, Word> wordMap = new HashMap<>(baseWords.length+combinations.length);
         for (final Word word : baseWords) {
-            wordMap.put(word.getHeadword(), word);
+            wordMap.put(word.getHeadword().toLowerCase(), word);
         }
 
         for (final Combination combination : combinations) {
@@ -2556,7 +2558,7 @@ public class Words {
                 base[i] = (BaseWord)wordMap.get(combination.base[i]);
             }
             final CombinedWord combinedWord = new CombinedWord(combination.headword, base);
-            wordMap.put(combination.headword, combinedWord);
+            wordMap.put(combination.headword.toLowerCase(), combinedWord);
         }
         return wordMap;
     }
@@ -2570,7 +2572,10 @@ public class Words {
         for (final Combination combination : combinations) {
             headwords[i++] = combination.headword;
         }
-        Arrays.sort(headwords);
+
+        final Collator sl = Collator.getInstance(new Locale("sl"));
+        sl.setStrength(Collator.PRIMARY);  // ignore case
+        Arrays.sort(headwords, sl);
         return headwords;
     }
 }
