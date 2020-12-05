@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        new ObbMounter(this).mount(new ObbMounter.OnObbMountedListener() {
+        new ObbMounter(this).init(new ObbMounter.OnObbMountedListener() {
             @Override
             public void onObbMounted(final ObbLoader obbLoader) {}
 
@@ -82,8 +82,7 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            // normal back
-            super.onBackPressed();
+            super.onBackPressed();  // normal back
         }
     }
 

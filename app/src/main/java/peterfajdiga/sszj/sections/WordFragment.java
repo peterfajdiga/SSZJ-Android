@@ -103,7 +103,7 @@ public class WordFragment extends SectionFragment implements
         showSpelling();
 
         final ObbMounter obbMounter = new ObbMounter(getContext());
-        obbMounter.mount(new ObbMounter.OnObbMountedListener() {
+        obbMounter.init(new ObbMounter.OnObbMountedListener() {
             @Override
             public void onObbMounted(final ObbLoader obbLoader) {
                 final String[] gestureFiles = word.getGestureFiles();
