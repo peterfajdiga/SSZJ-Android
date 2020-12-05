@@ -65,13 +65,13 @@ public class WordFragment extends SectionFragment implements
                 loadWord();
             }
         };
-        final LoadingContainer loadingContainerMain = (LoadingContainer)self.findViewById(R.id.loading_container_main);
+        final LoadingContainer loadingContainerMain = self.findViewById(R.id.loading_container_main);
         loadingContainerMain.setOnRetryClickedListener(retryListener);
-        final LoadingContainer loadingContainerAnimation = (LoadingContainer)self.findViewById(R.id.loading_container_animation);
+        final LoadingContainer loadingContainerAnimation = self.findViewById(R.id.loading_container_animation);
         loadingContainerAnimation.setOnRetryClickedListener(retryListener);
 
         // setup retry button for definition
-        final LoadingContainer loadingContainerDefinition = (LoadingContainer)self.findViewById(R.id.loading_container_definition);
+        final LoadingContainer loadingContainerDefinition = self.findViewById(R.id.loading_container_definition);
         loadingContainerDefinition.setOnRetryClickedListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,13 +80,13 @@ public class WordFragment extends SectionFragment implements
         });
 
         // setup word_base_container
-        final RecyclerView wordBaseContainer = (RecyclerView)self.findViewById(R.id.word_base_container);
+        final RecyclerView wordBaseContainer = self.findViewById(R.id.word_base_container);
         wordBaseContainer.setLayoutManager(new WeightedLinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         final DividerItemDecorationNoLast dividerItemDecoration = new DividerItemDecorationNoLast(getContext(), LinearLayoutManager.HORIZONTAL);
         wordBaseContainer.addItemDecoration(dividerItemDecoration);
 
         // setup spelling container
-        final RecyclerView spellingContainer = (RecyclerView)self.findViewById(R.id.spelling_container);
+        final RecyclerView spellingContainer = self.findViewById(R.id.spelling_container);
         spellingContainer.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
 
         loadWord();
@@ -94,9 +94,9 @@ public class WordFragment extends SectionFragment implements
     }
 
     private void loadWord() {
-        final LoadingContainer loadingContainerMain = (LoadingContainer)self.findViewById(R.id.loading_container_main);
+        final LoadingContainer loadingContainerMain = self.findViewById(R.id.loading_container_main);
         loadingContainerMain.onLoading();
-        final LoadingContainer loadingContainerAnimation = (LoadingContainer)self.findViewById(R.id.loading_container_animation);
+        final LoadingContainer loadingContainerAnimation = self.findViewById(R.id.loading_container_animation);
         loadingContainerAnimation.onLoading();
 
         onWordLoaded(word);
@@ -121,7 +121,7 @@ public class WordFragment extends SectionFragment implements
     }
 
     private void loadDefinition() {
-        final LoadingContainer loadingContainerDefinition = (LoadingContainer)self.findViewById(R.id.loading_container_definition);
+        final LoadingContainer loadingContainerDefinition = self.findViewById(R.id.loading_container_definition);
         loadingContainerDefinition.onLoading();
 
         final RequestQueue queue = Constants.initQueue(getContext());
@@ -147,10 +147,10 @@ public class WordFragment extends SectionFragment implements
 
     // TODO: refactor
     public void onWordLoaded(final Word word) {
-        final LoadingContainer loadingContainer = (LoadingContainer)self.findViewById(R.id.loading_container_main);
+        final LoadingContainer loadingContainer = self.findViewById(R.id.loading_container_main);
         loadingContainer.onLoaded();
 
-        final TextView baseText = (TextView)self.findViewById(R.id.word_base_text);
+        final TextView baseText = self.findViewById(R.id.word_base_text);
         if (word instanceof CombinedWord) {
             final String[] base = ((CombinedWord)word).getBaseHeadwords();
             switch (base.length) {
@@ -186,7 +186,7 @@ public class WordFragment extends SectionFragment implements
             }
 
             // show letters
-            final RecyclerView spellingContainer = (RecyclerView)self.findViewById(R.id.spelling_container);
+            final RecyclerView spellingContainer = self.findViewById(R.id.spelling_container);
             spellingContainer.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
             final LettersAdapter adapter = new LettersAdapter(R.layout.card_letter_fixed, word.getHeadword());
             adapter.setOnWordClickedListener(mainActivity);
@@ -209,7 +209,7 @@ public class WordFragment extends SectionFragment implements
         // set visibility
         final View animationProgress = self.findViewById(R.id.animation_progress);
         animationProgress.setVisibility(View.VISIBLE);
-        final RecyclerView wordBaseContainer = (RecyclerView)self.findViewById(R.id.word_base_container);
+        final RecyclerView wordBaseContainer = self.findViewById(R.id.word_base_container);
         wordBaseContainer.setVisibility(View.VISIBLE);
 
         // show base words
@@ -220,21 +220,21 @@ public class WordFragment extends SectionFragment implements
 
     // TODO: refactor
     public void onWordAnimationLoaded(ReportingAnimationDrawable animation, int[] frameCounts) {
-        final LoadingContainer loadingContainerAnimation = (LoadingContainer)self.findViewById(R.id.loading_container_animation);
+        final LoadingContainer loadingContainerAnimation = self.findViewById(R.id.loading_container_animation);
         loadingContainerAnimation.onLoaded();
 
-        final ImageView animationView = (ImageView)self.findViewById(R.id.animation_view);
+        final ImageView animationView = self.findViewById(R.id.animation_view);
         animationView.setImageDrawable(animation);
         animation.setOneShot(false);
         animation.start();
 
         if (frameCounts.length > 1) {
             animation.setOnFrameListener(this);
-            final ProgressBar animationProgress = (ProgressBar)self.findViewById(R.id.animation_progress);
+            final ProgressBar animationProgress = self.findViewById(R.id.animation_progress);
             animationProgress.setMax(animation.getNumberOfFrames() - 1);
         }
 
-        final RecyclerView wordBaseContainer = (RecyclerView)self.findViewById(R.id.word_base_container);
+        final RecyclerView wordBaseContainer = self.findViewById(R.id.word_base_container);
         final WeightedLinearLayoutManager layoutManager = (WeightedLinearLayoutManager)wordBaseContainer.getLayoutManager();
         layoutManager.setWeights(frameCounts);
         layoutManager.requestLayout();
@@ -242,29 +242,29 @@ public class WordFragment extends SectionFragment implements
 
     // TODO: refactor
     public void onWordAnimationFailed() {
-        final LoadingContainer loadingContainerAnimation = (LoadingContainer)self.findViewById(R.id.loading_container_animation);
+        final LoadingContainer loadingContainerAnimation = self.findViewById(R.id.loading_container_animation);
         loadingContainerAnimation.onFailed();
     }
 
     @Override
     public void onFrame(int index) {
-        final ProgressBar animationProgress = (ProgressBar)self.findViewById(R.id.animation_progress);
+        final ProgressBar animationProgress = self.findViewById(R.id.animation_progress);
         animationProgress.setProgress(index);
     }
 
     @Override
     public void onWordDefinitionLoaded(Spanned definition) {
-        final LoadingContainer loadingContainerDefinition = (LoadingContainer)self.findViewById(R.id.loading_container_definition);
+        final LoadingContainer loadingContainerDefinition = self.findViewById(R.id.loading_container_definition);
         loadingContainerDefinition.onLoaded();
 
-        final TextView definitionView = (TextView)self.findViewById(R.id.definition_view);
+        final TextView definitionView = self.findViewById(R.id.definition_view);
         definitionView.setText(definition);
         definitionView.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void onWordDefinitionFailed() {
-        final LoadingContainer loadingContainerDefinition = (LoadingContainer)self.findViewById(R.id.loading_container_definition);
+        final LoadingContainer loadingContainerDefinition = self.findViewById(R.id.loading_container_definition);
         loadingContainerDefinition.onFailed();
     }
 }
