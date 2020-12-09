@@ -1,8 +1,9 @@
 package peterfajdiga.sszj.sections;
 
-
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Spanned;
 import android.view.LayoutInflater;
@@ -125,9 +126,20 @@ public class WordFragment extends SectionFragment implements
         final LoadingContainer loadingContainerDefinition = self.findViewById(R.id.loading_container_definition);
         loadingContainerDefinition.onLoading();
 
+        final String definitionUrl = getDefinitionUrl();
+
         final RequestQueue queue = Constants.initQueue(getContext());
-        final DefinitionRequest request = new DefinitionRequest(this, word.getHeadword());
+        final DefinitionRequest request = new DefinitionRequest(this, definitionUrl + "&View=3");
         queue.add(request);
+
+        final View definitionContainer = self.findViewById(R.id.card_definition);
+        definitionContainer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                final Intent definitionIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(definitionUrl));
+                startActivity(definitionIntent);
+            }
+        });
     }
 
     @Override
@@ -258,5 +270,9 @@ public class WordFragment extends SectionFragment implements
     public void onWordDefinitionFailed() {
         final LoadingContainer loadingContainerDefinition = self.findViewById(R.id.loading_container_definition);
         loadingContainerDefinition.onFailed();
+    }
+
+    private String getDefinitionUrl() {
+        return "https://www.fran.si/iskanje?FilteredDictionaryIds=133&Headword=" + word.getHeadword();
     }
 }

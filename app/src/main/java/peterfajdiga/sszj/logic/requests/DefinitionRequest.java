@@ -7,21 +7,13 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 
-import org.w3c.dom.Document;
-
-import javax.xml.parsers.DocumentBuilderFactory;
-
 public class DefinitionRequest extends StringRequest {
     private static final String entryMatchStart = "<div class=\"col-sm-12 col-md-8 col-md-push-4 entry\">";  // TODO: use regex, ignore classes other than "entry"
     private static final String entryMatchEnd = "</div>";
 
-    public DefinitionRequest(final Owner owner, final String word) {
-        super(Method.GET, buildUrl(word), new Listener(owner), new ErrorListener(owner));
+    public DefinitionRequest(final Owner owner, final String url) {
+        super(Method.GET, url, new Listener(owner), new ErrorListener(owner));
         setTag(owner);
-    }
-
-    private static String buildUrl(final String word) {
-        return "https://www.fran.si/iskanje?FilteredDictionaryIds=133&View=3&Headword=" + word;
     }
 
     private static class Listener implements Response.Listener<String> {

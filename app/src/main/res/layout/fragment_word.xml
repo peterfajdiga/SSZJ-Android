@@ -89,7 +89,10 @@
 
             <!--Definition-->
 
-            <androidx.cardview.widget.CardView style="@style/Card">
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_definition"
+                style="@style/Card">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
