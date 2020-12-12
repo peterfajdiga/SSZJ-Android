@@ -67,27 +67,10 @@ public class MainActivity extends AppCompatActivity
         final NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        final Intent intent = getIntent();
-        switch (intent.getAction()) {
-            case Intent.ACTION_MAIN: {
-                // show SetsFragment by default
-                loadSectionFragment(new SetsFragment(), false);
-                break;
-            }
-            case Intent.ACTION_SEARCH: {
-                final String query = intent.getStringExtra(SearchManager.QUERY);
-                if (WordSearchUtils.isValidWord(query)) {
-                    loadWord(query, false);
-                    new SearchRecentSuggestions(this, SearchRecentProvider.AUTHORITY, SearchRecentProvider.MODE).saveRecentQuery(query, null);  // save search
-                } else if (WordSearchUtils.isValidWordSpelling(query)) {
-                    final Fragment fragment = new SpellingFragment();
-                    Bundle bundle = new Bundle();
-                    bundle.putString(WordFragment.BUNDLE_KEY_WORD, query);
-                    fragment.setArguments(bundle);
-                    loadSectionFragment(fragment, false);
-                }
-                break;
-            }
+        final FragmentManager fragmentManager = getSupportFragmentManager();
+        if (fragmentManager.getBackStackEntryCount() == 0) {
+            // this is an initial load of the activity, and no section fragment is currently shown
+            loadSectionFragment(getIntent(), false);
         }
     }
 
@@ -159,15 +142,43 @@ public class MainActivity extends AppCompatActivity
 
     private void loadSectionFragment(final Fragment fragment, final boolean saveStack) {
         // Insert the fragment by replacing any existing fragment
-        FragmentManager fragmentManager = getSupportFragmentManager();
+        final FragmentManager fragmentManager = getSupportFragmentManager();
         final FragmentTransaction transaction = fragmentManager.beginTransaction().replace(R.id.content_frame, fragment);
         if (saveStack) {
             transaction.addToBackStack(null);
         }
         transaction.commit();
     }
+
     private void loadSectionFragment(final Fragment fragment) {
         loadSectionFragment(fragment, true);
+    }
+
+    private void loadSectionFragment(final Intent intent, final boolean saveStack) {
+        switch (intent.getAction()) {
+            case Intent.ACTION_MAIN: {
+                // use SetsFragment as the default view
+                loadSectionFragment(new SetsFragment(), false);
+                break;
+            }
+            case Intent.ACTION_SEARCH: {
+                final String query = intent.getStringExtra(SearchManager.QUERY);
+                if (WordSearchUtils.isValidWord(query)) {
+                    loadWord(query, false);
+                    new SearchRecentSuggestions(this, SearchRecentProvider.AUTHORITY, SearchRecentProvider.MODE).saveRecentQuery(
+                        query,
+                        null
+                    );  // save search
+                } else if (WordSearchUtils.isValidWordSpelling(query)) {
+                    final Fragment fragment = new SpellingFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putString(WordFragment.BUNDLE_KEY_WORD, query);
+                    fragment.setArguments(bundle);
+                    loadSectionFragment(fragment, false);
+                }
+                break;
+            }
+        }
     }
 
     private void loadWord(String word, boolean saveStack) {
