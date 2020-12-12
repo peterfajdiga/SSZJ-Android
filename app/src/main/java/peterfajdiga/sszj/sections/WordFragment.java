@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.Spanned;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -257,7 +256,7 @@ public class WordFragment extends SectionFragment implements
     }
 
     @Override
-    public void onWordDefinitionLoaded(Spanned definition) {
+    public void onWordDefinitionLoaded(CharSequence definition) {
         final LoadingContainer loadingContainerDefinition = self.findViewById(R.id.loading_container_definition);
         loadingContainerDefinition.onLoaded();
 

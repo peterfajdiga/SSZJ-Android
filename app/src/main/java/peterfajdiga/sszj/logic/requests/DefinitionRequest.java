@@ -55,7 +55,7 @@ public class DefinitionRequest extends StringRequest {
 
 
     public interface Owner {
-        void onWordDefinitionLoaded(Spanned definition);
+        void onWordDefinitionLoaded(CharSequence definition);
         void onWordDefinitionFailed();
     }
 }
