@@ -8,9 +8,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 
 public class DefinitionRequest extends StringRequest {
-    private static final String entryMatchStart = "<div class=\"col-sm-12 col-md-8 col-md-push-4 entry\">";  // TODO: use regex, ignore classes other than "entry"
-    private static final String entryMatchEnd = "</div>";
-
     public DefinitionRequest(final Owner owner, final String url) {
         super(Method.GET, url, new Listener(owner), new ErrorListener(owner));
         setTag(owner);
@@ -25,18 +22,52 @@ public class DefinitionRequest extends StringRequest {
 
         @Override
         public void onResponse(final String response) {
-            final int indexStart = response.indexOf(entryMatchStart) + entryMatchStart.length();
-            final int indexEnd = response.indexOf(entryMatchEnd, indexStart);
-            final String definitionHtml = response.substring(indexStart, indexEnd);
+            try {
+                final String definitionHtml = extractDefinition(response);
 
-            Spanned definition;
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-                definition = Html.fromHtml(definitionHtml, Html.FROM_HTML_MODE_COMPACT);
-            } else {
-                definition = Html.fromHtml(definitionHtml);
+                final Spanned definition;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                    definition = Html.fromHtml(definitionHtml, Html.FROM_HTML_MODE_COMPACT);
+                } else {
+                    definition = Html.fromHtml(definitionHtml);
+                }
+                requestOwner.onWordDefinitionLoaded(definition);
+
+            } catch (final HtmlParseException e) {
+                e.printStackTrace();
+                requestOwner.onWordDefinitionFailed();
             }
-            requestOwner.onWordDefinitionLoaded(definition);
         }
+
+        private static String extractDefinition(final String html) throws HtmlParseException {
+            final int definitionAttributeIndex = html.indexOf("data-group=\"explanation");
+            if (definitionAttributeIndex == -1) {
+                throw new HtmlParseException();
+            }
+
+            final int definitionContentStartIndex = html.indexOf('>', definitionAttributeIndex);
+            if (definitionContentStartIndex == -1) {
+                throw new HtmlParseException();
+            }
+
+            final int definitionContentEndIndex = html.indexOf("</span>", definitionContentStartIndex + 1);
+            if (definitionContentEndIndex == -1) {
+                throw new HtmlParseException();
+            }
+
+            final String definition = html.substring(definitionContentStartIndex + 1, definitionContentEndIndex);
+            return removeTrailingCharacter(definition, ':');
+        }
+
+        private static String removeTrailingCharacter(final String string, final char character) {
+            final int lastIndex = string.length() - 1;
+            if (string.charAt(lastIndex) == character) {
+                return string.substring(0, lastIndex);
+            }
+            return string;
+        }
+
+        private static class HtmlParseException extends Exception {}
     }
 
     private static class ErrorListener implements Response.ErrorListener {
@@ -47,7 +78,7 @@ public class DefinitionRequest extends StringRequest {
         }
 
         @Override
-        public void onErrorResponse(VolleyError error) {
+        public void onErrorResponse(final VolleyError error) {
             //System.err.println(error.getMessage());
             requestOwner.onWordDefinitionFailed();
         }
