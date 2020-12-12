@@ -23,7 +23,7 @@ public class AboutFragment extends SectionFragment {
 
     @Override
     protected void init() {
-        final Button aboutWebLink = (Button)self.findViewById(R.id.about_web_link);
+        final Button aboutWebLink = self.findViewById(R.id.about_web_link);
         aboutWebLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -1,4 +1,4 @@
-package peterfajdiga.sszj;
+package peterfajdiga.sszj.sections;
 
 import android.app.SearchManager;
 import android.content.Context;
@@ -20,6 +20,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.navigation.NavigationView;
 
+import peterfajdiga.sszj.R;
+import peterfajdiga.sszj.SearchRecentProvider;
 import peterfajdiga.sszj.elements.adapters.OnWordClickedListener;
 import peterfajdiga.sszj.elements.adapters.SetsAdapter;
 import peterfajdiga.sszj.logic.sets.Set;
@@ -27,12 +29,6 @@ import peterfajdiga.sszj.logic.WordSearchUtils;
 import peterfajdiga.sszj.logic.requests.Constants;
 import peterfajdiga.sszj.obb.ObbLoader;
 import peterfajdiga.sszj.obb.ObbMounter;
-import peterfajdiga.sszj.sections.AboutFragment;
-import peterfajdiga.sszj.sections.SectionFragment;
-import peterfajdiga.sszj.sections.SetFragment;
-import peterfajdiga.sszj.sections.SetsFragment;
-import peterfajdiga.sszj.sections.SpellingFragment;
-import peterfajdiga.sszj.sections.WordFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
