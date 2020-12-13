@@ -35,6 +35,11 @@
             style="@style/ContentText"
             android:text="@string/about_web_link" />
 
+        <TextView
+            android:text="@string/about_year"
+            style="@style/ContentText.Normal"
+            android:gravity="right" />
+
     </LinearLayout>
 
 </ScrollView>

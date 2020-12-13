@@ -16,6 +16,7 @@ public class ObbMounter {
     public ObbMounter(@NonNull final Context context) {
         this.storageManager = (StorageManager)context.getSystemService(Context.STORAGE_SERVICE);
         this.obbFile = getObbFile(context);
+        System.err.println(obbFile.getAbsolutePath());
     }
 
     @NonNull
@@ -41,6 +42,7 @@ public class ObbMounter {
                 switch (state) {
                     case MOUNTED:
                     case ERROR_ALREADY_MOUNTED:
+                        System.err.println("mounted OBB: " + state);
                         final ObbLoader obbLoader = new ObbLoader(storageManager, obbFile);
                         listener.onObbMounted(obbLoader);
                         break;
