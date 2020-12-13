@@ -32,7 +32,8 @@ public class ObbMounter {
         }
 
         if (!obbFile.exists()) {
-            download();
+            listener.onObbFailure();  // TODO: download
+            return;
         }
 
         final boolean success = storageManager.mountObb(obbFile.getPath(), null, new OnObbStateChangeListener() {
@@ -55,10 +56,6 @@ public class ObbMounter {
         if (!success) {
             listener.onObbFailure();
         }
-    }
-
-    private void download() {
-        // TODO
     }
 
     public interface OnObbMountedListener {
