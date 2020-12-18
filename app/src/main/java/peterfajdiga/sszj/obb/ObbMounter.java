@@ -16,7 +16,6 @@ public class ObbMounter {
     public ObbMounter(@NonNull final Context context) {
         this.storageManager = (StorageManager)context.getSystemService(Context.STORAGE_SERVICE);
         this.obbFile = getObbFile(context);
-        System.err.println(obbFile.getAbsolutePath());
     }
 
     @NonNull
