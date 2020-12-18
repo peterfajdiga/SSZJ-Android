@@ -1,7 +1,6 @@
 package peterfajdiga.sszj.obb;
 
 import android.content.Context;
-import android.os.Environment;
 import android.os.storage.OnObbStateChangeListener;
 import android.os.storage.StorageManager;
 
