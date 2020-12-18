@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import java.io.File;
 
 public class ObbMounter {
-    private static final String OBB_URL = "https://raw.githubusercontent.com/peterfajdiga/SSZJ-Android/master/imgsrc/ic_logo_original.png";
+    private static final String OBB_URL = "https://github.com/peterfajdiga/SSZJ-Android/releases/download/v1.4/data.obb";
 
     private final StorageManager storageManager;
     private final DownloadManager downloadManager;
