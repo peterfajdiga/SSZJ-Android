@@ -69,6 +69,7 @@ public class ObbMounter {
     private void downloadAndMount(@NonNull final OnObbMountedListener listener) {
         final DownloadManager.Request request = new DownloadManager.Request(Uri.parse(OBB_URL));
         request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+        request.setTitle("Animacije kretenj SSZJ");  // TODO: move to strings.xml
         request.setDestinationUri(Uri.fromFile(obbFile));
         request.setAllowedOverMetered(true);  // TODO: warn on mobile data
         request.setAllowedOverRoaming(true);  // TODO: warn on mobile data
@@ -93,7 +94,8 @@ public class ObbMounter {
                     }
                     assert cursor.getCount() == 1;
 
-                    final int status = cursor.getColumnIndex(DownloadManager.COLUMN_STATUS);
+                    final int statusIndex = cursor.getColumnIndex(DownloadManager.COLUMN_STATUS);
+                    final int status = cursor.getInt(statusIndex);
                     switch (status) {
                         case DownloadManager.STATUS_SUCCESSFUL:
                             mount(listener);
