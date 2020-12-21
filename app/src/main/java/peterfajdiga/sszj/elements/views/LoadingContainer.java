@@ -17,12 +17,14 @@ import androidx.annotation.StyleRes;
 
 import peterfajdiga.sszj.R;
 
+// TODO: add loading message
 public class LoadingContainer extends FrameLayout {
 
     private String retry = "Retry";
     private int hiddenVisibility = View.GONE;
 
     private ProgressBar view_spinner;
+    private ProgressBar view_progress;
     private Button retryButton;
     private View content;
 
@@ -77,9 +79,16 @@ public class LoadingContainer extends FrameLayout {
         );
         params.gravity = Gravity.CENTER;
 
-        view_spinner = new ProgressBar(context);
+        view_spinner = new ProgressBar(context, null, android.R.attr.progressBarStyle);
         view_spinner.setLayoutParams(params);
+        view_spinner.setIndeterminate(true);
         addView(view_spinner);
+
+        view_progress = new ProgressBar(context, null, android.R.attr.progressBarStyleHorizontal);
+        view_progress.setLayoutParams(params);
+        view_progress.setIndeterminate(false);
+        view_progress.setProgress(0);
+        addView(view_progress);
 
         retryButton = new Button(context);
         retryButton.setLayoutParams(params);
@@ -87,21 +96,33 @@ public class LoadingContainer extends FrameLayout {
         addView(retryButton);
     }
 
-
     public void onLoading() {
         view_spinner.setVisibility(View.VISIBLE);
+        view_progress.setVisibility(View.GONE);
+        retryButton.setVisibility(View.GONE);
+        getContent().setVisibility(hiddenVisibility);
+    }
+
+    public void onLoading(final int progress, final int max) {
+        view_progress.setProgress(progress);
+        view_progress.setMax(max);
+
+        view_spinner.setVisibility(View.GONE);
+        view_progress.setVisibility(View.VISIBLE);
         retryButton.setVisibility(View.GONE);
         getContent().setVisibility(hiddenVisibility);
     }
 
     public void onLoaded() {
         view_spinner.setVisibility(View.GONE);
+        view_progress.setVisibility(View.GONE);
         retryButton.setVisibility(View.GONE);
         getContent().setVisibility(View.VISIBLE);
     }
 
     public void onFailed() {
         view_spinner.setVisibility(View.GONE);
+        view_progress.setVisibility(View.GONE);
         retryButton.setVisibility(View.VISIBLE);
         getContent().setVisibility(hiddenVisibility);
     }
@@ -118,7 +139,7 @@ public class LoadingContainer extends FrameLayout {
     }
 
     public void ensureCorrectOrder() {
-        if (getChildCount() != 3) {
+        if (getChildCount() != 4) {
             throw new RuntimeException("LoadingContainer must have exactly one content child");
         }
         if (getChildAt(0) == content) {
@@ -126,6 +147,7 @@ public class LoadingContainer extends FrameLayout {
             return;
         }
         view_spinner.bringToFront();
+        view_progress.bringToFront();
         retryButton.bringToFront();
         content = getChildAt(0);
     }
