@@ -31,11 +31,6 @@
     <string name="definition_loading">Definicija iz SSKJ se nalaga&#8230;</string>
     <string name="definition_error">Napaka pri nalaganju definicije iz SSKJ</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
-
-
     <!--About-->
     <string name="about_authors">Mobilno aplikacijo in spletni aplikacijski vmesnik za SSZJ sva razvila diplomirana inženirja računalništva in informatike (UN) Peter Fajdiga in Žiga Černigoj na Fakulteti za računalništvo in informatiko Univerze v Ljubljani pri predmetu Interakcija in oblikovanje informacij pod mentorstvom prof. dr. Franca Soline in viš. pred. dr. Boruta Batagelja.</string>
     <string name="about_web">Aplikacija je adaptacija spletnega slovarja znakovnega jezika:</string>
