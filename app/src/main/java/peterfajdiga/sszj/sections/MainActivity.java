@@ -48,6 +48,14 @@ public class MainActivity extends AppCompatActivity
 
             @Override
             public void onObbFailure() {}
+
+            @Override
+            public void onObbDownloadProgress(final int bytesDownloaded, final int bytesTotal) {}
+
+            @Override
+            public boolean shouldKeepListening() {
+                return false;
+            }
         });
 
         setContentView(R.layout.activity_main);

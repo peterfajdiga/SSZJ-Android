@@ -1,5 +1,6 @@
 package peterfajdiga.sszj.sections;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -102,7 +103,13 @@ public class WordFragment extends SectionFragment implements
         showBaseText();
         showSpelling();
 
-        final ObbMounter obbMounter = new ObbMounter(getContext());
+        final Context context = getContext();
+        if (!(context instanceof Activity)) {
+            throw new RuntimeException("Context must be an Activity");
+        }
+        final Activity activity = (Activity)context;
+
+        final ObbMounter obbMounter = new ObbMounter(context);
         obbMounter.init(new ObbMounter.OnObbMountedListener() {
             @Override
             public void onObbMounted(final ObbLoader obbLoader) {
@@ -117,6 +124,21 @@ public class WordFragment extends SectionFragment implements
             @Override
             public void onObbFailure() {
                 loadingContainerAnimation.onFailed();
+            }
+
+            @Override
+            public void onObbDownloadProgress(final int bytesDownloaded, final int bytesTotal) {
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        loadingContainerAnimation.onLoading(bytesDownloaded, bytesTotal);
+                    }
+                });
+            }
+
+            @Override
+            public boolean shouldKeepListening() {
+                return loadingContainerAnimation.isShown();
             }
         });
     }
