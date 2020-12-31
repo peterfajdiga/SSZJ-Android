@@ -132,7 +132,9 @@ public class ObbMounter {
 
                     final Cursor cursor = downloadManager.query(downloadQuery);
                     if (!cursor.moveToFirst()) {
-                        continue;
+                        // download was most likely cancelled
+                        listener.onObbFailure();
+                        return;
                     }
                     assert cursor.getCount() == 1;
 

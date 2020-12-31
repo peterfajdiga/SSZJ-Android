@@ -123,7 +123,12 @@ public class WordFragment extends SectionFragment implements
 
             @Override
             public void onObbFailure() {
-                loadingContainerAnimation.onFailed();
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        loadingContainerAnimation.onFailed();
+                    }
+                });
             }
 
             @Override
