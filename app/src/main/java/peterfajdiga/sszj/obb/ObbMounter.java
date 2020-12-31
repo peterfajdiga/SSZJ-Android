@@ -29,14 +29,10 @@ public class ObbMounter {
     };
 
     private final Context context;
-    private final StorageManager storageManager;
-    private final DownloadManager downloadManager;
     private final File obbFile;
 
     public ObbMounter(@NonNull final Context context) {
         this.context = context;
-        this.storageManager = (StorageManager)context.getSystemService(Context.STORAGE_SERVICE);
-        this.downloadManager = (DownloadManager)context.getSystemService(Context.DOWNLOAD_SERVICE);
         this.obbFile = getObbFile(context);
     }
 
@@ -46,6 +42,7 @@ public class ObbMounter {
     }
 
     public synchronized void init(@NonNull final OnObbMountedListener listener) {
+        final StorageManager storageManager = (StorageManager)context.getSystemService(Context.STORAGE_SERVICE);
         if (storageManager.isObbMounted(obbFile.getPath())) {
             final ObbLoader obbLoader = new ObbLoader(storageManager, obbFile);
             listener.onObbMounted(obbLoader);
@@ -77,6 +74,7 @@ public class ObbMounter {
     }
 
     private void mount(@NonNull final OnObbMountedListener listener) {
+        final StorageManager storageManager = (StorageManager)context.getSystemService(Context.STORAGE_SERVICE);
         final boolean success = storageManager.mountObb(obbFile.getPath(), null, new OnObbStateChangeListener() {
             @Override
             public void onObbStateChange(final String path, final int state) {
@@ -139,10 +137,13 @@ public class ObbMounter {
         request.setDestinationUri(Uri.fromFile(obbFile));
         request.setAllowedOverMetered(true);  // TODO: warn on mobile data
         request.setAllowedOverRoaming(true);  // TODO: warn on mobile data
+
+        final DownloadManager downloadManager = (DownloadManager)context.getSystemService(Context.DOWNLOAD_SERVICE);
         return downloadManager.enqueue(request);
     }
 
     private void waitForDownloadAndMount(final long downloadId, @NonNull final OnObbMountedListener listener) {
+        final DownloadManager downloadManager = (DownloadManager)context.getSystemService(Context.DOWNLOAD_SERVICE);
         final DownloadManager.Query downloadQuery = new DownloadManager.Query();
         downloadQuery.setFilterById(downloadId);
 
@@ -198,6 +199,7 @@ public class ObbMounter {
     }
 
     private DownloadStatus findDownload() {
+        final DownloadManager downloadManager = (DownloadManager)context.getSystemService(Context.DOWNLOAD_SERVICE);
         final DownloadManager.Query downloadQuery = new DownloadManager.Query();
         final Cursor cursor = downloadManager.query(downloadQuery);
 
