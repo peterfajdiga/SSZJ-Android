@@ -20,6 +20,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
+import peterfajdiga.sszj.R;
+
 public class ObbMounter {
     private static final String OBB_URL = "https://github.com/peterfajdiga/SSZJ-Android/releases/download/v1.4/data.obb";
     private static final byte[] OBB_MD5 = new byte[] {
@@ -116,9 +118,9 @@ public class ObbMounter {
         }
 
         final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
-        dialogBuilder.setMessage("SSZJ mora za polno funkcionalnost prenesti animacije kretenj (382MB). Naj se začne prenos?");  // TODO: strings.xml
-        dialogBuilder.setTitle("Prenos animacij kretenj");
-        dialogBuilder.setPositiveButton("Prenesi", new DialogInterface.OnClickListener() {
+        dialogBuilder.setTitle(R.string.obb_download_dialog_title);
+        dialogBuilder.setMessage(R.string.obb_download_dialog_message);
+        dialogBuilder.setPositiveButton(R.string.obb_download_dialog_confirm, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(final DialogInterface dialog, final int which) {
                 final long downloadId = startDownload();
@@ -126,7 +128,7 @@ public class ObbMounter {
             }
         });
 
-        dialogBuilder.setNegativeButton("Prekliči", new DialogInterface.OnClickListener() {
+        dialogBuilder.setNegativeButton(R.string.obb_download_dialog_cancel, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(final DialogInterface dialog, final int which) {
                 listener.onObbFailure();
@@ -141,7 +143,7 @@ public class ObbMounter {
     private long startDownload() {
         final DownloadManager.Request request = new DownloadManager.Request(Uri.parse(OBB_URL));
         request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE);
-        request.setTitle("Animacije kretenj SSZJ");  // TODO: move to strings.xml
+        request.setTitle(context.getString(R.string.obb_download_title));
         request.setDestinationUri(Uri.fromFile(obbFile));
         request.setAllowedOverMetered(true);
         request.setAllowedOverRoaming(true);

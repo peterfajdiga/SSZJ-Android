@@ -36,4 +36,11 @@
     <string name="about_web">Aplikacija je adaptacija spletnega slovarja znakovnega jezika:</string>
     <string name="about_web_link">Spletni slovar</string>
     <string name="about_year">Ljubljana, 2017</string>
+
+    <!--OBB-->
+    <string name="obb_download_title">Animacije kretenj SSZJ</string>
+    <string name="obb_download_dialog_title">Prenos animacij kretenj</string>
+    <string name="obb_download_dialog_message">SSZJ mora za polno funkcionalnost prenesti animacije kretenj (382MB). Naj se začne prenos?</string>
+    <string name="obb_download_dialog_confirm">Prenesi</string>
+    <string name="obb_download_dialog_cancel">Prekliči</string>
 </resources>
