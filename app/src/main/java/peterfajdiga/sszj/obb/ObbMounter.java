@@ -5,6 +5,7 @@ import android.app.DownloadManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.database.Cursor;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.storage.OnObbStateChangeListener;
 import android.os.storage.StorageManager;
@@ -107,6 +108,13 @@ public class ObbMounter {
     }
 
     private void askStartDownload(@NonNull final OnObbMountedListener listener) {
+        final ConnectivityManager connectivityManager = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (!connectivityManager.isActiveNetworkMetered()) {
+            final long downloadId = startDownload();
+            waitForDownloadAndMount(downloadId, listener);
+            return;
+        }
+
         final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
         dialogBuilder.setMessage("SSZJ mora za polno funkcionalnost prenesti animacije kretenj (382MB). Naj se začne prenos?");  // TODO: strings.xml
         dialogBuilder.setTitle("Prenos animacij kretenj");
@@ -135,8 +143,8 @@ public class ObbMounter {
         request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE);
         request.setTitle("Animacije kretenj SSZJ");  // TODO: move to strings.xml
         request.setDestinationUri(Uri.fromFile(obbFile));
-        request.setAllowedOverMetered(true);  // TODO: warn on mobile data
-        request.setAllowedOverRoaming(true);  // TODO: warn on mobile data
+        request.setAllowedOverMetered(true);
+        request.setAllowedOverRoaming(true);
 
         final DownloadManager downloadManager = (DownloadManager)context.getSystemService(Context.DOWNLOAD_SERVICE);
         return downloadManager.enqueue(request);
