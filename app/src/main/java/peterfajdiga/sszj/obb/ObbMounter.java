@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.storage.OnObbStateChangeListener;
 import android.os.storage.StorageManager;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -71,19 +70,7 @@ public class ObbMounter {
             return;
         }
 
-        if (checkObbMd5()) {
-            mount(listener);
-        } else {
-            final boolean deleteSuccess = obbFile.delete();
-            if (!deleteSuccess) {
-                Log.e("ObbMounter", "Failed to delete invalid OBB file: " + Uri.fromFile(obbFile).toString());
-                listener.onObbFailure();
-                return;
-            }
-
-            final long downloadId = startDownload();
-            waitForDownloadAndMount(downloadId, listener);
-        }
+        mount(listener);
     }
 
     private void mount(@NonNull final OnObbMountedListener listener) {
@@ -93,14 +80,23 @@ public class ObbMounter {
                 super.onObbStateChange(path, state);
                 switch (state) {
                     case MOUNTED:
-                    case ERROR_ALREADY_MOUNTED:
+                    case ERROR_ALREADY_MOUNTED: {
                         System.err.println("mounted OBB: " + state);
                         final ObbLoader obbLoader = new ObbLoader(storageManager, obbFile);
                         listener.onObbMounted(obbLoader);
                         break;
-                    default:
+                    }
+                    case ERROR_INTERNAL: {
+                        // OBB file is most likely corrupted
+                        if (!checkObbMd5()) {
+                            obbFile.delete();
+                        }
+                        // fallthrough
+                    }
+                    default: {
                         System.err.println("Failed to mount OBB, state: " + state);
                         listener.onObbFailure();
+                    }
                 }
             }
         });
