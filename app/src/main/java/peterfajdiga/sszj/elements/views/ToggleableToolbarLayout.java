@@ -22,7 +22,6 @@ public class ToggleableToolbarLayout extends CollapsingToolbarLayout {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-//        System.err.println("sadf");
         return false;
     }
 }

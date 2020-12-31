@@ -2,6 +2,7 @@ package peterfajdiga.sszj.logic.requests;
 
 import android.text.Html;
 import android.text.Spanned;
+import android.util.Log;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -34,7 +35,7 @@ public class DefinitionRequest extends StringRequest {
                 requestOwner.onWordDefinitionLoaded(definition);
 
             } catch (final HtmlParseException e) {
-                e.printStackTrace();
+                Log.e("DefinitionRequest", "Failed to parse definition", e);
                 requestOwner.onWordDefinitionFailed();
             }
         }
@@ -79,7 +80,6 @@ public class DefinitionRequest extends StringRequest {
 
         @Override
         public void onErrorResponse(final VolleyError error) {
-            //System.err.println(error.getMessage());
             requestOwner.onWordDefinitionFailed();
         }
     }

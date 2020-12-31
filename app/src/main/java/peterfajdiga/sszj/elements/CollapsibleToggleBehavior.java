@@ -30,8 +30,6 @@ public class CollapsibleToggleBehavior extends AppBarLayout.Behavior {
     public boolean onNestedFling(final CoordinatorLayout coordinatorLayout,
                                  final AppBarLayout child, View target, float velocityX, float velocityY,
                                  boolean consumed) {
-//        System.err.println("full: " + child.getTotalScrollRange());
-//        System.err.println("y: " + target.getScrollY());
         final int y = target.getScrollY();
         if (y > 0 && -velocityY > y * 2.5 && expandingEnabled) {
             child.setExpanded(true);

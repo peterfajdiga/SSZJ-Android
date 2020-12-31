@@ -9,6 +9,7 @@ import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.storage.OnObbStateChangeListener;
 import android.os.storage.StorageManager;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -85,7 +86,6 @@ public class ObbMounter {
                 switch (state) {
                     case MOUNTED:
                     case ERROR_ALREADY_MOUNTED: {
-                        System.err.println("mounted OBB: " + state);
                         final ObbLoader obbLoader = new ObbLoader(storageManager, obbFile);
                         listener.onObbMounted(obbLoader);
                         break;
@@ -98,7 +98,7 @@ public class ObbMounter {
                         // fallthrough
                     }
                     default: {
-                        System.err.println("Failed to mount OBB, state: " + state);
+                        Log.e("ObbMounter", "Failed to mount OBB, state: " + state);
                         listener.onObbFailure();
                     }
                 }
@@ -255,8 +255,8 @@ public class ObbMounter {
         try {
             final byte[] actualMd5 = getMd5(obbFile);
             return Arrays.equals(actualMd5, OBB_MD5);
-        } catch (NoSuchAlgorithmException | IOException e) {
-            e.printStackTrace();
+        } catch (final NoSuchAlgorithmException | IOException e) {
+            Log.e("ObbMounter", "Error calculating MD5 checksum", e);
             return false;
         }
     }
