@@ -75,8 +75,14 @@ public class ObbMounter {
             mount(listener);
         } else {
             final boolean deleteSuccess = obbFile.delete();
-            Log.e("ObbMounter", "Failed to delete invalid OBB file: " + Uri.fromFile(obbFile).toString());
-            listener.onObbFailure();
+            if (!deleteSuccess) {
+                Log.e("ObbMounter", "Failed to delete invalid OBB file: " + Uri.fromFile(obbFile).toString());
+                listener.onObbFailure();
+                return;
+            }
+
+            final long downloadId = startDownload();
+            waitForDownloadAndMount(downloadId, listener);
         }
     }
 
