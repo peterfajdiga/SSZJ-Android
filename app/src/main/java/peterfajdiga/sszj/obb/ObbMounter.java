@@ -219,7 +219,7 @@ public class ObbMounter {
         while (cursor.moveToNext()) {
             final String localUri = cursor.getString(cursor.getColumnIndex(DownloadManager.COLUMN_LOCAL_URI));
             final String correctUri = Uri.fromFile(obbFile).toString();
-            if (!localUri.equals(correctUri)) {
+            if (localUri == null || !localUri.equals(correctUri)) {
                 continue;
             }
 
