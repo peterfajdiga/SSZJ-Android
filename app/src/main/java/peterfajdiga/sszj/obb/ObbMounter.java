@@ -1,7 +1,9 @@
 package peterfajdiga.sszj.obb;
 
+import android.app.AlertDialog;
 import android.app.DownloadManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.storage.OnObbStateChangeListener;
@@ -26,11 +28,13 @@ public class ObbMounter {
         (byte)0xda, (byte)0x1a, (byte)0xa2, (byte)0xd9,
     };
 
+    private final Context context;
     private final StorageManager storageManager;
     private final DownloadManager downloadManager;
     private final File obbFile;
 
     public ObbMounter(@NonNull final Context context) {
+        this.context = context;
         this.storageManager = (StorageManager)context.getSystemService(Context.STORAGE_SERVICE);
         this.downloadManager = (DownloadManager)context.getSystemService(Context.DOWNLOAD_SERVICE);
         this.obbFile = getObbFile(context);
@@ -65,8 +69,7 @@ public class ObbMounter {
         }
 
         if (!obbFile.exists()) {
-            final long downloadId = startDownload();
-            waitForDownloadAndMount(downloadId, listener);
+            askStartDownload(listener);
             return;
         }
 
@@ -103,6 +106,29 @@ public class ObbMounter {
         if (!success) {
             listener.onObbFailure();
         }
+    }
+
+    private void askStartDownload(@NonNull final OnObbMountedListener listener) {
+        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
+        dialogBuilder.setMessage("SSZJ mora za polno funkcionalnost prenesti animacije kretenj (382MB). Naj se začne prenos?");  // TODO: strings.xml
+        dialogBuilder.setTitle("Prenos animacij kretenj");
+        dialogBuilder.setPositiveButton("Prenesi", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(final DialogInterface dialog, final int which) {
+                final long downloadId = startDownload();
+                waitForDownloadAndMount(downloadId, listener);
+            }
+        });
+
+        dialogBuilder.setNegativeButton("Prekliči", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(final DialogInterface dialog, final int which) {
+                listener.onObbFailure();
+            }
+        });
+
+        final AlertDialog dialog = dialogBuilder.create();
+        dialog.show();
     }
 
     // returns download id
