@@ -1,4 +1,4 @@
-package peterfajdiga.sszj.elements.views;
+package peterfajdiga.sszj.sections.word;
 
 import android.content.Context;
 import android.content.res.TypedArray;

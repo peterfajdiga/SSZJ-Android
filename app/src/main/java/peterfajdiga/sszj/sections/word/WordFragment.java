@@ -23,7 +23,6 @@ import peterfajdiga.sszj.elements.recycler.adapters.LettersAdapter;
 import peterfajdiga.sszj.elements.recycler.adapters.OnWordClickedListener;
 import peterfajdiga.sszj.R;
 import peterfajdiga.sszj.elements.recycler.DividerItemDecorationNoLast;
-import peterfajdiga.sszj.elements.views.LoadingContainer;
 import peterfajdiga.sszj.logic.words.Words;
 import peterfajdiga.sszj.logic.words.CombinedWord;
 import peterfajdiga.sszj.logic.words.Word;

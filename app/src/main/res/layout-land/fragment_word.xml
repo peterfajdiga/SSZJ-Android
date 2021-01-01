@@ -1,4 +1,4 @@
-<peterfajdiga.sszj.elements.views.LoadingContainer xmlns:android="http://schemas.android.com/apk/res/android"
+<peterfajdiga.sszj.sections.word.LoadingContainer xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/loading_container_main"
@@ -14,7 +14,7 @@
 
         <!--Animation-->
 
-        <peterfajdiga.sszj.elements.views.LoadingContainer
+        <peterfajdiga.sszj.sections.word.LoadingContainer
             android:id="@+id/loading_container_animation"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -27,7 +27,7 @@
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
                 android:src="@drawable/placeholder_animation" />
-        </peterfajdiga.sszj.elements.views.LoadingContainer>
+        </peterfajdiga.sszj.sections.word.LoadingContainer>
 
 
 
@@ -111,7 +111,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="1dp"
                                 android:background="@color/cardSeparator" />
-                            <peterfajdiga.sszj.elements.views.LoadingContainer
+                            <peterfajdiga.sszj.sections.word.LoadingContainer
                                 android:id="@+id/loading_container_definition"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content">
@@ -119,11 +119,11 @@
                                     android:id="@+id/definition_view"
                                     style="@style/CardText"
                                     android:visibility="gone" />
-                            </peterfajdiga.sszj.elements.views.LoadingContainer>
+                            </peterfajdiga.sszj.sections.word.LoadingContainer>
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
                 </LinearLayout>
         </ScrollView>
     </LinearLayout>
-</peterfajdiga.sszj.elements.views.LoadingContainer>
+</peterfajdiga.sszj.sections.word.LoadingContainer>
