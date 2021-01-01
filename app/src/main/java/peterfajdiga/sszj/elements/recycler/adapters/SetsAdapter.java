@@ -1,4 +1,4 @@
-package peterfajdiga.sszj.elements.adapters;
+package peterfajdiga.sszj.elements.recycler.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;

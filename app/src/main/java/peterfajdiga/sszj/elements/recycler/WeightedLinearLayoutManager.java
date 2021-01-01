@@ -1,4 +1,4 @@
-package peterfajdiga.sszj.elements;
+package peterfajdiga.sszj.elements.recycler;
 
 import android.content.Context;
 import android.util.AttributeSet;
