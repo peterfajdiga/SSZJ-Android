@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
 
 import peterfajdiga.sszj.elements.recycler.adapters.LettersAdapter;
 import peterfajdiga.sszj.elements.recycler.adapters.OnWordClickedListener;
@@ -38,6 +39,8 @@ public class WordFragment extends SectionFragment implements
         ReportingAnimationDrawable.OnFrameListener {
 
     public static final String BUNDLE_KEY_WORD = "BUNDLE_KEY_WORD";
+
+    private RequestQueue volleyQueue;
 
     private Word word;
     private View self;
@@ -152,9 +155,11 @@ public class WordFragment extends SectionFragment implements
 
         final String definitionUrl = getDefinitionUrl();
 
-        final RequestQueue queue = Constants.initQueue(getContext());
+        if (volleyQueue == null) {
+            volleyQueue = Volley.newRequestQueue(getContext());
+        }
         final DefinitionRequest request = new DefinitionRequest(this, definitionUrl + "&View=3");
-        queue.add(request);
+        volleyQueue.add(request);
 
         final View definitionContainer = self.findViewById(R.id.card_definition);
         definitionContainer.setOnClickListener(new View.OnClickListener() {
@@ -179,7 +184,9 @@ public class WordFragment extends SectionFragment implements
     @Override
     public void onDetach() {
         super.onDetach();
-        Constants.initQueue(getContext()).cancelAll(this);
+        if (volleyQueue != null) {
+            volleyQueue.cancelAll(this);
+        }
     }
 
     private void showBaseText() {
