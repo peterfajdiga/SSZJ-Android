@@ -29,6 +29,7 @@ import peterfajdiga.sszj.logic.WordSearchUtils;
 import peterfajdiga.sszj.logic.requests.Constants;
 import peterfajdiga.sszj.obb.ObbLoader;
 import peterfajdiga.sszj.obb.ObbMounter;
+import peterfajdiga.sszj.sections.word.WordFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,

@@ -17,7 +17,7 @@ import peterfajdiga.sszj.elements.recycler.GridAutofitLayoutManager;
 import peterfajdiga.sszj.elements.recycler.adapters.LettersAdapter;
 import peterfajdiga.sszj.elements.recycler.adapters.OnWordClickedListener;
 
-import static peterfajdiga.sszj.sections.WordFragment.BUNDLE_KEY_WORD;
+import static peterfajdiga.sszj.sections.word.WordFragment.BUNDLE_KEY_WORD;
 
 
 public class SpellingFragment extends SectionFragment implements OnWordClickedListener {

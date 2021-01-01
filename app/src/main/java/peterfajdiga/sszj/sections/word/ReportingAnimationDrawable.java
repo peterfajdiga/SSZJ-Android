@@ -1,4 +1,4 @@
-package peterfajdiga.sszj.logic;
+package peterfajdiga.sszj.sections.word;
 
 import android.graphics.drawable.AnimationDrawable;
 

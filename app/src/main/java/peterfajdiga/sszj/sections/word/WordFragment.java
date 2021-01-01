@@ -1,4 +1,4 @@
-package peterfajdiga.sszj.sections;
+package peterfajdiga.sszj.sections.word;
 
 import android.app.Activity;
 import android.content.Context;
@@ -21,19 +21,17 @@ import com.android.volley.RequestQueue;
 import peterfajdiga.sszj.elements.recycler.adapters.LettersAdapter;
 import peterfajdiga.sszj.elements.recycler.adapters.OnWordClickedListener;
 import peterfajdiga.sszj.R;
-import peterfajdiga.sszj.logic.AnimationBuilder;
-import peterfajdiga.sszj.logic.ReportingAnimationDrawable;
 import peterfajdiga.sszj.elements.recycler.DividerItemDecorationNoLast;
 import peterfajdiga.sszj.elements.views.LoadingContainer;
 import peterfajdiga.sszj.logic.words.Words;
 import peterfajdiga.sszj.logic.words.CombinedWord;
 import peterfajdiga.sszj.logic.words.Word;
 import peterfajdiga.sszj.logic.requests.Constants;
-import peterfajdiga.sszj.logic.requests.DefinitionRequest;
 import peterfajdiga.sszj.elements.recycler.WeightedLinearLayoutManager;
 import peterfajdiga.sszj.elements.recycler.adapters.WordsAdapter;
 import peterfajdiga.sszj.obb.ObbLoader;
 import peterfajdiga.sszj.obb.ObbMounter;
+import peterfajdiga.sszj.sections.SectionFragment;
 
 public class WordFragment extends SectionFragment implements
         DefinitionRequest.Owner,

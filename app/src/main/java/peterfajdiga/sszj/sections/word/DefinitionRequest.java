@@ -1,4 +1,4 @@
-package peterfajdiga.sszj.logic.requests;
+package peterfajdiga.sszj.sections.word;
 
 import android.text.Html;
 import android.text.Spanned;
