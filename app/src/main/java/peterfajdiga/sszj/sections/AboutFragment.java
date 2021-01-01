@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import peterfajdiga.sszj.R;
-import peterfajdiga.sszj.logic.requests.Constants;
+import peterfajdiga.sszj.logic.utils.Web;
 
 public class AboutFragment extends SectionFragment {
 
@@ -27,7 +27,7 @@ public class AboutFragment extends SectionFragment {
         aboutWebLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Constants.openWebsite(getContext(), "http://sszj.fri.uni-lj.si/?stran=staticno.prva");
+                Web.openWebsite(getContext(), "http://sszj.fri.uni-lj.si/?stran=staticno.prva");
             }
         });
     }

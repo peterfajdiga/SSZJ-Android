@@ -26,7 +26,7 @@ import peterfajdiga.sszj.elements.recycler.adapters.OnWordClickedListener;
 import peterfajdiga.sszj.elements.recycler.adapters.SetsAdapter;
 import peterfajdiga.sszj.logic.sets.Set;
 import peterfajdiga.sszj.sections.search.WordSearchUtils;
-import peterfajdiga.sszj.logic.requests.Constants;
+import peterfajdiga.sszj.logic.utils.Web;
 import peterfajdiga.sszj.obb.ObbLoader;
 import peterfajdiga.sszj.obb.ObbMounter;
 import peterfajdiga.sszj.sections.word.WordFragment;
@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_sets:     loadSectionFragment(new SetsFragment()); break;
             case R.id.nav_search:   searchViewItem.expandActionView(); break;
             case R.id.nav_spelling: loadSectionFragment(new SpellingFragment()); break;
-            case R.id.nav_practice: Constants.openWebsite(this, "http://sszj.fri.uni-lj.si/?stran=vaje.index"); break;
+            case R.id.nav_practice: Web.openWebsite(this, "http://sszj.fri.uni-lj.si/?stran=vaje.index"); break;
             case R.id.nav_about:    loadSectionFragment(new AboutFragment()); break;
         }
 

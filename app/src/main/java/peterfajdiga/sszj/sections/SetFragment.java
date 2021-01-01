@@ -14,7 +14,6 @@ import peterfajdiga.sszj.R;
 import peterfajdiga.sszj.elements.recycler.DividerItemDecorationNoLast;
 import peterfajdiga.sszj.elements.recycler.adapters.WordsAdapter;
 import peterfajdiga.sszj.logic.sets.Set;
-import peterfajdiga.sszj.logic.requests.Constants;
 import peterfajdiga.sszj.elements.views.LoadingContainer;
 import peterfajdiga.sszj.logic.sets.Sets;
 

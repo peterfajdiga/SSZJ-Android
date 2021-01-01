@@ -1,10 +1,12 @@
-package peterfajdiga.sszj.logic.requests;
+package peterfajdiga.sszj.logic.utils;
 
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 
-public final class Constants {
+public final class Web {
+    private Web() {}
+
     public static void openWebsite(final Context context, final String url) {
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         context.startActivity(browserIntent);

@@ -27,7 +27,6 @@ import peterfajdiga.sszj.elements.views.LoadingContainer;
 import peterfajdiga.sszj.logic.words.Words;
 import peterfajdiga.sszj.logic.words.CombinedWord;
 import peterfajdiga.sszj.logic.words.Word;
-import peterfajdiga.sszj.logic.requests.Constants;
 import peterfajdiga.sszj.elements.recycler.WeightedLinearLayoutManager;
 import peterfajdiga.sszj.elements.recycler.adapters.WordsAdapter;
 import peterfajdiga.sszj.obb.ObbLoader;
