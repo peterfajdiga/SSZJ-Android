@@ -88,10 +88,4 @@ public class SetFragment extends SectionFragment {
     protected int getDrawerItemId() {
         return R.id.nav_sets;
     }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        Constants.initQueue(getContext()).cancelAll(this);
-    }
 }
