@@ -1,4 +1,4 @@
-package peterfajdiga.sszj.elements.recycler;
+package peterfajdiga.sszj.recycler;
 
 import android.content.Context;
 import android.util.TypedValue;

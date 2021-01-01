@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 import androidx.recyclerview.widget.RecyclerView;
 
 import peterfajdiga.sszj.R;
-import peterfajdiga.sszj.elements.recycler.GridAutofitLayoutManager;
-import peterfajdiga.sszj.elements.recycler.adapters.SetsAdapter;
+import peterfajdiga.sszj.recycler.GridAutofitLayoutManager;
+import peterfajdiga.sszj.recycler.adapters.SetsAdapter;
 import peterfajdiga.sszj.logic.sets.Sets;
 
 public class SetsFragment extends SectionFragment {

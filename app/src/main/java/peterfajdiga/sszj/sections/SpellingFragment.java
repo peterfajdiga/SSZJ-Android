@@ -13,9 +13,9 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import peterfajdiga.sszj.R;
-import peterfajdiga.sszj.elements.recycler.GridAutofitLayoutManager;
-import peterfajdiga.sszj.elements.recycler.adapters.LettersAdapter;
-import peterfajdiga.sszj.elements.recycler.adapters.OnWordClickedListener;
+import peterfajdiga.sszj.recycler.GridAutofitLayoutManager;
+import peterfajdiga.sszj.recycler.adapters.LettersAdapter;
+import peterfajdiga.sszj.recycler.adapters.OnWordClickedListener;
 
 import static peterfajdiga.sszj.sections.word.WordFragment.BUNDLE_KEY_WORD;
 

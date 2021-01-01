@@ -22,8 +22,8 @@ import com.google.android.material.navigation.NavigationView;
 
 import peterfajdiga.sszj.R;
 import peterfajdiga.sszj.sections.search.SearchRecentProvider;
-import peterfajdiga.sszj.elements.recycler.adapters.OnWordClickedListener;
-import peterfajdiga.sszj.elements.recycler.adapters.SetsAdapter;
+import peterfajdiga.sszj.recycler.adapters.OnWordClickedListener;
+import peterfajdiga.sszj.recycler.adapters.SetsAdapter;
 import peterfajdiga.sszj.logic.sets.Set;
 import peterfajdiga.sszj.sections.search.WordSearchUtils;
 import peterfajdiga.sszj.logic.utils.Web;

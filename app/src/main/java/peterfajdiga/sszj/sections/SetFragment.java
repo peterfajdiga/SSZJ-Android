@@ -9,10 +9,10 @@ import android.view.ViewGroup;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import peterfajdiga.sszj.elements.recycler.adapters.OnWordClickedListener;
+import peterfajdiga.sszj.recycler.adapters.OnWordClickedListener;
 import peterfajdiga.sszj.R;
-import peterfajdiga.sszj.elements.recycler.DividerItemDecorationNoLast;
-import peterfajdiga.sszj.elements.recycler.adapters.WordsAdapter;
+import peterfajdiga.sszj.recycler.DividerItemDecorationNoLast;
+import peterfajdiga.sszj.recycler.adapters.WordsAdapter;
 import peterfajdiga.sszj.logic.sets.Set;
 import peterfajdiga.sszj.logic.sets.Sets;
 
