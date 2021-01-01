@@ -1,4 +1,4 @@
-package peterfajdiga.sszj;
+package peterfajdiga.sszj.sections.search;
 
 import android.content.SearchRecentSuggestionsProvider;
 import android.database.Cursor;
@@ -6,7 +6,7 @@ import android.database.MatrixCursor;
 import android.database.MergeCursor;
 import android.net.Uri;
 
-import peterfajdiga.sszj.logic.WordSearchUtils;
+import peterfajdiga.sszj.R;
 
 public class SearchRecentProvider extends SearchRecentSuggestionsProvider {
     public static final String AUTHORITY = "peterfajdiga.sszj.SearchRecentAuthority";

@@ -1,4 +1,4 @@
-package peterfajdiga.sszj.logic;
+package peterfajdiga.sszj.sections.search;
 
 import java.text.Collator;
 import java.util.ArrayList;

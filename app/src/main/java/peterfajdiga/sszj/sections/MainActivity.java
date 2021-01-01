@@ -21,11 +21,11 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.navigation.NavigationView;
 
 import peterfajdiga.sszj.R;
-import peterfajdiga.sszj.SearchRecentProvider;
+import peterfajdiga.sszj.sections.search.SearchRecentProvider;
 import peterfajdiga.sszj.elements.recycler.adapters.OnWordClickedListener;
 import peterfajdiga.sszj.elements.recycler.adapters.SetsAdapter;
 import peterfajdiga.sszj.logic.sets.Set;
-import peterfajdiga.sszj.logic.WordSearchUtils;
+import peterfajdiga.sszj.sections.search.WordSearchUtils;
 import peterfajdiga.sszj.logic.requests.Constants;
 import peterfajdiga.sszj.obb.ObbLoader;
 import peterfajdiga.sszj.obb.ObbMounter;

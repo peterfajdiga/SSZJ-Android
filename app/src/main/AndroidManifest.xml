@@ -28,7 +28,7 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable"/>
         </activity>
-        <provider android:name=".SearchRecentProvider"
+        <provider android:name=".sections.search.SearchRecentProvider"
             android:authorities="peterfajdiga.sszj.SearchRecentAuthority" />
     </application>
 

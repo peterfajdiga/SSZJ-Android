@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import peterfajdiga.sszj.R;
-import peterfajdiga.sszj.logic.WordSearchUtils;
+import peterfajdiga.sszj.sections.search.WordSearchUtils;
 
 public class LettersAdapter extends RecyclerView.Adapter<LettersAdapter.LetterViewHolder> {
 
