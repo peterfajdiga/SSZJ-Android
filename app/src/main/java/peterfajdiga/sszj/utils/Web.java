@@ -1,4 +1,4 @@
-package peterfajdiga.sszj.logic.utils;
+package peterfajdiga.sszj.utils;
 
 import android.content.Context;
 import android.content.Intent;

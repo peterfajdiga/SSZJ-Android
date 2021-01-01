@@ -1,4 +1,4 @@
-package peterfajdiga.sszj.logic.sets;
+package peterfajdiga.sszj.sets;
 
 public class Set {
     public final String label;

@@ -1,4 +1,4 @@
-package peterfajdiga.sszj.logic.sets;
+package peterfajdiga.sszj.sets;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import peterfajdiga.sszj.R;
-import peterfajdiga.sszj.logic.utils.Web;
+import peterfajdiga.sszj.utils.Web;
 
 public class AboutFragment extends SectionFragment {
 

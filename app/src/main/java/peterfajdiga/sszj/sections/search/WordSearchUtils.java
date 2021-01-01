@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.regex.Pattern;
 
-import peterfajdiga.sszj.logic.words.Words;
+import peterfajdiga.sszj.words.Words;
 
 public final class WordSearchUtils {
     private WordSearchUtils() {}

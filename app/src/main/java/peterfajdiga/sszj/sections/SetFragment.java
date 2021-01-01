@@ -13,8 +13,8 @@ import peterfajdiga.sszj.recycler.adapters.OnWordClickedListener;
 import peterfajdiga.sszj.R;
 import peterfajdiga.sszj.recycler.DividerItemDecorationNoLast;
 import peterfajdiga.sszj.recycler.adapters.WordsAdapter;
-import peterfajdiga.sszj.logic.sets.Set;
-import peterfajdiga.sszj.logic.sets.Sets;
+import peterfajdiga.sszj.sets.Set;
+import peterfajdiga.sszj.sets.Sets;
 
 public class SetFragment extends SectionFragment {
 
