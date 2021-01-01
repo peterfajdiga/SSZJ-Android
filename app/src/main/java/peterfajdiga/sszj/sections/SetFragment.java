@@ -14,7 +14,6 @@ import peterfajdiga.sszj.R;
 import peterfajdiga.sszj.elements.recycler.DividerItemDecorationNoLast;
 import peterfajdiga.sszj.elements.recycler.adapters.WordsAdapter;
 import peterfajdiga.sszj.logic.sets.Set;
-import peterfajdiga.sszj.elements.views.LoadingContainer;
 import peterfajdiga.sszj.logic.sets.Sets;
 
 public class SetFragment extends SectionFragment {
@@ -41,15 +40,6 @@ public class SetFragment extends SectionFragment {
         }
         loadSet();
 
-        // setup retry button
-        final LoadingContainer loadingContainer = self.findViewById(R.id.loading_container_main);
-        loadingContainer.setOnRetryClickedListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loadSet();
-            }
-        });
-
         // setup container
         final RecyclerView container = self.findViewById(R.id.container_main);
         container.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
@@ -58,9 +48,6 @@ public class SetFragment extends SectionFragment {
     }
 
     private void loadSet() {
-        final LoadingContainer loadingContainer = self.findViewById(R.id.loading_container_main);
-        loadingContainer.onLoading();
-
         final Context context = getContext();
         final OnWordClickedListener mainActivity;
         if (context instanceof OnWordClickedListener) {
@@ -74,8 +61,6 @@ public class SetFragment extends SectionFragment {
         final WordsAdapter adapter = new WordsAdapter(R.layout.item_word_vertical, set.words);
         adapter.setOnWordClickedListener(mainActivity);
         container.setAdapter(adapter);
-
-        loadingContainer.onLoaded();
     }
 
     @Override
