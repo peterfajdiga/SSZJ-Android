@@ -82,7 +82,9 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onRestart() {
         super.onRestart();
-        searchViewItem.collapseActionView();
+        if (searchViewItem != null) {
+            searchViewItem.collapseActionView();
+        }
     }
 
     @Override
