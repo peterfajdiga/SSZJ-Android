@@ -21,11 +21,10 @@ import peterfajdiga.sszj.R;
 
 // TODO: add loading message
 public class LoadingContainer extends FrameLayout {
-
     private String retry = "Retry";
     private int hiddenVisibility = View.GONE;
 
-    private ProgressBar view_progress;
+    private ProgressBar progressIndicator;
     private Button retryButton;
     private View content;
 
@@ -80,10 +79,10 @@ public class LoadingContainer extends FrameLayout {
         );
         params.gravity = Gravity.CENTER;
 
-        view_progress = new LinearProgressIndicator(context);
-        view_progress.setLayoutParams(params);
-        view_progress.setIndeterminate(true);
-        addView(view_progress);
+        progressIndicator = new LinearProgressIndicator(context);
+        progressIndicator.setLayoutParams(params);
+        progressIndicator.setIndeterminate(true);
+        addView(progressIndicator);
 
         retryButton = new Button(context);
         retryButton.setLayoutParams(params);
@@ -92,31 +91,31 @@ public class LoadingContainer extends FrameLayout {
     }
 
     public void onLoading() {
-        view_progress.setIndeterminate(true);
+        progressIndicator.setIndeterminate(true);
 
-        view_progress.setVisibility(View.VISIBLE);
+        progressIndicator.setVisibility(View.VISIBLE);
         retryButton.setVisibility(View.GONE);
         getContent().setVisibility(hiddenVisibility);
     }
 
     public void onLoading(final int progress, final int max) {
-        view_progress.setIndeterminate(false);
-        view_progress.setProgress(progress);
-        view_progress.setMax(max);
+        progressIndicator.setIndeterminate(false);
+        progressIndicator.setProgress(progress);
+        progressIndicator.setMax(max);
 
-        view_progress.setVisibility(View.VISIBLE);
+        progressIndicator.setVisibility(View.VISIBLE);
         retryButton.setVisibility(View.GONE);
         getContent().setVisibility(hiddenVisibility);
     }
 
     public void onLoaded() {
-        view_progress.setVisibility(View.GONE);
+        progressIndicator.setVisibility(View.GONE);
         retryButton.setVisibility(View.GONE);
         getContent().setVisibility(View.VISIBLE);
     }
 
     public void onFailed() {
-        view_progress.setVisibility(View.GONE);
+        progressIndicator.setVisibility(View.GONE);
         retryButton.setVisibility(View.VISIBLE);
         getContent().setVisibility(hiddenVisibility);
     }
@@ -124,8 +123,6 @@ public class LoadingContainer extends FrameLayout {
     public void setOnRetryClickedListener(Button.OnClickListener listener) {
         retryButton.setOnClickListener(listener);
     }
-
-
 
     private @NonNull View getContent() {
         ensureCorrectOrder();
@@ -140,12 +137,10 @@ public class LoadingContainer extends FrameLayout {
             // already OK
             return;
         }
-        view_progress.bringToFront();
+        progressIndicator.bringToFront();
         retryButton.bringToFront();
         content = getChildAt(0);
     }
-
-
 
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
