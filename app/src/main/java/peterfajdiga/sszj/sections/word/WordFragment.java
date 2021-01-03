@@ -90,17 +90,21 @@ public class WordFragment extends SectionFragment implements
         spellingContainer.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
 
         loadWord();
+        loadAnimation();
         loadDefinition();
     }
 
     private void loadWord() {
         final LoadingContainer loadingContainerMain = self.findViewById(R.id.loading_container_main);
         loadingContainerMain.onLoaded();
-        final LoadingContainer loadingContainerAnimation = self.findViewById(R.id.loading_container_animation);
-        loadingContainerAnimation.onLoading();
 
         showBaseText();
         showSpelling();
+    }
+
+    private void loadAnimation() {
+        final LoadingContainer loadingContainerAnimation = self.findViewById(R.id.loading_container_animation);
+        loadingContainerAnimation.onLoading();
 
         final Context context = getContext();
         if (!(context instanceof Activity)) {
