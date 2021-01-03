@@ -90,7 +90,6 @@ public class WordFragment extends SectionFragment implements
         spellingContainer.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
 
         loadWord();
-        loadAnimation();
         loadDefinition();
     }
 
@@ -181,6 +180,12 @@ public class WordFragment extends SectionFragment implements
     @Override
     protected int getDrawerItemId() {
         return 0;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadAnimation();
     }
 
     @Override
