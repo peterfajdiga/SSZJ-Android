@@ -147,4 +147,24 @@ public class LoadingContainer extends FrameLayout {
         ensureCorrectOrder();
         super.onLayout(changed, left, top, right, bottom);
     }
+
+    public State getState() {
+        if (progressIndicator.getVisibility() == View.VISIBLE) {
+            return State.Loading;
+        }
+        if (retryButton.getVisibility() == View.VISIBLE) {
+            return State.Failed;
+        }
+        if (getContent().getVisibility() == View.VISIBLE) {
+            return State.Loaded;
+        }
+        return State.Invalid;
+    }
+
+    public enum State{
+        Invalid,
+        Loading,
+        Loaded,
+        Failed,
+    }
 }

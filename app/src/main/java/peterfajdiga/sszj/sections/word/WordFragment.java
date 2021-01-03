@@ -185,7 +185,13 @@ public class WordFragment extends SectionFragment implements
     @Override
     public void onResume() {
         super.onResume();
-        loadAnimation();
+
+        final LoadingContainer loadingContainerAnimation = self.findViewById(R.id.loading_container_animation);
+        switch (loadingContainerAnimation.getState()) {
+            case Loading:
+            case Invalid:
+                loadAnimation();
+        }
     }
 
     @Override
