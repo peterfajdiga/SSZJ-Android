@@ -42,7 +42,7 @@ public class ObbMounter {
 
     @NonNull
     private static File getObbFile(@NonNull final Context context) {
-        return new File(context.getObbDir(), "data.obb");
+        return new File(context.getObbDir(), "main.7.peterfajdiga.sszj.obb");
     }
 
     public synchronized void init(@NonNull final OnObbMountedListener listener) {
